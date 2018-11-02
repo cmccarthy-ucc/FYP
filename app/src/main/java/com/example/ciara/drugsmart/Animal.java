@@ -5,6 +5,7 @@ public class Animal {
     String animalID;
     String animalBreed;
     String animalGender;
+    String animalSource;
 
 
 
@@ -12,10 +13,11 @@ public class Animal {
 
     }
 
-    public Animal(String animalID, String animalBreed, String animalGender){
+    public Animal(String animalID, String animalBreed, String animalGender, String animalSource){
         this.animalID = animalID;
         this.animalBreed = animalBreed;
         this.animalGender = animalGender;
+        this.animalSource = animalSource;
     }
 
     public String getAnimalID() {
@@ -29,5 +31,7 @@ public class Animal {
     public String getAnimalGender() {
         return animalGender;
     }
+
+    public String getAnimalSource() { return animalSource; }
 
 }
