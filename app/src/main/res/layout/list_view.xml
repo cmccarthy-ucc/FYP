@@ -4,12 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <TextView
-        android:id="@+id/animalID"
+        android:id="@+id/tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ID"
+        android:text="AnimalTag"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
     <TextView
@@ -17,21 +17,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Breed"
-        android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
-
-
-
     <TextView
         android:id="@+id/gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Gender"
         android:textSize="14sp" />
-
     <TextView
         android:id="@+id/source"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Source" />
+    <TextView
+        android:id="@+id/DOB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DateOfBirth" />
+    <TextView
+        android:id="@+id/animalID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID"
+        android:textSize="14sp"/>
+
+
 </LinearLayout>
