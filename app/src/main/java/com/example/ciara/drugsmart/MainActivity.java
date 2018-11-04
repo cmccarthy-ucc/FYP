@@ -28,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
     EditText editTextSource;
     Button buttonAdd;
     Spinner spinnerGender;
-    Button buttonCamera;
+    private Button buttonCamera;
+    private Button buttonVaccination;
+
+
 
     //https://www.youtube.com/watch?v=hwe1abDO2Ag
 
@@ -113,18 +116,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        buttonVaccination = (Button)findViewById(R.id.buttonVaccination);
+        buttonVaccination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddVaccination.class);
+
+                        startActivity(intent);
+            }
+        });
+
     }
 
     private void addAnimal(){
         String breed = editTextBreed.getText().toString().trim();
         String gender = spinnerGender.getSelectedItem().toString();
         String source = editTextSource.getText().toString().trim();
+        String DOB = mDisplayDate.getText().toString().trim();
 
         if(!TextUtils.isEmpty(breed)){
 
             String id = databaseAnimal.push().getKey();
 
-            Animal animal = new Animal(id, breed, gender, source);
+            Animal animal = new Animal(id, breed, gender, source, DOB);
 
             databaseAnimal.child(id).setValue(animal);
 
