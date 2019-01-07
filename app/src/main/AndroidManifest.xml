@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ciara.drugsmart">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -13,17 +13,38 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".DataRetrieved" />
+        <activity android:name=".TextRecognition" />
+        <activity android:name=".AddVaccination" />
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="orc" />
+
+        <activity android:name=".ViewAnimalDetails" />
+
+        <receiver android:name=".NotificationService" />
+
+        <activity android:name=".ViewVaccination" />
+        <activity android:name=".ActivityHome"></activity>
+        <activity android:name=".ActivityAllVaccinations" />
+        <activity android:name=".Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DataRetrieved" />
-        <activity android:name=".TextRecognition"></activity>
-
-        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="orc"/>
+        <activity android:name=".ActivityOptions"></activity>
     </application>
 
 </manifest>

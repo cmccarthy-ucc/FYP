@@ -1,9 +1,12 @@
 package com.example.ciara.drugsmart;
 
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,29 +29,26 @@ public class MainActivity extends AppCompatActivity {
 
     EditText editTextBreed;
     EditText editTextSource;
+    EditText editTextTagNumber;
     Button buttonAdd;
     Spinner spinnerGender;
     private Button buttonCamera;
-    private Button buttonVaccination;
-
-
 
     //https://www.youtube.com/watch?v=hwe1abDO2Ag
-
     private static final String TAG = "MainActivity";
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-
+    //Variables for retrieving data from database
     DatabaseReference databaseAnimal;
     private FloatingActionButton floatingActionButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       //Select date from a calender
         //https://www.youtube.com/watch?v=hwe1abDO2Ag
         mDisplayDate = (TextView)findViewById(R.id.animalDOB);
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
                         mDateSetListener, year,month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
-
-
             }
         });
 
@@ -77,13 +75,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "OnDateSet: date: " + dayOfMonth + "/" + month + "/" + year);
                 String date = dayOfMonth + "/" + month + "/" + year;
                 mDisplayDate.setText(date);
-
-
             }
         };
 
-
-
+        //Retrieving data from database
         databaseAnimal = FirebaseDatabase.getInstance().getReference("animals");
 
         floatingActionButton = findViewById(R.id.floatingActionButton);
@@ -97,9 +92,12 @@ public class MainActivity extends AppCompatActivity {
 
         editTextBreed = (EditText) findViewById(R.id.editTextBreed);
         editTextSource = (EditText) findViewById(R.id.editTextSource);
+        editTextTagNumber = (EditText) findViewById(R.id.editTextTagNumber);
+        editTextTagNumber.requestFocus();
         buttonAdd = (Button) findViewById(R.id.buttonAddAnimal);
         spinnerGender = (Spinner) findViewById(R.id.spinnerGender);
 
+        //Calling the method to add animal to the database
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,16 +114,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonVaccination = (Button)findViewById(R.id.buttonVaccination);
-        buttonVaccination.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddVaccination.class);
-
-                        startActivity(intent);
-            }
-        });
-
     }
 
     private void addAnimal(){
@@ -133,20 +121,49 @@ public class MainActivity extends AppCompatActivity {
         String gender = spinnerGender.getSelectedItem().toString();
         String source = editTextSource.getText().toString().trim();
         String DOB = mDisplayDate.getText().toString().trim();
+        String tag = editTextTagNumber.getText().toString().trim();
 
-        if(!TextUtils.isEmpty(breed)){
+        if(TextUtils.isEmpty(breed)){
+            Toast.makeText(this, "You should enter a breed", Toast.LENGTH_LONG).show();
+        }
+        else if(TextUtils.isEmpty(source)){
+            Toast.makeText(this, "You should enter a source", Toast.LENGTH_LONG).show();
+        }
+        else if (TextUtils.isEmpty(DOB)){
+            Toast.makeText(this, "You should enter a Date of Birth", Toast.LENGTH_LONG).show();
+        }
+        else if (TextUtils.isEmpty(tag)){
+            Toast.makeText(this, "You should enter a Tag Number", Toast.LENGTH_LONG).show();
+        }
+        else if (tag.length() < 6){
+            Toast.makeText(this, "Please enter valid tag number", Toast.LENGTH_LONG).show();
+
+        }
+        else{
+            String id = databaseAnimal.push().getKey();
+
+            Animal animal = new Animal(id, breed, gender, source, DOB, tag);
+
+            databaseAnimal.child(id).setValue(animal);
+
+            Toast.makeText(this, "Animal added", Toast.LENGTH_LONG).show();
+        }
+
+        /*if(!TextUtils.isEmpty(breed)){
 
             String id = databaseAnimal.push().getKey();
 
-            Animal animal = new Animal(id, breed, gender, source, DOB);
+            Animal animal = new Animal(id, breed, gender, source, DOB, tag);
 
             databaseAnimal.child(id).setValue(animal);
 
             Toast.makeText(this, "Animal added", Toast.LENGTH_LONG).show();
 
-        } else{
-            Toast.makeText(this, "You should enter a breed", Toast.LENGTH_LONG).show();
         }
+
+        else{
+            Toast.makeText(this, "You should enter a breed", Toast.LENGTH_LONG).show();
+        }*/
     }
 
     public void openOCRCamera(){
@@ -154,4 +171,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
 }
