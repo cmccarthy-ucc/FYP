@@ -2,41 +2,33 @@ package com.example.ciara.drugsmart;
 
 public class Group {
     String groupID;
+    String groupAnimalType;
     String groupBreed;
     String groupSource;
-    String groupAge;
+    String groupDOB;
 
+
+    public Group(){
+    }
+
+    public Group(String groupID, String groupAnimalType, String groupBreed, String groupSource, String groupDOB){
+        this.groupID = groupID;
+        this.groupAnimalType = groupAnimalType;
+        this.groupBreed = groupBreed;
+        this.groupSource = groupSource;
+        this.groupDOB = groupDOB;
+    }
     public String getGroupID() {
         return groupID;
     }
-
-    public void setGroupID(String groupID) {
-        this.groupID = groupID;
-    }
-
     public String getGroupBreed() {
         return groupBreed;
     }
-
-    public void setGroupBreed(String groupBreed) {
-        this.groupBreed = groupBreed;
-    }
-
     public String getGroupSource() {
         return groupSource;
     }
-
-    public void setGroupSource(String groupSource) {
-        this.groupSource = groupSource;
-    }
-
-    public String getGroupAge() {
-        return groupAge;
-    }
-
-    public void setGroupAge(String groupAge) {
-        this.groupAge = groupAge;
-    }
+    public String getGroupAnimalType() { return groupAnimalType;  }
+    public String getGroupDOB() { return groupDOB;  }
 
 
 }

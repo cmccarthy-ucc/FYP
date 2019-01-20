@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
                         mDateSetListener, year,month, day);
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }

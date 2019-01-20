@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddVaccination extends AppCompatActivity {
 
@@ -140,6 +141,7 @@ public class AddVaccination extends AppCompatActivity {
                         AddVaccination.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
                         mDateSetListener, year,month, day);
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
 

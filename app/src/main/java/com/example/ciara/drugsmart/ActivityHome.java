@@ -12,7 +12,9 @@ public class ActivityHome extends AppCompatActivity {
 
     Button addAnimal;
     Button viewAnimals;
-    Button viewVaccinations;
+    Button addGroup;
+    Button viewGroups;
+    Button search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +38,28 @@ public class ActivityHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        viewVaccinations = (Button) findViewById(R.id.btnViewVaccinations);
-        viewVaccinations.setOnClickListener(new View.OnClickListener() {
+        viewGroups = (Button) findViewById(R.id.btnViewGroup);
+        viewGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityHome.this, ActivityAllVaccinations.class);
+                Intent intent = new Intent(ActivityHome.this, ActivityAllGroups.class);
+                startActivity(intent);
+            }
+        });
+        addGroup = (Button) findViewById(R.id.btnAddGroup);
+        addGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityHome.this, ActivityAddGroup.class);
+                startActivity(intent);
+            }
+        });
+
+        search = (Button) findViewById(R.id.buttonSearch);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityHome.this, SearchDatabase.class);
                 startActivity(intent);
             }
         });

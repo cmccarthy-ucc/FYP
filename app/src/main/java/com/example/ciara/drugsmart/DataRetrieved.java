@@ -106,6 +106,8 @@ public class DataRetrieved extends AppCompatActivity {
             }
         }); //List view item click ends
 
+
+
     }
 
     @Override
