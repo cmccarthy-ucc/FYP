@@ -53,7 +53,10 @@
         <activity android:name=".ActivityAddGroup" />
         <activity android:name=".ActivityVaccinationHome" />
         <activity android:name=".SearchDatabase" />
-        <activity android:name=".ActivityAllGroups"></activity>
+        <activity android:name=".ActivityAllGroups" />
+        <!--<activity android:name=".ActivityAddGroupVaccination" />-->
+        <activity android:name=".ViewGroupDetails" />
+        <activity android:name=".ViewVaccinationDetails"></activity>
     </application>
 
 </manifest>

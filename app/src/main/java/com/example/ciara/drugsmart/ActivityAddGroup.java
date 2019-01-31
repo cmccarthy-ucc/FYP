@@ -1,12 +1,18 @@
 package com.example.ciara.drugsmart;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -37,6 +43,12 @@ public class ActivityAddGroup extends AppCompatActivity {
     private static final String TAG = "ActivityAddGroup";
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
+    //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
+    private DrawerLayout dl;
+    private ActionBarDrawerToggle t;
+    private NavigationView nv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +104,47 @@ public class ActivityAddGroup extends AppCompatActivity {
                 addGroup();
             }
         });
+
+        dl = (DrawerLayout)findViewById(R.id.activity_main);
+        t = new ActionBarDrawerToggle(this, dl,R.string.Open, R.string.Close);
+
+        dl.addDrawerListener(t);
+        t.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        nv = (NavigationView)findViewById(R.id.nv);
+        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.animals:
+                        Toast.makeText(ActivityAddGroup.this, "Animals",Toast.LENGTH_SHORT).show();
+                        Intent intentAnimal = new Intent(ActivityAddGroup.this, ActivityHome.class);
+                        startActivity(intentAnimal);
+                        break;
+                    case R.id.vaccinations:
+                        Toast.makeText(ActivityAddGroup.this, "Vaccinations", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityAddGroup.this, ActivityVaccinationHome.class);
+                        startActivity(intentVaccination);
+                        break;
+                    case R.id.groups:
+                        Toast.makeText(ActivityAddGroup.this, "Groups", Toast.LENGTH_SHORT).show();
+                        Intent intentGroups = new Intent(ActivityAddGroup.this, ActivityAllGroups.class);
+                        startActivity(intentGroups);
+                        break;
+                    case R.id.home:
+                        Toast.makeText(ActivityAddGroup.this, "Home", Toast.LENGTH_SHORT).show();
+                        Intent intentHome = new Intent(ActivityAddGroup.this, ActivityOptions.class);
+                        startActivity(intentHome);
+                        break;
+                    default:
+                        return true;
+                }
+            return true;
+            }
+        });
     }
 
     private void addGroup() {
@@ -122,4 +175,13 @@ public class ActivityAddGroup extends AppCompatActivity {
             Toast.makeText(this, "Group added", Toast.LENGTH_LONG).show();
         }
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(t.onOptionsItemSelected(item))
+            return true;
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

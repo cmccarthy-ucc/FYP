@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchDatabase extends AppCompatActivity {
@@ -39,13 +40,14 @@ public class SearchDatabase extends AppCompatActivity {
         editTextSearch = (EditText) findViewById(R.id.editTextSearch);
         buttonSearch = (Button) findViewById(R.id.buttonSearch);
         resultsListView = (ListView) findViewById(R.id.resultsListView);
+        vaccinationList = new ArrayList<>();
 
 
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //resultsList.clear(); //clear RecyclerView
+                vaccinationList.clear();//clear RecyclerView
                 //get text from search field
                 String vaccinationInfo = editTextSearch.getText().toString();
                 firebaseVaccinationSearch(vaccinationInfo);
@@ -59,7 +61,7 @@ public class SearchDatabase extends AppCompatActivity {
 
         //query to search database based on text in textbox - made case insensitive
         //code from https://stackoverflow.com/questions/54155576/android-firebase-search-query-not-working-properly
-        Query vaccinationSearchQuery = mVaccinationDatabase.orderByChild("ID").startAt(vaccinationInfo.toLowerCase()).endAt(vaccinationInfo.toLowerCase() + "\uf8ff");
+        Query vaccinationSearchQuery = mVaccinationDatabase.orderByChild("vaccinationAdmin").startAt(vaccinationInfo.toLowerCase()).endAt(vaccinationInfo.toLowerCase() + "\uf8ff");
         vaccinationSearchQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -105,6 +107,27 @@ public class SearchDatabase extends AppCompatActivity {
 //
 //
 
+    protected void onStart(){
+        super.onStart();
+        mVaccinationDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot vaccinationSnapshot : dataSnapshot.getChildren()){
+                    Vaccination vaccination = vaccinationSnapshot.getValue(Vaccination.class);
+                    vaccinationList.add(vaccination);
+                }
+
+                VaccinationInfoAdapter vaccinationInfoAdapter = new VaccinationInfoAdapter(SearchDatabase.this, vaccinationList);
+                resultsListView.setAdapter(vaccinationInfoAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     //View Holder Class
     //Help initialise the content from the single layout

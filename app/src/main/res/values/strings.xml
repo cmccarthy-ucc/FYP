@@ -6,13 +6,11 @@
         <item>Male</item>
         <item>Female</item>
     </array>
-
     <array name="drug">
         <item>Example Drug 1</item>
         <item>Example Drug 2</item>
         <item>Example Drug 3</item>
     </array>
-
     <array name="dosage">
         <item>1</item>
         <item>2</item>
@@ -71,4 +69,6 @@
         <item>Horse</item>
         <item>Sheep</item>
     </array>
+    <string name="Open">NavBar</string>
+    <string name="Close">NavBar</string>
 </resources>
