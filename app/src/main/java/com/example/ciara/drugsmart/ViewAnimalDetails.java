@@ -47,7 +47,6 @@ public class ViewAnimalDetails extends AppCompatActivity {
         String animalBreedText = extras.getString("EXTRA_BREED");
         String animalTagText = extras.getString("EXTRA_TAG");
 
-
         animalID.setText(animalIDText);
         animalDOB.setText(animalDOBText);
         animalGender.setText(animalGenderText);

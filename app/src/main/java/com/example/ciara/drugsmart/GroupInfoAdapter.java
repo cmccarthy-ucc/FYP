@@ -32,7 +32,7 @@ public class GroupInfoAdapter extends ArrayAdapter<Group> {
         TextView groupDOB = (TextView)listView.findViewById(R.id.groupDOB);
         TextView groupID = (TextView)listView.findViewById(R.id.groupID);
         TextView groupSource = (TextView) listView.findViewById(R.id.groupSource);
-        TextView animalTag = (TextView)listView.findViewById(R.id.tag);
+        TextView groupNumber = (TextView)listView.findViewById(R.id.groupNumber);
 
         Group group = groupList.get(position);
         groupType.setText(group.getGroupAnimalType());
@@ -40,6 +40,8 @@ public class GroupInfoAdapter extends ArrayAdapter<Group> {
         groupDOB.setText(group.getGroupDOB());
         groupID.setText(group.getGroupID());
         groupSource.setText(group.getGroupSource());
+        groupNumber.setText(group.getGroupNo());
+
 
         return listView;
 

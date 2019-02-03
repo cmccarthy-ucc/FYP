@@ -8,17 +8,33 @@ tools:context=".AddVaccination">
 
 
     <TextView
+        android:id="@+id/textView13"
+        android:layout_width="338dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:text="Are all group members vaccinated?"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vaccinationDate" />
+
+    <TextView
         android:id="@+id/TextViewGroupID"
-        android:layout_width="344dp"
-        android:layout_height="47dp"
+        android:layout_width="343dp"
+        android:layout_height="10dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="GroupID"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="24dp"
-        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,53 +42,56 @@ tools:context=".AddVaccination">
 
     <TextView
         android:id="@+id/TextViewGroupNumber"
-        android:layout_width="344dp"
-        android:layout_height="47dp"
+        android:layout_width="174dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:hint="Group Number"
+        android:textColor="@android:color/black"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewGroupID" />
+<!-- Select Drug-->
+
+<!-- Select Drug-->
+    <Spinner
+        android:id="@+id/spinnerDrug"
+        android:layout_width="338dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:entries="@array/drug"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.625"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewGroupNumber" />
+
+<!-- Enter Administrator's name -->
+    <EditText
+        android:id="@+id/editAdmin"
+        android:layout_width="338dp"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="Group Number"
-        android:textSize="24dp"
-        android:textColor="@android:color/black"
+        android:ems="10"
+        android:hint="Administrator"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewGroupID" />
-<!-- Select Drug-->
-
-<!-- Select Drug-->
-<Spinner
-    android:id="@+id/spinnerDrug"
-    android:layout_width="0dp"
-    android:layout_height="60dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginRight="8dp"
-    android:entries="@array/drug"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/TextViewGroupNumber" />
-
-<!-- Enter Administrator's name -->
-<EditText
-    android:id="@+id/editAdmin"
-    android:layout_width="344dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginRight="8dp"
-    android:ems="10"
-    android:hint="Administrator"
-    android:inputType="textPersonName"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/spinnerDrug" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDrug" />
 
 
 <!--android:text="Enter Breed"-->
@@ -80,61 +99,141 @@ tools:context=".AddVaccination">
 
     <TextView
         android:id="@+id/vaccinationDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="338dp"
+        android:layout_height="35dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:hint="Select Date"
-        android:textSize="25sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDosage" />
 
-<Button
-    android:id="@+id/buttonAddVaccination"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="24dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginRight="8dp"
-    android:text="Add Vaccination"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/vaccinationDate" />
+    <Button
+        android:id="@+id/buttonAddVaccination"
+        android:layout_width="186dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Add Vaccination"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextNotes"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupAllVaccinated" />
 
-<Button
-    android:id="@+id/buttonAddReminder"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginRight="8dp"
-    android:text="Add Reminder"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/buttonAddVaccination" />
+    <Button
+        android:id="@+id/buttonAddReminder"
+        android:layout_width="183dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Add Reminder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toEndOf="@+id/editTextNotes"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddVaccination"
+        app:layout_constraintVertical_bias="0.036" />
 
     <EditText
         android:id="@+id/editDosage"
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
+        android:layout_width="338dp"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="Dosage"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editAdmin" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupAllVaccinated"
+        android:layout_width="307dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+        <RadioButton
+            android:id="@+id/radioButtonYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Yes" />
+
+        <RadioButton
+            android:id="@+id/radioButtonNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="No" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Notes"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAddVaccination"
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupAllVaccinated" />
+
+    <EditText
+        android:id="@+id/editTextNotes"
+        android:layout_width="152dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.257" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="132dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="32dp"
+        android:text="Group Number:"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewGroupID" />
 
 </android.support.constraint.ConstraintLayout>

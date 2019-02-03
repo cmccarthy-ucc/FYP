@@ -36,7 +36,7 @@ public class ActivityVaccinationHome extends AppCompatActivity {
             }
         });
 
-        addVaccination = (Button) findViewById(R.id.btnAddVaccination);
+        addVaccination = (Button) findViewById(R.id.btnAddGroup);
         addVaccination.setOnClickListener((new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -79,7 +79,7 @@ public class ActivityVaccinationHome extends AppCompatActivity {
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityVaccinationHome.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityVaccinationHome.this, ActivityOptions.class);
+                        Intent intentHome = new Intent(ActivityVaccinationHome.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
                         break;
                     default:

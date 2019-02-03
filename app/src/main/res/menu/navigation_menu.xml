@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/ic_keyboard_arrow_right_black_24dp"/>
     <item android:id="@+id/animals"
         android:icon="@drawable/ic_android_black_24dp"
         android:title="Animals"/>
@@ -10,8 +13,5 @@
     <item android:id="@+id/groups"
         android:icon="@drawable/ic_spa_black_24dp"
         android:title="Groups"/>
-    <item android:id="@+id/home"
-        android:title="Home"
-        android:icon="@drawable/ic_keyboard_arrow_right_black_24dp"/>
 
 </menu>

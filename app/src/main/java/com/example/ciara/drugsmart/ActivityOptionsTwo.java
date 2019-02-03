@@ -1,22 +1,21 @@
 package com.example.ciara.drugsmart;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class ActivityOptions extends AppCompatActivity {
+public class ActivityOptionsTwo extends AppCompatActivity {
 
-    ImageView imageViewAnimal;
-    ImageView imageViewVaccination;
+    ImageView imageViewIndividualAnimal;
+    ImageView imageViewAnimalGroups;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -28,22 +27,22 @@ public class ActivityOptions extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_options);
+        setContentView(R.layout.activity_options_two);
 
-        imageViewAnimal = (ImageView) findViewById(R.id.imageViewAnimal);
-        imageViewAnimal.setOnClickListener(new View.OnClickListener() {
+        imageViewIndividualAnimal = (ImageView) findViewById(R.id.imageViewAnimal);
+        imageViewIndividualAnimal.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent intent = new Intent(ActivityOptions.this, ActivityHome.class);
+               Intent intent = new Intent(ActivityOptionsTwo.this, ActivityIndividualHome.class);
                startActivity(intent);
            }
     });
 
-        imageViewVaccination = (ImageView) findViewById(R.id.imageViewVaccination);
-        imageViewVaccination.setOnClickListener(new View.OnClickListener() {
+        imageViewAnimalGroups = (ImageView) findViewById(R.id.imageViewGroup);
+        imageViewAnimalGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityOptions.this, ActivityVaccinationHome.class);
+                Intent intent = new Intent(ActivityOptionsTwo.this, ActivityGroupHome.class);
                 startActivity(intent);
             }
         });
@@ -66,22 +65,22 @@ public class ActivityOptions extends AppCompatActivity {
                 switch (id) {
                     case R.id.animals:
                         //Toast.makeText(ActivityOptions.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityOptions.this, ActivityHome.class);
+                        Intent intentAnimal = new Intent(ActivityOptionsTwo.this, ActivityHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityOptions.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityOptions.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityOptionsTwo.this, "Vaccinations", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityOptionsTwo.this, ActivityVaccinationHome.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
-                        Toast.makeText(ActivityOptions.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityOptions.this, ActivityAllGroups.class);
+                        Toast.makeText(ActivityOptionsTwo.this, "Groups", Toast.LENGTH_SHORT).show();
+                        Intent intentGroups = new Intent(ActivityOptionsTwo.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
-                        Toast.makeText(ActivityOptions.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityOptions.this, ActivityOptionsTwo.class);
+                        Toast.makeText(ActivityOptionsTwo.this,"Home", Toast.LENGTH_SHORT).show();
+                        Intent intentHome = new Intent(ActivityOptionsTwo.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
                         break;
                     default:

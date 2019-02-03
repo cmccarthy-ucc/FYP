@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,16 +26,25 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class ActivityAddGroup extends AppCompatActivity {
 
-    EditText editTextGroupID;
+    EditText editTextGroupNo;
     EditText editTextBreed;
     EditText editTextSource;
     Button btnAddGroup;
     Spinner spinnerAnimalType;
+    EditText editTextNotes;
+    RadioButton radioButtonYes;
+    RadioButton radioButtonNo;
+    Boolean allVaccinated = false;
+
 
 
     //Variables for retrieving data from database
@@ -54,9 +65,6 @@ public class ActivityAddGroup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
-
-        //Select date from a calender
-        //https://www.youtube.com/watch?v=hwe1abDO2Ag
         mDisplayDate = (TextView) findViewById(R.id.textViewDOB);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -86,16 +94,18 @@ public class ActivityAddGroup extends AppCompatActivity {
                 mDisplayDate.setText(date);
             }
         };
-
         //Retrieving data from database
         databaseAnimal = FirebaseDatabase.getInstance().getReference("groups");
 
         editTextBreed = findViewById(R.id.editTextBreed);
         editTextSource = (EditText) findViewById(R.id.editTextSource);
-        editTextGroupID = (EditText) findViewById(R.id.editTextGroupNo);
-        editTextGroupID.requestFocus();
+        editTextGroupNo = (EditText) findViewById(R.id.editTextGroupNo);
+        editTextGroupNo.requestFocus();
+        editTextNotes = (EditText) findViewById(R.id.editTextNotes);
         btnAddGroup = (Button) findViewById(R.id.btnAddGroup);
         spinnerAnimalType = (Spinner) findViewById(R.id.spinnerAnimalType);
+        radioButtonYes = (RadioButton) findViewById(R.id.radioButtonYes);
+        radioButtonNo = (RadioButton) findViewById(R.id.radioButtonNo);
 
         //Calling the method to add animal to the database
         btnAddGroup.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +146,7 @@ public class ActivityAddGroup extends AppCompatActivity {
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityAddGroup.this, "Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityAddGroup.this, ActivityOptions.class);
+                        Intent intentHome = new Intent(ActivityAddGroup.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
                         break;
                     default:
@@ -145,34 +155,85 @@ public class ActivityAddGroup extends AppCompatActivity {
             return true;
             }
         });
+
+        //https://stackoverflow.com/questions/8323778/how-to-set-onclicklistener-on-a-radiobutton-in-android
+        // **Origional source but updated code**
+
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.AllVaccinated);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+               if (radioButtonNo.isChecked()){
+                   allVaccinated = false;
+                }
+                else if (radioButtonYes.isChecked()){
+                   allVaccinated = true;
+               }
+            }
+        });
+
+
     }
+
+
+//    public void onRadioButtonClicked(View view) {
+////            // Is the button now checked?
+//            boolean checked = ((RadioButton) view).isChecked();
+//
+//            // Check which radio button was clicked
+//            switch(view.getId()) {
+//                case R.id.radioButtonNo:
+//                    if (checked)
+//                        allVaccinated = true;
+//                    break;
+//                case R.id.radioButtonYes:
+//                    if (checked)
+//                       allVaccinated = false;
+//                        break;
+//            }
+//        }
 
     private void addGroup() {
         String breed = editTextBreed.getText().toString().trim();
         String animalType = spinnerAnimalType.getSelectedItem().toString();
         String source = editTextSource.getText().toString().trim();
         String DOB = mDisplayDate.getText().toString().trim();
-        String groupId = editTextGroupID.getText().toString().trim();
+        String notes = editTextNotes.getText().toString().trim();
+        Boolean vaccinated = allVaccinated;
+
+//
+
+        //String DOB = mDisplayDate.getText();
+        String groupNo = editTextGroupNo.getText().toString().trim();
 
         if (TextUtils.isEmpty(breed)) {
-            Toast.makeText(this, "You should enter a breed", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"You should enter a breed", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(animalType)) {
             Toast.makeText(this, "You select an Animal Type", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(source)) {
             Toast.makeText(this, "You should enter a Source", Toast.LENGTH_LONG).show();
-        } else if (TextUtils.isEmpty(groupId)) {
+        } else if (TextUtils.isEmpty(groupNo)) {
             Toast.makeText(this, "You should enter a Group Number", Toast.LENGTH_LONG).show();
-        } else if (groupId.length() < 2) {
+        } else if (groupNo.length() < 2) {
             Toast.makeText(this, "A Group Number must be greater than 2 digits", Toast.LENGTH_LONG).show();
+            }
+// else if (allVaccinated = null){
+//            Toast.makeText(this, "You should enter a Group Number", Toast.LENGTH_LONG).show();
+//
+//        }
+        else {
+            String id = databaseAnimal.push().getKey();
 
-        } else {
-            //String id = databaseAnimal.push().getKey();
+            Group group = new Group(groupNo, animalType, breed, source, DOB, id, notes, vaccinated);
 
-            Group group = new Group(groupId, animalType, breed, source, DOB);
-
-            databaseAnimal.child(groupId).setValue(group);
+            databaseAnimal.child(groupNo).setValue(group);
 
             Toast.makeText(this, "Group added", Toast.LENGTH_LONG).show();
+
+            //stackoverflow.com/questions/3053761/reload-activity-in-android
+            finish();
+            startActivity(getIntent());
         }
     }
     @Override

@@ -20,22 +20,20 @@
             android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Add Animal"
+            android:text="Add Group"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView" />
 
         <Button
-            android:id="@+id/btnViewVaccination"
+            android:id="@+id/btnViewGroups"
             android:layout_width="249dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="View Animals"
+            android:text="View Groups"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,18 +45,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="88dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Animals"
+            android:text="Animal Groups"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnViewTreatments"
+            android:id="@+id/btnViewGroupVaccinations"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -66,13 +63,13 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="View Group"
+            android:text="View Group Vaccinations"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnViewVaccination" />
+            app:layout_constraintTop_toBottomOf="@+id/btnViewGroups" />
 
         <Button
-            android:id="@+id/btnAddGroup"
+            android:id="@+id/btnAddGroupVaccinations"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -80,26 +77,24 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Add Group"
+            android:text="Add Group Vaccination"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnViewTreatments" />
+            app:layout_constraintTop_toBottomOf="@+id/btnViewGroupVaccinations" />
 
         <Button
-            android:id="@+id/buttonSearch"
-            android:layout_width="wrap_content"
+            android:id="@+id/buttonSearchGroups"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="28dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="Search"
+            android:text="Search for Groups"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/btnAddGroupVaccinations" />
 
     </android.support.constraint.ConstraintLayout>
 

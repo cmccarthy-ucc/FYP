@@ -133,7 +133,7 @@ public class ActivityAllVaccinations extends AppCompatActivity {
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityAllVaccinations.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityAllVaccinations.this, ActivityOptions.class);
+                        Intent intentHome = new Intent(ActivityAllVaccinations.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
                         break;
                     default:

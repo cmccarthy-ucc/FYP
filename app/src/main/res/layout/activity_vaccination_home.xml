@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/btnAddVaccination"
+            android:id="@+id/btnAddGroup"
             android:layout_width="247dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -38,7 +38,7 @@
             android:text="View Vaccination"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddVaccination" />
+            app:layout_constraintTop_toBottomOf="@+id/btnAddGroup" />
 
         <TextView
             android:id="@+id/textView"

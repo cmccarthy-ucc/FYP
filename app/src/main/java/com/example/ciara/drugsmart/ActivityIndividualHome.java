@@ -1,24 +1,24 @@
 package com.example.ciara.drugsmart;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class ActivityHome extends AppCompatActivity {
+public class ActivityIndividualHome extends AppCompatActivity {
 
 
     Button addAnimal;
     Button viewAnimals;
-    Button addGroup;
-    Button viewGroups;
+    Button addVaccination;
+    Button viewVaccination;
     Button search;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
@@ -29,38 +29,38 @@ public class ActivityHome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_individual_home);
 
-        addAnimal = (Button) findViewById(R.id.btnAddGroup);
+        addAnimal = (Button) findViewById(R.id.btnAddAnimal);
         addAnimal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityHome.this, MainActivity.class);
+                Intent intent = new Intent(ActivityIndividualHome.this, MainActivity.class);
                 startActivity(intent);
             }
         });
 
-        viewAnimals = (Button) findViewById(R.id.btnViewVaccination);
+        viewAnimals = (Button) findViewById(R.id.btnViewAnimals);
         viewAnimals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityHome.this, DataRetrieved.class);
+                Intent intent = new Intent(ActivityIndividualHome.this, DataRetrieved.class);
                 startActivity(intent);
             }
         });
-        viewGroups = (Button) findViewById(R.id.btnViewTreatments);
-        viewGroups.setOnClickListener(new View.OnClickListener() {
+        viewVaccination = (Button) findViewById(R.id.btnViewTreatments);
+        viewVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityHome.this, ActivityAllGroups.class);
+                Intent intent = new Intent(ActivityIndividualHome.this, ActivityAllVaccinations.class);
                 startActivity(intent);
             }
         });
-        addGroup = (Button) findViewById(R.id.btnAddGroup);
-        addGroup.setOnClickListener(new View.OnClickListener() {
+        addVaccination = (Button) findViewById(R.id.btnAddTreatment);
+        addVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityHome.this, ActivityAddGroup.class);
+                Intent intent = new Intent(ActivityIndividualHome.this, DataRetrieved.class);
                 startActivity(intent);
             }
         });
@@ -69,7 +69,7 @@ public class ActivityHome extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityHome.this, SearchDatabase.class);
+                Intent intent = new Intent(ActivityIndividualHome.this, SearchDatabase.class);
                 startActivity(intent);
             }
         });
@@ -94,22 +94,22 @@ public class ActivityHome extends AppCompatActivity {
                 switch (id) {
                     case R.id.animals:
                         //Toast.makeText(ActivityOptions.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityHome.this, ActivityHome.class);
+                        Intent intentAnimal = new Intent(ActivityIndividualHome.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityHome.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityHome.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityIndividualHome.this, "Vaccinations", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityIndividualHome.this, ActivityVaccinationHome.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
-                        Toast.makeText(ActivityHome.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityHome.this, ActivityAllGroups.class);
+                        Toast.makeText(ActivityIndividualHome.this, "Groups", Toast.LENGTH_SHORT).show();
+                        Intent intentGroups = new Intent(ActivityIndividualHome.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
-                        Toast.makeText(ActivityHome.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityHome.this, ActivityOptionsTwo.class);
+                        Toast.makeText(ActivityIndividualHome.this,"Home", Toast.LENGTH_SHORT).show();
+                        Intent intentHome = new Intent(ActivityIndividualHome.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
                         break;
                     default:

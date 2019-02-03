@@ -70,6 +70,9 @@ public class ActivityAllGroups extends AppCompatActivity {
                 TextView groupSource = (TextView) parent.findViewById(R.id.groupSource);
                 String groupSourceText = (String) groupSource.getText();
 
+                TextView groupNumber = (TextView) parent.findViewById(R.id.groupNumber);
+                String groupNumberText = (String) groupNumber.getText();
+
 
                 //Multiple Values
                 Intent intent = new Intent(ActivityAllGroups.this, ViewGroupDetails.class);
@@ -79,6 +82,7 @@ public class ActivityAllGroups extends AppCompatActivity {
                 extras.putString("EXTRA_BREED",groupBreedText);
                 extras.putString("EXTRA_DOB",groupDOBText);
                 extras.putString("EXTRA_SOURCE", groupSourceText);
+                extras.putString("EXTRA_GROUP_NUMBER",groupNumberText);
 
                 intent.putExtras(extras);
                 startActivity(intent);
@@ -127,7 +131,7 @@ public class ActivityAllGroups extends AppCompatActivity {
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityAllGroups.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityAllGroups.this, ActivityOptions.class);
+                        Intent intentHome = new Intent(ActivityAllGroups.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
                         break;
                     default:
