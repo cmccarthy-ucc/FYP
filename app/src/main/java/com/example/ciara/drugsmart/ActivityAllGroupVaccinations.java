@@ -1,13 +1,12 @@
 package com.example.ciara.drugsmart;
 
-import android.app.ActivityGroup;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,11 +23,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityAllGroups extends AppCompatActivity {
+public class ActivityAllGroupVaccinations extends AppCompatActivity {
 
     private ListView listView;
     DatabaseReference databaseReference;
-    List<Group> groupList;
+    List<GroupVaccination> groupVaccinationList;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -39,14 +38,13 @@ public class ActivityAllGroups extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_groups);
+        setContentView(R.layout.activity_all_group_vaccinations);
 
-        listView = (ListView)findViewById(R.id.listViewGroups);
+        listView = (ListView)findViewById(R.id.listItemAllGroupVaccinations);
+        databaseReference = FirebaseDatabase.getInstance().getReference("groupVaccination");
+        groupVaccinationList = new ArrayList<>();
 
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("groups");
-        groupList = new ArrayList<>();
-
+    //Transferring data from selected list view item to other activity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -55,35 +53,33 @@ public class ActivityAllGroups extends AppCompatActivity {
                 //String tempListValue = animalList.get(position).toString();
                 //.get(position).toString();
 
-                TextView groupID = (TextView) view.findViewById(R.id.groupID);
-                String groupIDText = (String) groupID.getText();
+                TextView groupVaccinationID = (TextView) parent.findViewById(R.id.groupVaccinationID);
+                String groupVaccinationIDText = (String) groupVaccinationID.getText();
 
-                TextView groupType = (TextView) view.findViewById(R.id.groupType);
-                String groupTypeText = (String) groupType.getText();
+                TextView vaccinationGroupNumber = (TextView) parent.findViewById(R.id.groupNumber);
+                String vaccinationAnimalTagText = (String) vaccinationGroupNumber.getText();
 
-                TextView groupDOB = (TextView) view.findViewById(R.id.groupDOB);
-                String groupDOBText = (String) groupDOB.getText();
+                TextView vaccinationDate = (TextView) parent.findViewById(R.id.date);
+                String vaccinationDateText = (String) vaccinationDate.getText();
 
-                TextView groupBreed = (TextView) view.findViewById(R.id.groupBreed);
-                String groupBreedText = (String) groupBreed.getText();
+                TextView vaccinationDosage = (TextView) parent.findViewById(R.id.dosage);
+                String vaccinationDosageText = (String) vaccinationDosage.getText();
 
-                TextView groupSource = (TextView) view.findViewById(R.id.groupSource);
-                String groupSourceText = (String) groupSource.getText();
+                TextView vaccinationDrug = (TextView) parent.findViewById(R.id.drug);
+                String vaccinationDrugText = (String) vaccinationDrug.getText();
 
-                TextView groupNumber = (TextView) view.findViewById(R.id.groupNumber);
-                String groupNumberText = (String) groupNumber.getText();
-
+                TextView vaccinationAdmin = (TextView) parent.findViewById(R.id.administrator);
+                String vaccinationAdminText = (String) vaccinationAdmin.getText();
 
                 //Multiple Values
-                Intent intent = new Intent(ActivityAllGroups.this, ViewGroupDetails.class);
+                Intent intent = new Intent(ActivityAllGroupVaccinations.this, ViewVaccinationDetails.class);
                 Bundle extras = new Bundle();
-                extras.putString("EXTRA_ANIMAL_TYPE",groupTypeText);
-                extras.putString("EXTRA_GROUP_ID",groupIDText);
-                extras.putString("EXTRA_BREED",groupBreedText);
-                extras.putString("EXTRA_DOB",groupDOBText);
-                extras.putString("EXTRA_SOURCE", groupSourceText);
-                extras.putString("EXTRA_GROUP_NUMBER",groupNumberText);
-
+                extras.putString("EXTRA_ANIMAL_TAG",vaccinationAnimalTagText);
+                extras.putString("EXTRA_ID",groupVaccinationIDText);
+                extras.putString("EXTRA_DRUG",vaccinationDrugText);
+                extras.putString("EXTRA_DATE",vaccinationDateText);
+                extras.putString("EXTRA_DOSAGE", vaccinationDosageText);
+                extras.putString("EXTRA_ADMIN", vaccinationAdminText);
                 intent.putExtras(extras);
                 startActivity(intent);
 
@@ -94,7 +90,7 @@ public class ActivityAllGroups extends AppCompatActivity {
 
                 //intent.putExtra("ListViewClickedValue", tempListValue);
 
-               
+                //startActivity(intent);
 
 
             }
@@ -115,48 +111,48 @@ public class ActivityAllGroups extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.animals:
-                        Toast.makeText(ActivityAllGroups.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityAllGroups.this, ActivityIndividualHome.class);
+                        Toast.makeText(ActivityAllGroupVaccinations.this, "Animals",Toast.LENGTH_SHORT).show();
+                        Intent intentAnimal = new Intent(ActivityAllGroupVaccinations.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityAllGroups.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityAllGroups.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityAllGroupVaccinations.this, "Vaccinations", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityAllGroupVaccinations.this, ActivityVaccinationHome.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
-                        Toast.makeText(ActivityAllGroups.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityAllGroups.this, ActivityGroupHome.class);
+                        Toast.makeText(ActivityAllGroupVaccinations.this, "Groups", Toast.LENGTH_SHORT).show();
+                        Intent intentGroups = new Intent(ActivityAllGroupVaccinations.this, ActivityGroupHome.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
-                        Toast.makeText(ActivityAllGroups.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityAllGroups.this, ActivityOptionsTwo.class);
+                        Toast.makeText(ActivityAllGroupVaccinations.this,"Home", Toast.LENGTH_SHORT).show();
+                        Intent intentHome = new Intent(ActivityAllGroupVaccinations.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
                         break;
                     default:
                         return true;
                 }
                 return true;
-
             }
-
         });
+    }
 
 
-           }
+
+
     protected void onStart(){
         super.onStart();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot groupSnapshot : dataSnapshot.getChildren()){
-                    Group group = groupSnapshot.getValue(Group.class);
-                    groupList.add(group);
+                for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()){
+                    GroupVaccination groupVaccination = groupVaccinationSnapshot.getValue(GroupVaccination.class);
+                    groupVaccinationList.add(groupVaccination);
                 }
 
-                GroupInfoAdapter groupInfoAdapter = new GroupInfoAdapter(ActivityAllGroups.this, groupList);
-                listView.setAdapter(groupInfoAdapter);
+                GroupVaccinationInfoAdapter groupVaccinationInfoAdapter = new GroupVaccinationInfoAdapter(ActivityAllGroupVaccinations.this, groupVaccinationList);
+                listView.setAdapter(groupVaccinationInfoAdapter);
 
             }
 
@@ -175,4 +171,6 @@ public class ActivityAllGroups extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

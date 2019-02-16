@@ -71,4 +71,11 @@
     </array>
     <string name="Open">NavBar</string>
     <string name="Close">NavBar</string>
+    <string name="title_activity_medical_records2">Medical Records</string>
+    <string name="title_home">Vaccinations</string>
+    <string name="title_dashboard">Doses</string>
+    <string name="title_notifications">Treatments</string>
+    <string name="title_todo">To-Do List</string>
+
+
 </resources>

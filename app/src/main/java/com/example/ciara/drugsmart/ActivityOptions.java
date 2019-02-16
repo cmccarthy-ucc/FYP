@@ -66,7 +66,7 @@ public class ActivityOptions extends AppCompatActivity {
                 switch (id) {
                     case R.id.animals:
                         //Toast.makeText(ActivityOptions.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityOptions.this, ActivityHome.class);
+                        Intent intentAnimal = new Intent(ActivityOptions.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
@@ -76,7 +76,7 @@ public class ActivityOptions extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityOptions.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityOptions.this, ActivityAllGroups.class);
+                        Intent intentGroups = new Intent(ActivityOptions.this, ActivityGroupHome.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:

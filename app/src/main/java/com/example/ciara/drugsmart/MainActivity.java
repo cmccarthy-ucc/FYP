@@ -7,11 +7,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -43,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
     //Variables for retrieving data from database
     DatabaseReference databaseAnimal;
     private FloatingActionButton floatingActionButton;
+
+
+    //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
+    private DrawerLayout dl;
+    private ActionBarDrawerToggle t;
+    private NavigationView nv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +126,49 @@ public class MainActivity extends AppCompatActivity {
                 openOCRCamera();
             }
         });
+
+
+        dl = (DrawerLayout)findViewById(R.id.activity_main);
+        t = new ActionBarDrawerToggle(this, dl,R.string.Open, R.string.Close);
+
+        dl.addDrawerListener(t);
+        t.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        nv = (NavigationView)findViewById(R.id.nv);
+        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.animals:
+                        Toast.makeText(MainActivity.this, "Animals",Toast.LENGTH_SHORT).show();
+                        Intent intentAnimal = new Intent(MainActivity.this, ActivityIndividualHome.class);
+                        startActivity(intentAnimal);
+                        break;
+                    case R.id.vaccinations:
+                        Toast.makeText(MainActivity.this, "Vaccinations", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(MainActivity.this, ActivityVaccinationHome.class);
+                        startActivity(intentVaccination);
+                        break;
+                    case R.id.groups:
+                        Toast.makeText(MainActivity.this, "Groups", Toast.LENGTH_SHORT).show();
+                        Intent intentGroups = new Intent(MainActivity.this, ActivityGroupHome.class);
+                        startActivity(intentGroups);
+                        break;
+                    case R.id.home:
+                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        Intent intentHome = new Intent(MainActivity.this, ActivityOptionsTwo.class);
+                        startActivity(intentHome);
+                        break;
+                    default:
+                        return true;
+                }
+                return true;
+            }
+        });
+
 
     }
 

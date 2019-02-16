@@ -8,13 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -36,30 +36,33 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class ActivityAddGroupVaccination extends AppCompatActivity {
+public class ActivityAddGroupDose extends AppCompatActivity {
 
     //TextView declarations to correspond with XML file
 
     TextView groupID;
     TextView groupNumber;
-    Button buttonAddVaccination;
+    Button buttonAddDose;
     Button buttonAddReminder;
-    Spinner vaccinationDrug;
-    EditText vaccinationAdmin;
-    EditText vaccinationDosage;
-    EditText vaccinationNotes;
+    Spinner doseDrug;
+    EditText doseAdmin;
+    EditText doseDosage;
+    EditText doseNotes;
     RadioButton radioButtonYes;
     RadioButton radioButtonNo;
-    Boolean allVaccinated = false;
-    String dateVaccination;
+    RadioButton radioButtonInjection;
+    RadioButton radioButtonOral;
+    Boolean allDosed = false;
+    String dateDose;
+    String doseMethod;
     //Date dateVaccination;
 
     //https://www.youtube.com/watch?v=hwe1abDO2Ag
     private static final String TAG = "MainActivity";
-    private TextView vaccinationDate;
+    private TextView doseDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    DatabaseReference databaseVaccination;
+    DatabaseReference databaseDose;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -69,30 +72,30 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_group_vaccination);
+        setContentView(R.layout.activity_add_group_dose);
 
-        vaccinationDrug = (Spinner) findViewById(R.id.spinnerDrug);
-        vaccinationAdmin = (EditText) findViewById(R.id.editAdmin);
-        vaccinationDosage = (EditText) findViewById(R.id.editDosage);
-        vaccinationNotes = (EditText) findViewById(R.id.editTextNotes);
+        doseDrug = (Spinner) findViewById(R.id.spinnerDrug);
+        doseAdmin = (EditText) findViewById(R.id.editAdmin);
+        doseDosage = (EditText) findViewById(R.id.editDosage);
+        doseNotes = (EditText) findViewById(R.id.editTextNotes);
 
         groupID = (TextView) findViewById(R.id.TextViewGroupID);
         groupNumber = (TextView) findViewById(R.id.TextViewGroupNumber);
 
-        Intent vaccinationIntent = getIntent();
-        Bundle vaccinationExtras = vaccinationIntent.getExtras();
-        String groupIDText = vaccinationExtras.getString("VACCINATION_EXTRA_ID");
-        String groupNumberText = vaccinationExtras.getString("VACCINATION_EXTRA_NUMBER");
+        Intent doseIntent = getIntent();
+        Bundle doseExtras = doseIntent.getExtras();
+        String groupIDText = doseExtras.getString("DOSE_EXTRA_ID");
+        String groupNumberText = doseExtras.getString("DOSE_EXTRA_NUMBER");
 
         groupID.setText(groupIDText);
         groupNumber.setText(groupNumberText);
 
-        buttonAddVaccination = (Button) findViewById(R.id.buttonAddVaccination);
-        buttonAddVaccination.setOnClickListener(new View.OnClickListener() {
+        buttonAddDose = (Button) findViewById(R.id.buttonAddVaccination);
+        buttonAddDose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Calling the addVaccination method to add vaccination record to the database
-                addVaccination();
+                addDose();
                 //Also adding a notification when a vaccination is added
 
 
@@ -127,7 +130,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
             }
         });
 
-        databaseVaccination = FirebaseDatabase.getInstance().getReference("groupVaccination");
+        databaseDose = FirebaseDatabase.getInstance().getReference("groupDose");
 
         /*Bundle bundle = getIntent().getExtras();
         animalID.setText(bundle.getString("AnimalID"));*/
@@ -140,8 +143,8 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
 
         //https://www.youtube.com/watch?v=hwe1abDO2Ag
         //Select administration of vaccination date
-        vaccinationDate = (TextView) findViewById(R.id.vaccinationDate);
-        vaccinationDate.setOnClickListener(new View.OnClickListener() {
+        doseDate = (TextView) findViewById(R.id.vaccinationDate);
+        doseDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
@@ -150,7 +153,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        ActivityAddGroupVaccination.this,
+                        ActivityAddGroupDose.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
                 dialog.getDatePicker().setMaxDate(new Date().getTime());
@@ -170,7 +173,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
 //                dateVaccination = date;
 //                vaccinationDate.setText(dateFormat.format(date));
                 String date = dayOfMonth + "/" + month + "/" + year;
-                vaccinationDate.setText(date);
+                doseDate.setText(date);
 
 
 
@@ -189,11 +192,27 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (radioButtonNo.isChecked()){
-                    allVaccinated = false;
+                    allDosed = false;
 
                 }
                 else if (radioButtonYes.isChecked()){
-                    allVaccinated = true;
+                    allDosed = true;
+                }
+            }
+        });
+
+        radioButtonInjection = (RadioButton)findViewById(R.id.radioButtonInjection);
+        radioButtonOral = (RadioButton)findViewById(R.id.radioButtonOral);
+
+        RadioGroup radioGroupMethod = (RadioGroup) findViewById(R.id.radioGroupMethod);
+        radioGroupMethod.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (radioButtonInjection.isChecked()){
+                    doseMethod = "Injection";
+                }
+                else if (radioButtonOral.isChecked()){
+                    doseMethod = "Oral";
                 }
             }
         });
@@ -213,24 +232,29 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.animals:
-                        Toast.makeText(ActivityAddGroupVaccination.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityAddGroupVaccination.this, ActivityIndividualHome.class);
+                        Toast.makeText(ActivityAddGroupDose.this, "Animals",Toast.LENGTH_SHORT).show();
+                        Intent intentAnimal = new Intent(ActivityAddGroupDose.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityAddGroupVaccination.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityAddGroupVaccination.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityAddGroupDose.this, "Vaccinations", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityAddGroupDose.this, ActivityVaccinationHome.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
-                        Toast.makeText(ActivityAddGroupVaccination.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityAddGroupVaccination.this, ActivityGroupHome.class);
+                        Toast.makeText(ActivityAddGroupDose.this, "Groups", Toast.LENGTH_SHORT).show();
+                        Intent intentGroups = new Intent(ActivityAddGroupDose.this, ActivityGroupHome.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
-                        Toast.makeText(ActivityAddGroupVaccination.this, "Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityAddGroupVaccination.this, ActivityOptionsTwo.class);
+                        Toast.makeText(ActivityAddGroupDose.this, "Home", Toast.LENGTH_SHORT).show();
+                        Intent intentHome = new Intent(ActivityAddGroupDose.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(ActivityAddGroupDose.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(ActivityAddGroupDose.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;
@@ -240,16 +264,17 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
         });
 
     }
-    private void addVaccination(){
+    private void addDose(){
         String idGroup = groupID.getText().toString().trim();
         String number = groupNumber.getText().toString().trim();
-        String drug = vaccinationDrug.getSelectedItem().toString();
+        String drug = doseDrug.getSelectedItem().toString();
         //Date date = dateVaccination;
-        String date = vaccinationDate.getText().toString().trim();
-        String admin = vaccinationAdmin.getText().toString().trim();
-        String dosage = vaccinationDosage.getText().toString().trim();
-        String notes = vaccinationNotes.getText().toString().trim();
-
+        String date = doseDate.getText().toString().trim();
+        String admin = doseAdmin.getText().toString().trim();
+        String dosage = doseDosage.getText().toString().trim();
+        String notes = doseNotes.getText().toString().trim();
+        Boolean allAnimals = allDosed;
+        String method = doseMethod;
 
 //        if (TextUtils.isEmpty(date)) {
 //            Toast.makeText(this,"Please select a date", Toast.LENGTH_LONG).show();
@@ -258,20 +283,18 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
 
             } else if (TextUtils.isEmpty(dosage)) {
             Toast.makeText(this, "Please enter a dosage amount", Toast.LENGTH_LONG).show();
-        }
-        else if (radioButtonNo.isChecked() & (TextUtils.isEmpty(notes))){
-                Toast.makeText(this, "Please note which animals were not vaccinated", Toast.LENGTH_LONG).show();
-
-
+        }  else if (radioButtonNo.isChecked() & (TextUtils.isEmpty(notes))) {
+                Toast.makeText(this, "Please note which animals were not dosed", Toast.LENGTH_LONG).show();
             }
+
         else{
-        String id = databaseVaccination.push().getKey();
+        String id = databaseDose.push().getKey();
 
-        GroupVaccination groupVaccination = new GroupVaccination(idGroup, number, id, drug, admin, dosage, date, notes,allVaccinated );
+        Dosing groupDose = new Dosing(idGroup, number, id, drug, admin, dosage, date, notes,allAnimals, method);
 
-        databaseVaccination.child(id).setValue(groupVaccination);
+        databaseDose.child(id).setValue(groupDose);
 
-        Toast.makeText(this, "Vaccination added", Toast.LENGTH_LONG).show(); }
+        Toast.makeText(this, "Dose added", Toast.LENGTH_LONG).show(); }
 
 //        if(!TextUtils.isEmpty(number)){
 //
@@ -300,7 +323,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setContentTitle("Vaccination")
+                .setContentTitle("Dose")
                 .setContentText("Your animal will be out of the withdrawal period in 2 weeks");
 
         //intent needed to display the notification

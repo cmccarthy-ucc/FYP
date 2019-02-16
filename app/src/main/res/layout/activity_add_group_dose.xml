@@ -21,13 +21,13 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_weight="1"
-            android:text="Are all group members vaccinated?"
+            android:text="Are all group members dosed?"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vaccinationDate" />
 
-            <TextView
+        <TextView
 
             android:id="@+id/TextViewGroupID"
             android:layout_width="343dp"
@@ -38,44 +38,42 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="GroupID"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textColor="@android:color/white"
             android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
+        <TextView
             android:id="@+id/TextViewGroupNumber"
             android:layout_width="174dp"
             android:layout_height="38dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="Group Number"
             android:textColor="@android:color/black"
             android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.558"
             app:layout_constraintStart_toEndOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/TextViewGroupID" />
             <!--&lt;!&ndash; Select Drug&ndash;&gt;-->
 
             <!--&lt;!&ndash; Select Drug&ndash;&gt;-->
-            <Spinner
+        <Spinner
             android:id="@+id/spinnerDrug"
             android:layout_width="338dp"
             android:layout_height="31dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:entries="@array/drug"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.625"
+            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextViewGroupNumber" />
 
@@ -118,17 +116,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editDosage" />
 
-            <Button
+        <Button
             android:id="@+id/buttonAddVaccination"
             android:layout_width="186dp"
             android:layout_height="53dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Add Vaccination"
+            android:text="Add Dose"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toEndOf="@+id/editTextNotes"
             app:layout_constraintTop_toBottomOf="@+id/radioGroupAllVaccinated" />
 
@@ -198,27 +197,27 @@
 
             </RadioGroup>
 
-            <TextView
+        <TextView
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:text="Notes"
             app:layout_constraintEnd_toStartOf="@+id/buttonAddVaccination"
-            app:layout_constraintHorizontal_bias="0.152"
+            app:layout_constraintHorizontal_bias="0.11"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroupAllVaccinated" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupMethod" />
 
-            <EditText
+        <EditText
             android:id="@+id/editTextNotes"
             android:layout_width="152dp"
             android:layout_height="94dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
@@ -226,20 +225,67 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView15"
-            app:layout_constraintVertical_bias="0.257" />
+            app:layout_constraintVertical_bias="0.965" />
 
-            <TextView
+        <TextView
             android:id="@+id/textView14"
             android:layout_width="132dp"
             android:layout_height="25dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
             android:text="Group Number:"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextViewGroupID" />
+
+        <TextView
+            android:id="@+id/textViewMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="Method of Dosing"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.058"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupAllVaccinated" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupMethod"
+            android:layout_width="307dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMethod"
+            tools:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonInjection"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="Injection" />
+
+            <RadioButton
+                android:id="@+id/radioButtonOral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Oral" />
+        </RadioGroup>
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView

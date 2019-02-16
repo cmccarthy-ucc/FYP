@@ -104,7 +104,7 @@ public class ActivityIndividualHome extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityIndividualHome.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityIndividualHome.this, ActivityAllGroups.class);
+                        Intent intentGroups = new Intent(ActivityIndividualHome.this, ActivityGroupHome.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:

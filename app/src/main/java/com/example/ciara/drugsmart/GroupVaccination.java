@@ -1,5 +1,7 @@
 package com.example.ciara.drugsmart;
 
+
+
 public class GroupVaccination {
     String vaccinationGroupID;
     String vaccinationGroupNumber;

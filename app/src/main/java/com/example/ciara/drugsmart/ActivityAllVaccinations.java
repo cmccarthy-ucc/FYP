@@ -96,7 +96,7 @@ public class ActivityAllVaccinations extends AppCompatActivity {
 
                 //intent.putExtra("ListViewClickedValue", tempListValue);
 
-                startActivity(intent);
+                //startActivity(intent);
 
 
             }
@@ -118,7 +118,7 @@ public class ActivityAllVaccinations extends AppCompatActivity {
                 switch (id) {
                     case R.id.animals:
                         Toast.makeText(ActivityAllVaccinations.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityAllVaccinations.this, ActivityHome.class);
+                        Intent intentAnimal = new Intent(ActivityAllVaccinations.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
@@ -128,7 +128,7 @@ public class ActivityAllVaccinations extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityAllVaccinations.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityAllVaccinations.this, ActivityAllGroups.class);
+                        Intent intentGroups = new Intent(ActivityAllVaccinations.this, ActivityGroupHome.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:

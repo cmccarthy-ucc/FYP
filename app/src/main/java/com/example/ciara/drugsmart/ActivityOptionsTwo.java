@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ public class ActivityOptionsTwo extends AppCompatActivity {
 
     ImageView imageViewIndividualAnimal;
     ImageView imageViewAnimalGroups;
+    Button buttonToDo;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -47,6 +49,15 @@ public class ActivityOptionsTwo extends AppCompatActivity {
             }
         });
 
+        buttonToDo = (Button)findViewById(R.id.buttonToDo);
+        buttonToDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (ActivityOptionsTwo.this, ActivityToDoList.class);
+                startActivity(intent);
+            }
+        });
+
         dl = (DrawerLayout)findViewById(R.id.activity_main);
         t = new ActionBarDrawerToggle(this, dl,R.string.Open, R.string.Close);
 
@@ -65,17 +76,17 @@ public class ActivityOptionsTwo extends AppCompatActivity {
                 switch (id) {
                     case R.id.animals:
                         //Toast.makeText(ActivityOptions.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityOptionsTwo.this, ActivityHome.class);
+                        Intent intentAnimal = new Intent(ActivityOptionsTwo.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityOptionsTwo.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityOptionsTwo.this, ActivityVaccinationHome.class);
+                        Intent intentVaccination = new Intent(ActivityOptionsTwo.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityOptionsTwo.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityOptionsTwo.this, ActivityAllGroups.class);
+                        Intent intentGroups = new Intent(ActivityOptionsTwo.this, ActivityGroupHome.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:

@@ -21,6 +21,7 @@ public class ActivityGroupHome extends AppCompatActivity {
     Button addGroupVaccination;
     Button viewGroupVaccination;
     Button searchGroups;
+    Button addGroupDose;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -49,14 +50,14 @@ public class ActivityGroupHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//        viewGroupVaccination = (Button) findViewById(R.id.btnViewGroupVaccinations);
-//        viewGroupVaccination.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ActivityGroupHome.this, ActivityAllGroupVaccinations.class);
-//                startActivity(intent);
-//            }
-//        });
+        viewGroupVaccination = (Button) findViewById(R.id.btnViewGroupVaccinations);
+        viewGroupVaccination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityGroupHome.this, ActivityAllGroupVaccinations.class);
+                startActivity(intent);
+            }
+        });
         addGroupVaccination = (Button) findViewById(R.id.btnAddGroupVaccinations);
         addGroupVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +72,15 @@ public class ActivityGroupHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityGroupHome.this, SearchDatabase.class);
+                startActivity(intent);
+            }
+        });
+
+        addGroupDose = (Button) findViewById(R.id.buttonAddGroupDose);
+        addGroupDose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityGroupHome.this, ActivityAllGroups.class);
                 startActivity(intent);
             }
         });
@@ -95,7 +105,7 @@ public class ActivityGroupHome extends AppCompatActivity {
                 switch (id) {
                     case R.id.animals:
                         //Toast.makeText(ActivityOptions.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityGroupHome.this, ActivityGroupHome.class);
+                        Intent intentAnimal = new Intent(ActivityGroupHome.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
@@ -105,7 +115,7 @@ public class ActivityGroupHome extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityGroupHome.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityGroupHome.this, ActivityAllGroups.class);
+                        Intent intentGroups = new Intent(ActivityGroupHome.this, ActivityGroupHome.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:

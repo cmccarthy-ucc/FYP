@@ -64,7 +64,9 @@ public class ActivityAddGroup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_add_group);
+
         mDisplayDate = (TextView) findViewById(R.id.textViewDOB);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -131,23 +133,28 @@ public class ActivityAddGroup extends AppCompatActivity {
                 switch (id) {
                     case R.id.animals:
                         Toast.makeText(ActivityAddGroup.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityAddGroup.this, ActivityHome.class);
+                        Intent intentAnimal = new Intent(ActivityAddGroup.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityAddGroup.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityAddGroup.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityAddGroup.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityAddGroup.this, ActivityAllVaccinations.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityAddGroup.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityAddGroup.this, ActivityAllGroups.class);
+                        Intent intentGroups = new Intent(ActivityAddGroup.this, ActivityGroupHome.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityAddGroup.this, "Home", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(ActivityAddGroup.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(ActivityAddGroup.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(ActivityAddGroup.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;
