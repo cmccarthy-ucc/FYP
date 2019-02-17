@@ -1,5 +1,6 @@
 package com.example.ciara.drugsmart;
 
+import android.app.Activity;
 import android.app.ActivityGroup;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class ActivityGroupHome extends AppCompatActivity {
     Button viewGroupVaccination;
     Button searchGroups;
     Button addGroupDose;
+    Button viewDoses;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -85,6 +87,15 @@ public class ActivityGroupHome extends AppCompatActivity {
             }
         });
 
+        viewDoses = (Button) findViewById(R.id.buttonViewDoses);
+        viewDoses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityGroupHome.this, ActivityAllDoses.class);
+                startActivity(intent);
+            }
+        });
+
 
         //Navigation Drawer
         dl = (DrawerLayout)findViewById(R.id.activity_main);
@@ -109,8 +120,8 @@ public class ActivityGroupHome extends AppCompatActivity {
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityGroupHome.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityGroupHome.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityGroupHome.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityGroupHome.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -123,6 +134,11 @@ public class ActivityGroupHome extends AppCompatActivity {
                         Intent intentHome = new Intent(ActivityGroupHome.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
                         break;
+                    case R.id.todo:
+                    Toast.makeText(ActivityGroupHome.this,"To-Do List", Toast.LENGTH_SHORT).show();
+                    Intent intentToDo = new Intent(ActivityGroupHome.this, ActivityToDoList.class);
+                    startActivity(intentToDo);
+                    break;
                     default:
                         return true;
                 }

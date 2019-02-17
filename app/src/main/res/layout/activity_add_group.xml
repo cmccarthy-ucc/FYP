@@ -92,7 +92,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.454"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNotes" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewNotes" />
 
         <TextView
             android:id="@+id/textView4"
@@ -125,7 +125,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <EditText
-            android:id="@+id/editTextNotes"
+            android:id="@+id/textViewNotes"
             android:layout_width="350dp"
             android:layout_height="89dp"
             android:layout_marginStart="8dp"
@@ -203,7 +203,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/editTextNotes"
+            app:layout_constraintBottom_toTopOf="@+id/textViewNotes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDOB">

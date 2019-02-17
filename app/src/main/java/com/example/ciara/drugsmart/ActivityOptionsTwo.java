@@ -3,10 +3,14 @@ package com.example.ciara.drugsmart;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -49,11 +53,11 @@ public class ActivityOptionsTwo extends AppCompatActivity {
             }
         });
 
-        buttonToDo = (Button)findViewById(R.id.buttonToDo);
+        buttonToDo = (Button)findViewById(R.id.button);
         buttonToDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (ActivityOptionsTwo.this, ActivityToDoList.class);
+                Intent intent = new Intent (ActivityOptionsTwo.this, ActivityToDoDoses.class);
                 startActivity(intent);
             }
         });
@@ -75,12 +79,12 @@ public class ActivityOptionsTwo extends AppCompatActivity {
 
                 switch (id) {
                     case R.id.animals:
-                        //Toast.makeText(ActivityOptions.this, "Animals",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityOptionsTwo.this, "Animals",Toast.LENGTH_SHORT).show();
                         Intent intentAnimal = new Intent(ActivityOptionsTwo.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityOptionsTwo.this, "Vaccinations", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityOptionsTwo.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ActivityOptionsTwo.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
@@ -94,6 +98,11 @@ public class ActivityOptionsTwo extends AppCompatActivity {
                         Intent intentHome = new Intent(ActivityOptionsTwo.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
                         break;
+                    case R.id.todo:
+                        Toast.makeText(ActivityOptionsTwo.this,"To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(ActivityOptionsTwo.this, ActivityToDoDoses.class);
+                        startActivity(intentToDo);
+                        break;
                     default:
                         return true;
                 }
@@ -102,6 +111,25 @@ return true;
             }
 
         });
+
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Check your To-Do List", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar snackbar = Snackbar.make(view, "Check your To-Do List", Snackbar.LENGTH_LONG).setAction("Action", null);
+                snackbar.setAction(R.string.title_todo, new openToDo());
+                snackbar.show();
+
+        }});
     }
 
     @Override
@@ -111,6 +139,16 @@ return true;
             return true;
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public class openToDo implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+
+            Intent intentToDo = new Intent(ActivityOptionsTwo.this, ActivityToDoDoses.class);
+            startActivity(intentToDo);
+        }
     }
 
 }

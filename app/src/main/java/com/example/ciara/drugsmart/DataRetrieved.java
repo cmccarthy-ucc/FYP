@@ -75,25 +75,6 @@ public class DataRetrieved extends AppCompatActivity {
                 TextView animalTag = (TextView) view.findViewById(R.id.tag);
                 String animalTagText = (String) animalTag.getText();
 
-//                TextView animalID = parent.findViewById(R.id.animalID);
-//                String animalIDText = (String) animalID.getText();
-//
-//                TextView animalGender = (TextView) parent.findViewById(R.id.gender);
-//                String animalGenderText = (String) animalGender.getText();
-//
-//
-//                TextView animalDOB = (TextView) parent.findViewById(R.id.DOB);
-//                String animalDOBText = (String) animalDOB.getText();
-//
-//                TextView source = (TextView) parent.findViewById(R.id.source);
-//                String sourceText = (String) source.getText();
-//
-//                TextView animalBreed = (TextView) parent.findViewById(R.id.breed);
-//                String animalBreedText = (String) animalBreed.getText();
-//
-//                TextView animalTag = (TextView) parent.findViewById(R.id.tag);
-//                String animalTagText = (String) animalTag.getText();
-
                 //Multiple Values
                 Intent intent = new Intent(DataRetrieved.this, ViewAnimalDetails.class);
                 Bundle extras = new Bundle();
@@ -103,19 +84,8 @@ public class DataRetrieved extends AppCompatActivity {
                 extras.putString("EXTRA_SOURCE",sourceText);
                 extras.putString("EXTRA_BREED", animalBreedText);
                 extras.putString("EXTRA_TAG", animalTagText);
-                //extras.putString("POSITION", tempListValue);
                 intent.putExtras(extras);
-//                intent.putExtra("POSITION", position);
                 startActivity(intent);
-
-
-               /* //Only animal ID
-                Intent intent = new Intent(DataRetrieved.this, ViewAnimalDetails.class);
-                intent.putExtra("ListViewClickedValue", animalIDText);*/
-
-                //intent.putExtra("ListViewClickedValue", tempListValue);
-
-                //startActivity(intent);
 
 
             }
@@ -140,13 +110,13 @@ public class DataRetrieved extends AppCompatActivity {
 
                 switch (id) {
                     case R.id.animals:
-                        //Toast.makeText(ActivityOptions.this, "Animals",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DataRetrieved.this, "Animals",Toast.LENGTH_SHORT).show();
                         Intent intentAnimal = new Intent(DataRetrieved.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(DataRetrieved.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(DataRetrieved.this, ActivityVaccinationHome.class);
+                        Toast.makeText(DataRetrieved.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(DataRetrieved.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -158,6 +128,11 @@ public class DataRetrieved extends AppCompatActivity {
                         Toast.makeText(DataRetrieved.this,"Home", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(DataRetrieved.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(DataRetrieved.this,"To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(DataRetrieved.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;

@@ -72,10 +72,12 @@
     <string name="Open">NavBar</string>
     <string name="Close">NavBar</string>
     <string name="title_activity_medical_records2">Medical Records</string>
-    <string name="title_home">Vaccinations</string>
-    <string name="title_dashboard">Doses</string>
-    <string name="title_notifications">Treatments</string>
+    <string name="title_home">Treatments</string>
+    <string name="title_dashboard">Vaccinations</string>
+    <string name="title_notifications">Doses</string>
     <string name="title_todo">To-Do List</string>
+    <string name="title_vaccinations">Vaccinations</string>
+    <string name="title_doses">Doses</string>
 
 
 </resources>

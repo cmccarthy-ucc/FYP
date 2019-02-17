@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tag"
+        android:id="@+id/groupNumber"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:paddingLeft="5dp"
-        android:text="Tag Number"
+        android:text="AnimalGroup"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -25,6 +28,7 @@
         android:id="@+id/drug"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -41,6 +45,7 @@
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -57,6 +62,7 @@
         android:id="@+id/dosage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -72,6 +78,7 @@
         android:id="@+id/administrator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -83,9 +90,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
 
+    <TextView
+        android:id="@+id/allDosedTrueFalse"
+        android:layout_width="120dp"
+        android:layout_height="21dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:paddingLeft="5dp"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/doseType"
+        tools:text="AllDosed" />
 
     <TextView
-        android:id="@+id/animalID"
+        android:id="@+id/doseType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:paddingLeft="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dosage"
+        tools:text="Type" />
+
+    <TextView
+        android:id="@+id/groupDoseID"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:paddingLeft="5dp"
@@ -93,75 +132,55 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vaccinationID" />
+        app:layout_constraintTop_toBottomOf="@+id/doseID" />
 
     <TextView
-        android:id="@+id/vaccinationID"
+        android:id="@+id/notes"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:paddingLeft="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doseType" />
+
+    <TextView
+        android:id="@+id/doseID"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:paddingLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dosage" />
+        app:layout_constraintTop_toBottomOf="@+id/allDosedTrueFalse" />
 
     <TextView
         android:id="@+id/textView26"
-        android:layout_width="184dp"
+        android:layout_width="134dp"
         android:layout_height="35dp"
-        android:layout_alignBottom="@+id/tag"
+        android:layout_alignBottom="@+id/groupNumber"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_toStartOf="@+id/tag"
-        android:layout_toLeftOf="@+id/tag"
-        android:text="Tag Number:"
+        android:layout_toStartOf="@+id/groupNumber"
+        android:layout_toLeftOf="@+id/groupNumber"
+        android:text="Group Number:"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="All Animals Dosed?"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doseType" />
+
 
 </android.support.constraint.ConstraintLayout>
-
-
-    <!--<TextView-->
-        <!--android:id="@+id/tag"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="AnimalTag"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:textSize="24sp"-->
-        <!--android:textStyle="bold" />-->
-    <!--<TextView-->
-        <!--android:id="@+id/drug"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Drug"-->
-        <!--android:textSize="24sp"-->
-        <!--android:textStyle="bold" />-->
-    <!--<TextView-->
-        <!--android:id="@+id/date"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Date"-->
-        <!--android:textSize="14sp" />-->
-    <!--<TextView-->
-        <!--android:id="@+id/dosage"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Dosage" />-->
-    <!--<TextView-->
-        <!--android:id="@+id/administrator"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Administrator" />-->
-    <!--<TextView-->
-        <!--android:id="@+id/vaccinationID"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="ID"-->
-        <!--android:textSize="14sp"/>-->
-
-<!--</LinearLayout>-->

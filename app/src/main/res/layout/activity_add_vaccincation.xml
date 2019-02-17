@@ -14,38 +14,31 @@
 
         <TextView
             android:id="@+id/TextViewAnimalID"
-            android:layout_width="344dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
             android:text="AnimalID"
             android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
+            android:textColor="@android:color/white"
+            android:textSize="8sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
             android:id="@+id/TextViewAnimalTag"
-            android:layout_width="344dp"
+            android:layout_width="147dp"
             android:layout_height="47dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
             android:text="Animal Tag"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextViewAnimalID" />
 
 
@@ -98,10 +91,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editDosage" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewDosage" />
 
         <Button
-            android:id="@+id/buttonAddVaccination"
+            android:id="@+id/buttonUpdateVaccination"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -127,22 +120,45 @@
             android:text="Add Reminder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAddVaccination" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonUpdateVaccination" />
 
         <EditText
-            android:id="@+id/editDosage"
-            android:layout_width="344dp"
+            android:id="@+id/textViewDosage"
+            android:layout_width="169dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="Dosage"
+            android:inputType="numberDecimal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editAdmin" />
 
-        </android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="32dp"
+            android:text="Tag Number"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="24dp"
+            android:text="ml per KG"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/textViewDosage"
+            app:layout_constraintTop_toBottomOf="@+id/editAdmin" />
+
+    </android.support.constraint.ConstraintLayout>
 
         <android.support.design.widget.NavigationView
             android:layout_width="wrap_content"

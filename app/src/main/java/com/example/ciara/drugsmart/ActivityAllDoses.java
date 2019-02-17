@@ -27,7 +27,7 @@ public class ActivityAllDoses extends AppCompatActivity {
 
     private ListView listView;
     DatabaseReference databaseReference;
-    List<GroupVaccination> groupVaccinationList;
+    List<Dosing> dosingList;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -38,11 +38,11 @@ public class ActivityAllDoses extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_group_vaccinations);
+        setContentView(R.layout.activity_all_doses);
 
-        listView = (ListView)findViewById(R.id.listItemAllGroupVaccinations);
-        databaseReference = FirebaseDatabase.getInstance().getReference("groupVaccination");
-        groupVaccinationList = new ArrayList<>();
+        listView = (ListView)findViewById(R.id.listItemAllGroupDoses);
+        databaseReference = FirebaseDatabase.getInstance().getReference("groupDose");
+        dosingList = new ArrayList<>();
 
     //Transferring data from selected list view item to other activity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -53,33 +53,45 @@ public class ActivityAllDoses extends AppCompatActivity {
                 //String tempListValue = animalList.get(position).toString();
                 //.get(position).toString();
 
-                TextView groupVaccinationID = (TextView) parent.findViewById(R.id.groupVaccinationID);
-                String groupVaccinationIDText = (String) groupVaccinationID.getText();
+                TextView groupDoseID = (TextView) view.findViewById(R.id.groupDoseID);
+                String groupDoseIDText = (String) groupDoseID.getText();
 
-                TextView vaccinationGroupNumber = (TextView) parent.findViewById(R.id.groupNumber);
-                String vaccinationAnimalTagText = (String) vaccinationGroupNumber.getText();
+                TextView doseGroupNumber = (TextView) view.findViewById(R.id.groupNumber);
+                String doseGroupNumberText = (String) doseGroupNumber.getText();
 
-                TextView vaccinationDate = (TextView) parent.findViewById(R.id.date);
-                String vaccinationDateText = (String) vaccinationDate.getText();
+                TextView doseDate = (TextView) view.findViewById(R.id.date);
+                String doseDateText = (String) doseDate.getText();
 
-                TextView vaccinationDosage = (TextView) parent.findViewById(R.id.dosage);
-                String vaccinationDosageText = (String) vaccinationDosage.getText();
+                TextView doseDosage = (TextView) view.findViewById(R.id.dosage);
+                String doseDosageText = (String) doseDosage.getText();
 
-                TextView vaccinationDrug = (TextView) parent.findViewById(R.id.drug);
-                String vaccinationDrugText = (String) vaccinationDrug.getText();
+                TextView doseDrug = (TextView) view.findViewById(R.id.drug);
+                String doseDrugText = (String) doseDrug.getText();
 
-                TextView vaccinationAdmin = (TextView) parent.findViewById(R.id.administrator);
-                String vaccinationAdminText = (String) vaccinationAdmin.getText();
+                TextView doseAdmin = (TextView) view.findViewById(R.id.administrator);
+                String doseAdminText = (String) doseAdmin.getText();
+
+                TextView doseType = view.findViewById(R.id.doseType);
+                String doseTypeText = (String) doseType.getText();
+
+                TextView doseNotes = view.findViewById(R.id.notes);
+                String doseNotesText = (String) doseNotes.getText();
+
+                TextView allDosed = view.findViewById(R.id.allDosedTrueFalse);
+                String allDosedText = (String) allDosed.getText();
 
                 //Multiple Values
-                Intent intent = new Intent(ActivityAllDoses.this, ViewVaccinationDetails.class);
+                Intent intent = new Intent(ActivityAllDoses.this, ActivityViewDoseDetails.class);
                 Bundle extras = new Bundle();
-                extras.putString("EXTRA_ANIMAL_TAG",vaccinationAnimalTagText);
-                extras.putString("EXTRA_ID",groupVaccinationIDText);
-                extras.putString("EXTRA_DRUG",vaccinationDrugText);
-                extras.putString("EXTRA_DATE",vaccinationDateText);
-                extras.putString("EXTRA_DOSAGE", vaccinationDosageText);
-                extras.putString("EXTRA_ADMIN", vaccinationAdminText);
+                extras.putString("EXTRA_GROUP_NUMBER",doseGroupNumberText);
+                extras.putString("EXTRA_ID",groupDoseIDText);
+                extras.putString("EXTRA_DRUG",doseDrugText);
+                extras.putString("EXTRA_DATE",doseDateText);
+                extras.putString("EXTRA_DOSAGE", doseDosageText);
+                extras.putString("EXTRA_TYPE", doseTypeText);
+                extras.putString("EXTRA_NOTES", doseNotesText);
+                extras.putString("EXTRA_ALL_DOSED", allDosedText);
+                extras.putString("EXTRA_ADMIN", doseAdminText);
                 intent.putExtras(extras);
                 startActivity(intent);
 
@@ -116,8 +128,8 @@ public class ActivityAllDoses extends AppCompatActivity {
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityAllDoses.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityAllDoses.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityAllDoses.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityAllDoses.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -129,6 +141,11 @@ public class ActivityAllDoses extends AppCompatActivity {
                         Toast.makeText(ActivityAllDoses.this,"Home", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(ActivityAllDoses.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(ActivityAllDoses.this,"To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(ActivityAllDoses.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;
@@ -146,13 +163,13 @@ public class ActivityAllDoses extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()){
-                    GroupVaccination groupVaccination = groupVaccinationSnapshot.getValue(GroupVaccination.class);
-                    groupVaccinationList.add(groupVaccination);
+                for(DataSnapshot dosingSnapshot : dataSnapshot.getChildren()){
+                    Dosing dosing = dosingSnapshot.getValue(Dosing.class);
+                    dosingList.add(dosing);
                 }
 
-                GroupVaccinationInfoAdapter groupVaccinationInfoAdapter = new GroupVaccinationInfoAdapter(ActivityAllDoses.this, groupVaccinationList);
-                listView.setAdapter(groupVaccinationInfoAdapter);
+               DosingInfoAdapter dosingInfoAdapter = new DosingInfoAdapter(ActivityAllDoses.this, dosingList);
+                listView.setAdapter(dosingInfoAdapter);
 
             }
 

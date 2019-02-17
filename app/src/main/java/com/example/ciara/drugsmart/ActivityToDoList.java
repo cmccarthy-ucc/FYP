@@ -68,8 +68,8 @@ public class ActivityToDoList extends AppCompatActivity {
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityToDoList.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityToDoList.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityToDoList.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityToDoList.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -151,6 +151,7 @@ public class ActivityToDoList extends AppCompatActivity {
     }
     protected void onStart() {
         super.onStart();
+        groupVaccinationList.clear();
         Query toDoListQuery = databaseReference.orderByChild("allVaccinated").equalTo(false);
         toDoListQuery.addValueEventListener(new ValueEventListener() {
             @Override

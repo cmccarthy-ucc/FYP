@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class ActivityToDoDetails extends AppCompatActivity {
     TextView vaccinationNotes;
     TextView allVaccinatedTV;
     TextView vaccinationID;
+    Button updateVaccination;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -63,8 +66,6 @@ public class ActivityToDoDetails extends AppCompatActivity {
         String allVaccinatedText = extras.getString("EXTRA_ALL_VACCINATED");
         String vaccinationIDText = extras.getString("EXTRA_VACCINATION_ID");
 
-
-
         vaccinationGroupNumber.setText(vaccinationGroupNumberText);
         vaccinationGroupID.setText(vaccinationGroupIDText);
         vaccinationDate.setText(vaccinationDateText);
@@ -74,6 +75,8 @@ public class ActivityToDoDetails extends AppCompatActivity {
         vaccinationNotes.setText(vaccinationNotesText);
         allVaccinatedTV.setText(allVaccinatedText);
         vaccinationID.setText(vaccinationIDText);
+
+        
 
         vaccinationNotes.setMovementMethod(new ScrollingMovementMethod());
 
@@ -98,8 +101,8 @@ public class ActivityToDoDetails extends AppCompatActivity {
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityToDoDetails.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityToDoDetails.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityToDoDetails.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityToDoDetails.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -113,7 +116,7 @@ public class ActivityToDoDetails extends AppCompatActivity {
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
-                        Toast.makeText(ActivityToDoDetails.this, "Home", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityToDoDetails.this, "To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(ActivityToDoDetails.this, ActivityToDoList.class);
                         startActivity(intentToDo);
                         break;
@@ -123,7 +126,61 @@ public class ActivityToDoDetails extends AppCompatActivity {
                 return true;
             }
         });
-    }
+
+        updateVaccination = findViewById(R.id.btnUpdate);
+        updateVaccination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //String tempListValue = (listViewResults.getItemAtPosition(position).toString());
+                //String tempListValue = animalList.get(position).toString();
+                //.get(position).toString();
+
+                TextView vaccinationID = (TextView) findViewById(R.id.vaccinationID);
+                String vaccinationIDText = (String) vaccinationID.getText();
+
+                TextView vaccinationGroupNumber = (TextView) findViewById(R.id.vaccinationGroupNumber);
+                String vaccinationGroupNumberText = (String) vaccinationGroupNumber.getText();
+
+                TextView vaccinationDate = (TextView) findViewById(R.id.vaccinationDate);
+                String vaccinationDateText = (String) vaccinationDate.getText();
+
+                TextView vaccinationDosage = (TextView) findViewById(R.id.vaccinationDosage);
+                String vaccinationDosageText = (String) vaccinationDosage.getText();
+
+
+                TextView vaccinationDrug = (TextView) findViewById(R.id.vaccinationDrug);
+                String vaccinationDrugText = (String) vaccinationDrug.getText();
+
+                TextView vaccinationAdmin = (TextView) findViewById(R.id.vaccinationAdmin);
+                String vaccinationAdminText = (String) vaccinationAdmin.getText();
+
+
+                TextView vaccinationNotes = (TextView) findViewById(R.id.vaccinationNotes);
+                String vaccinationNotesText = (String) vaccinationNotes.getText().toString();
+
+                TextView groupVaccinationID = findViewById(R.id.groupVaccinationID);
+                String vaccinationGroupIDText = vaccinationGroupID.getText().toString();
+
+
+
+                //Multiple Values
+//                Intent intent = new Intent(ActivityToDoDetails.this, ActivityUpdateGroupVaccination.class);
+//                Bundle extras = new Bundle();
+//                extras.putString("EXTRA_GROUP_NUMBER", vaccinationGroupNumberText);
+//                extras.putString("EXTRA_DRUG", vaccinationDrugText);
+//                extras.putString("EXTRA_DATE", vaccinationDateText);
+//                extras.putString("EXTRA_DOSAGE", vaccinationDosageText);
+//                extras.putString("EXTRA_ADMIN", vaccinationAdminText);
+//                extras.putString("EXTRA_NOTES", vaccinationNotesText);
+//                extras.putString("EXTRA_VACCINATION_ID", vaccinationIDText);
+//                extras.putString("EXTRA_GROUP_ID", vaccinationGroupIDText);
+//                intent.putExtras(extras);
+//                startActivity(intent);
+            }
+
+        });
+            }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

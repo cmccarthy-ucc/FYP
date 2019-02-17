@@ -63,13 +63,13 @@ public class ActivityVaccinationHome extends AppCompatActivity {
 
                 switch (id) {
                     case R.id.animals:
-                        //Toast.makeText(ActivityOptions.this, "Animals",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityVaccinationHome.this, "Animals",Toast.LENGTH_SHORT).show();
                         Intent intentAnimal = new Intent(ActivityVaccinationHome.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityVaccinationHome.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityVaccinationHome.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityVaccinationHome.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityVaccinationHome.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -81,6 +81,11 @@ public class ActivityVaccinationHome extends AppCompatActivity {
                         Toast.makeText(ActivityVaccinationHome.this,"Home", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(ActivityVaccinationHome.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(ActivityVaccinationHome.this,"To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(ActivityVaccinationHome.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;

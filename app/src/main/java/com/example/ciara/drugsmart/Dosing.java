@@ -11,7 +11,7 @@ public class Dosing {
     //Date doseDate;
     String doseNotes;
     Boolean allDosed;
-    String doseMethod;
+    String doseType;
 
 
     public Dosing(){
@@ -19,7 +19,7 @@ public class Dosing {
     }
 
     public Dosing(String doseGroupID, String doseGroupNumber, String doseID, String doseDrug,
-                  String doseAdmin, String doseDosage, String doseDate, String doseNotes, Boolean allDosed, String doseMethod){
+                  String doseAdmin, String doseDosage, String doseDate, String doseNotes, Boolean allDosed, String doseType){
         //Date doseDate
         this.doseGroupID = doseGroupID;
         this.doseGroupNumber = doseGroupNumber;
@@ -30,7 +30,7 @@ public class Dosing {
         this.doseDate = doseDate;
         this.doseNotes = doseNotes;
         this.allDosed = allDosed;
-        this.doseMethod = doseMethod;
+        this.doseType = doseType;
     }
 
     public String getDoseGroupID() {   return doseGroupID;    }
@@ -52,7 +52,7 @@ public class Dosing {
 
     public Boolean getAllDosed() {return allDosed; }
 
-    public String getDoseMethod() { return doseMethod; }
+    public String getDoseType() { return doseType; }
 
 
 }

@@ -26,10 +26,6 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -103,7 +99,7 @@ public class ActivityAddGroup extends AppCompatActivity {
         editTextSource = (EditText) findViewById(R.id.editTextSource);
         editTextGroupNo = (EditText) findViewById(R.id.editTextGroupNo);
         editTextGroupNo.requestFocus();
-        editTextNotes = (EditText) findViewById(R.id.editTextNotes);
+        editTextNotes = (EditText) findViewById(R.id.textViewNotes);
         btnAddGroup = (Button) findViewById(R.id.btnAddGroup);
         spinnerAnimalType = (Spinner) findViewById(R.id.spinnerAnimalType);
         radioButtonYes = (RadioButton) findViewById(R.id.radioButtonYes);
@@ -138,7 +134,7 @@ public class ActivityAddGroup extends AppCompatActivity {
                         break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityAddGroup.this, "Medical Records", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityAddGroup.this, ActivityAllVaccinations.class);
+                        Intent intentVaccination = new Intent(ActivityAddGroup.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:

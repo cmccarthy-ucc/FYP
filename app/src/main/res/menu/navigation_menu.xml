@@ -9,7 +9,7 @@
         android:title="Animals"/>
     <item android:id="@+id/vaccinations"
         android:icon="@drawable/ic_portrait_black_24dp"
-        android:title="Vaccinations"/>
+        android:title="Medical Records"/>
     <item android:id="@+id/groups"
         android:icon="@drawable/ic_spa_black_24dp"
         android:title="Groups"/>

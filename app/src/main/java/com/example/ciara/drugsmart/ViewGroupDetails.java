@@ -72,7 +72,7 @@ ViewGroupDetails extends AppCompatActivity {
         groupBreed.setText(groupBreedText);
         groupNumber.setText(groupNumberText);
 
-        buttonAddVaccination = (Button)findViewById(R.id.buttonAddVaccination);
+        buttonAddVaccination = (Button)findViewById(R.id.buttonUpdateVaccination);
         buttonAddVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,8 +141,8 @@ ViewGroupDetails extends AppCompatActivity {
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ViewGroupDetails.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ViewGroupDetails.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ViewGroupDetails.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ViewGroupDetails.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -154,6 +154,11 @@ ViewGroupDetails extends AppCompatActivity {
                         Toast.makeText(ViewGroupDetails.this, "Home", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(ViewGroupDetails.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(ViewGroupDetails.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(ViewGroupDetails.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;

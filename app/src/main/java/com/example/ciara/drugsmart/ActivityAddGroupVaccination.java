@@ -50,7 +50,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
     EditText vaccinationNotes;
     RadioButton radioButtonYes;
     RadioButton radioButtonNo;
-    Boolean allVaccinated = false;
+    Boolean allVaccinated = true;
     String dateVaccination;
     //Date dateVaccination;
 
@@ -73,10 +73,10 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
 
         vaccinationDrug = (Spinner) findViewById(R.id.spinnerDrug);
         vaccinationAdmin = (EditText) findViewById(R.id.editAdmin);
-        vaccinationDosage = (EditText) findViewById(R.id.editDosage);
-        vaccinationNotes = (EditText) findViewById(R.id.editTextNotes);
+        vaccinationDosage = (EditText) findViewById(R.id.textViewDosage);
+        vaccinationNotes = (EditText) findViewById(R.id.textViewNotes);
 
-        groupID = (TextView) findViewById(R.id.TextViewGroupID);
+        groupID = (TextView) findViewById(R.id.textViewVaccinationID);
         groupNumber = (TextView) findViewById(R.id.TextViewGroupNumber);
 
         Intent vaccinationIntent = getIntent();
@@ -87,7 +87,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
         groupID.setText(groupIDText);
         groupNumber.setText(groupNumberText);
 
-        buttonAddVaccination = (Button) findViewById(R.id.buttonAddVaccination);
+        buttonAddVaccination = (Button) findViewById(R.id.buttonUpdateVaccination);
         buttonAddVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,8 +218,8 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityAddGroupVaccination.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityAddGroupVaccination.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityAddGroupVaccination.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityAddGroupVaccination.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -231,6 +231,11 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
                         Toast.makeText(ActivityAddGroupVaccination.this, "Home", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(ActivityAddGroupVaccination.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(ActivityAddGroupVaccination.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(ActivityAddGroupVaccination.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;

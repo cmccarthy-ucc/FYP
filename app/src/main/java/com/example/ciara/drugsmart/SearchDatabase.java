@@ -86,8 +86,8 @@ public class SearchDatabase extends AppCompatActivity {
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(SearchDatabase.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(SearchDatabase.this, ActivityVaccinationHome.class);
+                        Toast.makeText(SearchDatabase.this, "Medial Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(SearchDatabase.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -99,6 +99,11 @@ public class SearchDatabase extends AppCompatActivity {
                         Toast.makeText(SearchDatabase.this, "Home", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(SearchDatabase.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(SearchDatabase.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(SearchDatabase.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;

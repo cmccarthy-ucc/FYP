@@ -50,7 +50,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityOptions" />
-        <activity android:name=".ActivityOptionsTwo" />
+        <activity
+            android:name=".ActivityOptionsTwo"
+            android:label="Home" />
         <activity android:name=".ActivityAddGroup" />
         <activity android:name=".ActivityVaccinationHome" />
         <activity android:name=".SearchDatabase" />
@@ -60,14 +62,24 @@
         <activity android:name=".ViewVaccinationDetails" />
         <activity android:name=".ActivityGroupHome" />
         <activity android:name=".ActivityIndividualHome" />
-        <activity android:name=".ActivityMedicalRecords" />
         <activity android:name=".ActivityAllGroupVaccinations" />
+        <activity android:name=".ActivityAllDoses" />
+        <activity
+            android:name=".ActivityViewDoseDetails"
+            android:label="Group Dose Details" />
         <activity android:name=".ActivityAddGroupDose" />
         <activity
             android:name=".ActivityMedicalRecords2"
             android:label="@string/title_activity_medical_records2" />
-        <activity android:name=".ActivityToDoList" />
-        <activity android:name=".ActivityToDoDetails"></activity>
+        <activity
+            android:name=".ActivityToDoList"
+            android:label="To-Do List" />
+        <activity android:name=".ActivityToDoDetails" />
+        <activity android:name=".ActivityUpdateGroupVaccination" />
+        <activity
+            android:name=".ActivityToDoDoses"
+            android:label="To-Do List"></activity>
+        <activity android:name=".ActivityToDoDoseDetails"></activity>
     </application>
 
 </manifest>

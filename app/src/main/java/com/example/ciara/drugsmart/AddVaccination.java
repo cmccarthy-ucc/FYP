@@ -2,15 +2,12 @@ package com.example.ciara.drugsmart;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.NotificationCompat;
@@ -67,7 +64,7 @@ public class AddVaccination extends AppCompatActivity {
 
         vaccinationDrug = (Spinner)findViewById(R.id.spinnerDrug);
         vaccinationAdmin = (EditText)findViewById(R.id.editAdmin);
-        vaccinationDosage = (EditText) findViewById(R.id.editDosage);
+        vaccinationDosage = (EditText) findViewById(R.id.textViewDosage);
 
 
         animalID = (TextView)findViewById(R.id.TextViewAnimalID);
@@ -83,7 +80,7 @@ public class AddVaccination extends AppCompatActivity {
         animalID.setText(animalIDText);
         animalTag.setText(animalDOBText);
 
-        buttonAddVaccination = (Button) findViewById(R.id.buttonAddVaccination);
+        buttonAddVaccination = (Button) findViewById(R.id.buttonUpdateVaccination);
         buttonAddVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,13 +186,13 @@ public class AddVaccination extends AppCompatActivity {
 
                 switch (id) {
                     case R.id.animals:
-                        //Toast.makeText(ActivityOptions.this, "Animals",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddVaccination.this, "Animals",Toast.LENGTH_SHORT).show();
                         Intent intentAnimal = new Intent(AddVaccination.this, ActivityIndividualHome.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(AddVaccination.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(AddVaccination.this, ActivityVaccinationHome.class);
+                        Toast.makeText(AddVaccination.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(AddVaccination.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -207,6 +204,11 @@ public class AddVaccination extends AppCompatActivity {
                         Toast.makeText(AddVaccination.this,"Home", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(AddVaccination.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(AddVaccination.this,"To-DO List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(AddVaccination.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;

@@ -52,9 +52,9 @@ public class ActivityAddGroupDose extends AppCompatActivity {
     RadioButton radioButtonNo;
     RadioButton radioButtonInjection;
     RadioButton radioButtonOral;
-    Boolean allDosed = false;
+    Boolean allDosed = true;
     String dateDose;
-    String doseMethod;
+    String doseType = "Injection";
     //Date dateVaccination;
 
     //https://www.youtube.com/watch?v=hwe1abDO2Ag
@@ -76,10 +76,10 @@ public class ActivityAddGroupDose extends AppCompatActivity {
 
         doseDrug = (Spinner) findViewById(R.id.spinnerDrug);
         doseAdmin = (EditText) findViewById(R.id.editAdmin);
-        doseDosage = (EditText) findViewById(R.id.editDosage);
-        doseNotes = (EditText) findViewById(R.id.editTextNotes);
+        doseDosage = (EditText) findViewById(R.id.textViewDosage);
+        doseNotes = (EditText) findViewById(R.id.textViewNotes);
 
-        groupID = (TextView) findViewById(R.id.TextViewGroupID);
+        groupID = (TextView) findViewById(R.id.textViewVaccinationID);
         groupNumber = (TextView) findViewById(R.id.TextViewGroupNumber);
 
         Intent doseIntent = getIntent();
@@ -90,7 +90,7 @@ public class ActivityAddGroupDose extends AppCompatActivity {
         groupID.setText(groupIDText);
         groupNumber.setText(groupNumberText);
 
-        buttonAddDose = (Button) findViewById(R.id.buttonAddVaccination);
+        buttonAddDose = (Button) findViewById(R.id.buttonUpdateVaccination);
         buttonAddDose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,12 +208,12 @@ public class ActivityAddGroupDose extends AppCompatActivity {
         radioGroupMethod.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (radioButtonInjection.isChecked()){
-                    doseMethod = "Injection";
+                 if (radioButtonOral.isChecked()){
+                    doseType = "Oral";
                 }
-                else if (radioButtonOral.isChecked()){
-                    doseMethod = "Oral";
-                }
+                else if (radioButtonInjection.isChecked()){
+                     doseType = "Injection";
+                 }
             }
         });
 
@@ -237,8 +237,8 @@ public class ActivityAddGroupDose extends AppCompatActivity {
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ActivityAddGroupDose.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ActivityAddGroupDose.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ActivityAddGroupDose.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ActivityAddGroupDose.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -274,11 +274,11 @@ public class ActivityAddGroupDose extends AppCompatActivity {
         String dosage = doseDosage.getText().toString().trim();
         String notes = doseNotes.getText().toString().trim();
         Boolean allAnimals = allDosed;
-        String method = doseMethod;
+        String type = doseType;
 
 //        if (TextUtils.isEmpty(date)) {
 //            Toast.makeText(this,"Please select a date", Toast.LENGTH_LONG).show();
-            if (TextUtils.isEmpty(number)) {
+            if (TextUtils.isEmpty(date)) {
                 Toast.makeText(this,"Please select a date", Toast.LENGTH_LONG).show();
 
             } else if (TextUtils.isEmpty(dosage)) {
@@ -290,7 +290,7 @@ public class ActivityAddGroupDose extends AppCompatActivity {
         else{
         String id = databaseDose.push().getKey();
 
-        Dosing groupDose = new Dosing(idGroup, number, id, drug, admin, dosage, date, notes,allAnimals, method);
+        Dosing groupDose = new Dosing(idGroup, number, id, drug, admin, dosage, date, notes,allAnimals, type);
 
         databaseDose.child(id).setValue(groupDose);
 

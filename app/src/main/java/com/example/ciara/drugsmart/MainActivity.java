@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.vaccinations:
                         Toast.makeText(MainActivity.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(MainActivity.this, ActivityVaccinationHome.class);
+                        Intent intentVaccination = new Intent(MainActivity.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -161,6 +161,11 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(MainActivity.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(MainActivity.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(MainActivity.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;
@@ -228,4 +233,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(t.onOptionsItemSelected(item))
+            return true;
+
+        return super.onOptionsItemSelected(item);
+    }
 }

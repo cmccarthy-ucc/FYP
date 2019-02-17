@@ -82,8 +82,8 @@ public class ViewVaccinationDetails extends AppCompatActivity {
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
-                        Toast.makeText(ViewVaccinationDetails.this, "Vaccinations", Toast.LENGTH_SHORT).show();
-                        Intent intentVaccination = new Intent(ViewVaccinationDetails.this, ActivityVaccinationHome.class);
+                        Toast.makeText(ViewVaccinationDetails.this, "Medical Records", Toast.LENGTH_SHORT).show();
+                        Intent intentVaccination = new Intent(ViewVaccinationDetails.this, ActivityMedicalRecords2.class);
                         startActivity(intentVaccination);
                         break;
                     case R.id.groups:
@@ -95,6 +95,11 @@ public class ViewVaccinationDetails extends AppCompatActivity {
                         Toast.makeText(ViewVaccinationDetails.this, "Home", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(ViewVaccinationDetails.this, ActivityOptionsTwo.class);
                         startActivity(intentHome);
+                        break;
+                    case R.id.todo:
+                        Toast.makeText(ViewVaccinationDetails.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentToDo = new Intent(ViewVaccinationDetails.this, ActivityToDoList.class);
+                        startActivity(intentToDo);
                         break;
                     default:
                         return true;

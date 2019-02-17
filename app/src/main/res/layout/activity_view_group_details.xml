@@ -176,7 +176,7 @@
             android:layout_marginBottom="8dp"
             android:text="Group Date of Birth"
             android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintBottom_toTopOf="@+id/buttonAddVaccination"
+            app:layout_constraintBottom_toTopOf="@+id/buttonUpdateVaccination"
             app:layout_constraintEnd_toStartOf="@+id/textViewGroupDOB"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -184,7 +184,7 @@
             app:layout_constraintVertical_bias="0.016" />
 
         <Button
-            android:id="@+id/buttonAddVaccination"
+            android:id="@+id/buttonUpdateVaccination"
             android:layout_width="227dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -227,7 +227,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAddVaccination" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonUpdateVaccination" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
