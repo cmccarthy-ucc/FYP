@@ -1,0 +1,48 @@
+package com.example.ciara.drugsmart;
+
+public class Vaccination {
+
+    String vaccinationAnimalID;
+    String vaccinationAnimalTag;
+    String vaccinationID;
+    String vaccinationDrug;
+    String vaccinationAdmin;
+    String vaccinationDosage;
+    String vaccinationDate;
+
+    public Vaccination(){
+
+    }
+
+    public Vaccination(String vaccinationAnimalID, String vaccinationAnimalTag, String vaccinationID, String vaccinationDrug,
+                       String vaccinationAdmin, String vaccinationDosage, String vaccinationDate){
+        this.vaccinationAnimalID = vaccinationAnimalID;
+        this.vaccinationAnimalTag = vaccinationAnimalTag;
+        this.vaccinationID = vaccinationID;
+        this.vaccinationDrug = vaccinationDrug;
+        this.vaccinationAdmin = vaccinationAdmin;
+        this.vaccinationDosage = vaccinationDosage;
+        this.vaccinationDate = vaccinationDate;
+    }
+
+    public String getVaccinationAnimalID() {
+        return vaccinationAnimalID;
+    }
+
+    public String getVaccinationAnimalTag() {
+        return vaccinationAnimalTag;
+    }
+
+    public String getVaccinationID() {
+        return vaccinationID;
+    }
+
+    public String getVaccinationDrug() { return vaccinationDrug; }
+
+    public String getVaccinationAdmin() { return  vaccinationAdmin;}
+
+    public String getVaccinationDosage() {return vaccinationDosage;}
+
+    public String getVaccinationDate() {return  vaccinationDate; }
+
+}

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "460178962720",
+    "firebase_url": "https://drugsmart-6be2e.firebaseio.com",
+    "project_id": "drugsmart-6be2e",
+    "storage_bucket": "drugsmart-6be2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460178962720:android:9d1d20db0da9470d",
+        "android_client_info": {
+          "package_name": "com.example.ciara.drugsmart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460178962720-2qq8hp6c3atdk7cme7sptntfss1bqtq6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ciara.drugsmart",
+            "certificate_hash": "4ea5a00b96b179159296dccc6f36a5ab5d8645d0"
+          }
+        },
+        {
+          "client_id": "460178962720-el1d8ul0ju5g53gfdkrq9l7k98o20n94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4bPcRs98BbWL1jlG0HBL004tsKuo6Lrk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460178962720-el1d8ul0ju5g53gfdkrq9l7k98o20n94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

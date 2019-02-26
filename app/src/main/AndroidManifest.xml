@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ciara.drugsmart">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".DataRetrieved" />
+        <activity android:name=".TextRecognition" />
+        <activity android:name=".AddVaccination" />
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="orc" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".ViewAnimalDetails" />
+
+        <receiver android:name=".NotificationService" />
+
+        <activity android:name=".ViewVaccination" />
+        <activity android:name=".ActivityHome" />
+        <activity android:name=".ActivityAllVaccinations" />
+        <activity
+            android:name=".Splashscreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ActivityOptions" />
+        <activity
+            android:name=".ActivityOptionsTwo"
+            android:label="Home" />
+        <activity android:name=".ActivityAddGroup" />
+        <activity android:name=".ActivityVaccinationHome" />
+        <activity android:name=".SearchDatabase" />
+        <activity
+            android:name=".ActivityAllGroups"
+            android:label="All Animal Groups" />
+        <activity android:name=".ActivityAddGroupVaccination" />
+        <activity android:name=".ViewGroupDetails" />
+        <activity android:name=".ViewVaccinationDetails" />
+        <activity android:name=".ActivityGroupHome" />
+        <activity android:name=".ActivityIndividualHome" />
+        <activity android:name=".ActivityAllGroupVaccinations" />
+        <activity android:name=".ActivityAllDoses" />
+        <activity
+            android:name=".ActivityViewDoseDetails"
+            android:label="Group Dose Details" />
+        <activity android:name=".ActivityAddGroupDose" />
+        <activity
+            android:name=".ActivityMedicalRecords2"
+            android:label="@string/title_activity_medical_records2" />
+        <activity
+            android:name=".ActivityToDoList"
+            android:label="To-Do List" />
+        <activity android:name=".ActivityToDoDetails" />
+        <activity android:name=".ActivityUpdateGroupVaccination" />
+        <activity
+            android:name=".ActivityToDoDoses"
+            android:label="To-Do List" />
+        <activity android:name=".ActivityToDoDoseDetails" />
+        <activity android:name=".GroupActivity" />
+        <activity android:name=".GroupVaccinationActivity" />
+        <activity android:name=".GroupVaccinationDetailsActivity"
+            android:label="Group Vaccination Details"></activity>
+    </application>
+
+</manifest>
