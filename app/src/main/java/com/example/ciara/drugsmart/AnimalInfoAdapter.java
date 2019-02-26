@@ -35,12 +35,16 @@ public class AnimalInfoAdapter extends ArrayAdapter<Animal> {
         TextView animalGender = (TextView)listView.findViewById(R.id.gender);
         TextView animalID = (TextView)listView.findViewById(R.id.animalID);
         TextView animalSource = (TextView)listView.findViewById(R.id.source);
+        TextView animalDOB = (TextView)listView.findViewById(R.id.DOB) ;
+        TextView animalTag = (TextView)listView.findViewById(R.id.tag);
 
         Animal animal = animalList.get(position);
         animalBreed.setText(animal.getAnimalBreed());
         animalGender.setText(animal.getAnimalGender());
         animalID.setText(animal.getAnimalID());
         animalSource.setText(animal.getAnimalSource());
+        animalDOB.setText(animal.getAnimalDOB());
+        animalTag.setText(animal.getAnimalTag());
 
         return listView;
 

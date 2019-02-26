@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/groupType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Animal "
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/groupBreed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Breed"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/groupDOB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DOB"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/groupID"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="ID"
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+    <TextView
+        android:id="@+id/groupSource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Source" />
+    <TextView
+        android:id="@+id/groupNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Group Number"/>
+
+
+</LinearLayout>
