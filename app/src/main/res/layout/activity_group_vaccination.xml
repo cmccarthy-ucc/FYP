@@ -25,11 +25,11 @@
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vaccinationDate" />
+            app:layout_constraintTop_toBottomOf="@+id/doseDate" />
 
         <TextView
 
-            android:id="@+id/textViewVaccinationID"
+            android:id="@+id/textViewGroupID"
             android:layout_width="343dp"
             android:layout_height="10dp"
             android:layout_marginStart="8dp"
@@ -46,7 +46,7 @@
 
 
         <TextView
-            android:id="@+id/TextViewGroupNumber"
+            android:id="@+id/textViewGroupNumber"
             android:layout_width="174dp"
             android:layout_height="38dp"
             android:layout_marginStart="8dp"
@@ -60,7 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.558"
             app:layout_constraintStart_toEndOf="@+id/textView14"
-            app:layout_constraintTop_toBottomOf="@+id/textViewVaccinationID" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewGroupID" />
         <!--&lt;!&ndash; Select Drug&ndash;&gt;-->
 
         <!--&lt;!&ndash; Select Drug&ndash;&gt;-->
@@ -73,7 +73,7 @@
             android:layout_marginTop="12dp"
             android:entries="@array/drug"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextViewGroupNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewGroupNumber" />
 
         <!--&lt;!&ndash; Enter Administrator's name &ndash;&gt;-->
         <EditText
@@ -95,7 +95,7 @@
 
 
         <TextView
-            android:id="@+id/vaccinationDate"
+            android:id="@+id/doseDate"
             android:layout_width="338dp"
             android:layout_height="35dp"
             android:layout_marginStart="24dp"
@@ -224,7 +224,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewVaccinationID" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewGroupID" />
 
         <TextView
             android:id="@+id/textView19"

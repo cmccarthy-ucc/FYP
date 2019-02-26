@@ -71,7 +71,6 @@ public class GroupVaccinationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_vaccination);
 
-
         vaccinationDrug = (Spinner) findViewById(R.id.spinnerDrug);
         vaccinationAdmin = (EditText) findViewById(R.id.editAdmin);
         vaccinationDosage = (EditText) findViewById(R.id.textViewDosage);
@@ -82,18 +81,14 @@ public class GroupVaccinationActivity extends AppCompatActivity {
         final String groupIDText = extras.getString(GROUP_ID);
         final String groupNumberText = extras.getString(ActivityAddGroup.GROUP_NUMBER);
 
-
-        groupID = (TextView) findViewById(R.id.textViewVaccinationID);
-        groupNumber = (TextView) findViewById(R.id.TextViewGroupNumber);
+        groupID = (TextView) findViewById(R.id.textViewGroupID);
+        groupNumber = (TextView) findViewById(R.id.textViewGroupNumber);
 
         groupID.setText(groupIDText);
         groupNumber.setText(groupNumberText);
 
         databaseGroupVaccination = FirebaseDatabase.getInstance().getReference("groupVaccinations").child(intent.getStringExtra(ActivityAddGroup.GROUP_ID));
         groupVaccinations = new ArrayList<>();
-
-
-
 
         buttonAddVaccination = (Button) findViewById(R.id.buttonAddVaccination);
         buttonAddVaccination.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +104,7 @@ public class GroupVaccinationActivity extends AppCompatActivity {
         });
 
 
-        vaccinationDate = (TextView) findViewById(R.id.vaccinationDate);
+        vaccinationDate = (TextView) findViewById(R.id.doseDate);
         vaccinationDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

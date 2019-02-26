@@ -2,6 +2,7 @@ package com.example.ciara.drugsmart;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -36,12 +37,8 @@ public class GroupActivity extends AppCompatActivity {
     TextView groupSource;
     TextView groupBreed;
     TextView groupNumber;
-    Button btnIndividual;
-    private Button buttonAddVaccination;
-    private Button btnViewVaccination;
-    private Button buttonAddDose;
-
-
+    TextView mTextMessage;
+    Button btnAdd;
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
@@ -50,6 +47,12 @@ public class GroupActivity extends AppCompatActivity {
     ListView listViewVaccination;
     List<GroupVaccination> groupVaccinations;
     DatabaseReference databaseVaccinations;
+
+    List<Dosing> groupDoses;
+    DatabaseReference databaseDoses;
+
+    List<Animal> groupIndividuals;
+    DatabaseReference databaseIndividuals;
 
     public static final String GROUP_VACCINATION_ID = "com.example.ciara.drugsmart.vaccinationGroupID";
     public static final String VACCINATION_ID = "com.example.ciara.drugsmart.vaccinationID";
@@ -61,11 +64,33 @@ public class GroupActivity extends AppCompatActivity {
     public static final String VACCINATION_GROUP_NOTES = "com.example.ciara.drugsmart.vaccinationGroupNotes";
     public static final String ALL_VACCINATED = "com.example.ciara.drugsmart.allVaccinated";
 
+    public static final String GROUP_DOSE_ID = "com.example.ciara.drugsmart.doseGroupID";
+    public static final String DOSE_ID = "com.example.ciara.drugsmart.doseID";
+    public static final String DOSE_DRUG = "com.example.ciara.drugsmart.doseDrug";
+    public static final String DOSE_ADMIN = "com.example.ciara.drugsmart.doseAdmin";
+    public static final String DOSE_DOSAGE = "com.example.ciara.drugsmart.doseDosage";
+    public static final String DOSE_DATE = "com.example.ciara.drugsmart.doseDate";
+    public static final String DOSE_GROUP_NUMBER = "com.example.ciara.drugsmart.doseGroupNumber";
+    public static final String DOSE_NOTES = "com.example.ciara.drugsmart.doseGroupNotes";
+    public static final String ALL_DOSED = "com.example.ciara.drugsmart.allDosed";
+
+    public static final String GROUP_INDIVIDUAL_ID = "com.example.ciara.drugsmart.individualGroupID";
+    public static final String INDIVIDUAL_ID = "com.example.ciara.drugsmart.individualID";
+    public static final String INDIVIDUAL_GENDER = "com.example.ciara.drugsmart.individualGender";
+    public static final String INDIVIDUAL_SOURCE = "com.example.ciara.drugsmart.individualSource";
+    public static final String INDIVIDUAL_TAG = "com.example.ciara.drugsmart.individualTag";
+    public static final String INDIVIDUAL_BREED = "com.example.ciara.drugsmart.individualBreed";
+    public static final String INDIVIDUAL_DOB = "com.example.ciara.drugsmart.individualDOB";
+    public static final String INDIVIDUAL_NOTES = "com.example.ciara.drugsmart.individualNotes";
+    public static final String INDIVIDUAL_GROUP_NUMBER = "com.example.ciara.drugsmart.individualGroupNumber";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
+        mTextMessage = findViewById(R.id.textViewTitle);
+        btnAdd = findViewById(R.id.buttonAdd);
 
 
         groupID
@@ -93,68 +118,223 @@ public class GroupActivity extends AppCompatActivity {
         groupBreed.setText(groupBreedText);
         groupNumber.setText(groupNumberText);
 
-        buttonAddVaccination = findViewById(R.id.buttonAddVaccination);
-        buttonAddVaccination.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //creating an intent
-                Intent intent = new Intent(getApplicationContext(), GroupVaccinationActivity.class);
+        databaseDoses = FirebaseDatabase.getInstance().getReference("groupDoses").child(intent.getStringExtra(ActivityAddGroup.GROUP_ID));
+        groupDoses = new ArrayList<>();
 
-                //putting artist name and id to intent
-                intent.putExtra(GROUP_ID, groupIDText);
-                intent.putExtra(GROUP_NUMBER, groupNumberText);
+        databaseVaccinations = FirebaseDatabase.getInstance().getReference("groupVaccinations").child(intent.getStringExtra(ActivityAddGroup.GROUP_ID));
+        groupVaccinations = new ArrayList<>();
 
-                //starting the activity with intent
-                startActivity(intent);
-            }
-        });
+        databaseIndividuals = FirebaseDatabase.getInstance().getReference("animal").child(intent.getStringExtra(ActivityAddGroup.GROUP_ID));
+        groupIndividuals = new ArrayList<>();
 
-//        btnIndividual = findViewById(R.id.btnAddIndividual);
-//        btnIndividual.setOnClickListener(new View.OnClickListener() {
+       listViewVaccination = findViewById(R.id.listViewVaccinations);
+//        listViewVaccination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
-//            public void onClick(View v) {
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                //getting the selected artist
+//                GroupVaccination groupVaccination = groupVaccinations.get(i);
 //
 //                //creating an intent
-//                Intent intent = new Intent(getApplicationContext(), AnimalActivity.class);
+//                Intent intent = new Intent(getApplicationContext(), GroupVaccinationDetailsActivity.class);
 //
 //                //putting artist name and id to intent
-//                intent.putExtra(GROUP_ID, groupIDText);
+//                intent.putExtra(GROUP_VACCINATION_ID, groupVaccination.getVaccinationID());
+//                intent.putExtra(GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
+//                intent.putExtra(VACCINATION_ID, groupVaccination.getVaccinationID());
+//                intent.putExtra(VACCINATION_DRUG, groupVaccination.getVaccinationDrug());
+//                intent.putExtra(VACCINATION_DOSAGE, groupVaccination.getVaccinationDosage());
+//                intent.putExtra(VACCINATION_ADMIN, groupVaccination.getVaccinationAdmin());
+//                intent.putExtra(VACCINATION_DATE, groupVaccination.getVaccinationDate());
+//                intent.putExtra(VACCINATION_GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
+//                intent.putExtra(VACCINATION_GROUP_NOTES, groupVaccination.getVaccinationNotes());
+//                intent.putExtra(ALL_VACCINATED, groupVaccination.getAllVaccinated());
 //
 //                //starting the activity with intent
 //                startActivity(intent);
 //            }
 //        });
 
-        databaseVaccinations = FirebaseDatabase.getInstance().getReference("groupVaccinations").child(intent.getStringExtra(ActivityAddGroup.GROUP_ID));
-//list to store artists
-        groupVaccinations = new ArrayList<>();
+        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+                = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        listViewVaccination = findViewById(R.id.listViewVaccinations);
-        listViewVaccination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //getting the selected artist
-                GroupVaccination groupVaccination = groupVaccinations.get(i);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                //creating an intent
-                Intent intent = new Intent(getApplicationContext(), GroupVaccinationDetailsActivity.class);
+                switch (item.getItemId()) {
+                    case R.id.group_navigation_vaccination:
+                    listViewVaccination.setAdapter(null);
+                       groupVaccinations.clear();
+                        databaseVaccinations.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()){
+                                    GroupVaccination groupVaccination = groupVaccinationSnapshot.getValue(GroupVaccination.class);
+                                    groupVaccinations.add(groupVaccination);
+                                }
+                                GroupVaccinationList groupVaccinationInfoAdapter = new GroupVaccinationList(GroupActivity.this, groupVaccinations);
+                                listViewVaccination.setAdapter(groupVaccinationInfoAdapter);
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                //putting artist name and id to intent
-                intent.putExtra(GROUP_VACCINATION_ID, groupVaccination.getVaccinationID());
-                intent.putExtra(GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
-                intent.putExtra(VACCINATION_ID, groupVaccination.getVaccinationID());
-                intent.putExtra(VACCINATION_DRUG, groupVaccination.getVaccinationDrug());
-                intent.putExtra(VACCINATION_DOSAGE, groupVaccination.getVaccinationDosage());
-                intent.putExtra(VACCINATION_ADMIN, groupVaccination.getVaccinationAdmin());
-                intent.putExtra(VACCINATION_DATE, groupVaccination.getVaccinationDate());
-                intent.putExtra(VACCINATION_GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
-                intent.putExtra(VACCINATION_GROUP_NOTES, groupVaccination.getVaccinationNotes());
-                intent.putExtra(ALL_VACCINATED, groupVaccination.getAllVaccinated());
+                            }
+                        });
+                        mTextMessage.setText("Vaccinations");
+                        btnAdd.setText("Add Vaccination");
+                        btnAdd.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getApplicationContext(), GroupVaccinationActivity.class);
 
-                //starting the activity with intent
-                startActivity(intent);
+                                //putting artist name and id to intent
+                                intent.putExtra(GROUP_ID, groupIDText);
+                                intent.putExtra(GROUP_NUMBER, groupNumberText);
+
+                                //starting the activity with intent
+                                startActivity(intent);
+                            }
+                        });
+
+                        listViewVaccination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                //getting the selected artist
+                                GroupVaccination groupVaccination = groupVaccinations.get(i);
+                                //creating an intent
+                                Intent intent = new Intent(getApplicationContext(), GroupVaccinationDetailsActivity.class);
+                                //putting artist name and id to intent
+                                intent.putExtra(GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
+                                intent.putExtra(VACCINATION_ID, groupVaccination.getVaccinationID());
+                                intent.putExtra(VACCINATION_DRUG, groupVaccination.getVaccinationDrug());
+                                intent.putExtra(VACCINATION_DOSAGE, groupVaccination.getVaccinationDosage());
+                                intent.putExtra(VACCINATION_ADMIN, groupVaccination.getVaccinationAdmin());
+                                intent.putExtra(VACCINATION_DATE, groupVaccination.getVaccinationDate());
+                                intent.putExtra(VACCINATION_GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
+                                intent.putExtra(VACCINATION_GROUP_NOTES, groupVaccination.getVaccinationNotes());
+                                intent.putExtra(ALL_VACCINATED, groupVaccination.getAllVaccinated());
+                                        //starting the activity with intent
+                                        startActivity(intent);
+                                    }
+                                });
+                        return true;
+
+                    case R.id.group_navigation_doses:
+                        listViewVaccination.setAdapter(null);
+                        groupDoses.clear();
+                        databaseDoses.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for(DataSnapshot dosingSnapshot : dataSnapshot.getChildren()){
+                                    Dosing groupDose = dosingSnapshot.getValue(Dosing.class);
+                                    groupDoses.add(groupDose);
+                                }
+                                GroupDoseList groupDoseInfoAdapter = new GroupDoseList(GroupActivity.this, groupDoses);
+                                listViewVaccination.setAdapter(groupDoseInfoAdapter);
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        mTextMessage.setText("Doses");
+                        btnAdd.setText("Add Dose");
+                        btnAdd.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getApplicationContext(), GroupDoseActivity.class);
+
+                                //putting artist name and id to intent
+                                intent.putExtra(GROUP_ID, groupIDText);
+                                intent.putExtra(GROUP_NUMBER, groupNumberText);
+
+                                //starting the activity with intent
+                                startActivity(intent);
+                            }
+                        });
+                        listViewVaccination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                //getting the selected artist
+                                Dosing doses = groupDoses.get(i);
+                                //creating an intent
+                                Intent intent = new Intent(getApplicationContext(), VaccinationInformation.class);
+                                //putting artist name and id to intent
+                                intent.putExtra(GROUP_NUMBER, doses.getDoseGroupNumber());
+                                intent.putExtra(DOSE_ID, doses.getDoseID());
+                                intent.putExtra(DOSE_DRUG, doses.getDoseDrug());
+                                intent.putExtra(DOSE_DOSAGE, doses.getDoseDosage());
+                                intent.putExtra(DOSE_ADMIN, doses.getDoseAdmin());
+                                intent.putExtra(DOSE_DATE, doses.getDoseDate());
+                                intent.putExtra(DOSE_GROUP_NUMBER, doses.getDoseGroupNumber());
+                                intent.putExtra(DOSE_NOTES, doses.getDoseNotes());
+                                intent.putExtra(ALL_DOSED, doses.getAllDosed());
+                                //starting the activity with intent
+                                startActivity(intent);
+                            }
+                        });
+
+                        return true;
+                    case R.id.group_navigation_singles:
+                       listViewVaccination.setAdapter(null);
+                       groupIndividuals.clear();
+                        databaseIndividuals.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for(DataSnapshot groupIndividualSnapshot : dataSnapshot.getChildren()){
+                                    Animal animal = groupIndividualSnapshot.getValue(Animal.class);
+                                    groupIndividuals.add(animal);
+                                }
+                                GroupIndividualList groupIndividualInfoAdapter = new GroupIndividualList(GroupActivity.this, groupIndividuals);
+                                listViewVaccination.setAdapter(groupIndividualInfoAdapter);
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
+                       mTextMessage.setText("Treated Singles");
+                        btnAdd.setText("Add Single");
+                        btnAdd.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getApplicationContext(), AnimalActivity.class);
+
+                                //putting artist name and id to intent
+                                intent.putExtra(GROUP_ID, groupIDText);
+                                intent.putExtra(GROUP_NUMBER, groupNumberText);
+
+                                //starting the activity with intent
+                                startActivity(intent);
+                            }
+                        });
+
+                        listViewVaccination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                //getting the selected artist
+                                Animal animals = groupIndividuals.get(i);
+                                //creating an intent
+                                Intent intent = new Intent(getApplicationContext(), ViewAnimalDetails.class);
+                                //putting artist name and id to intent
+                                intent.putExtra(INDIVIDUAL_ID, animals.getAnimalID());
+                                intent.putExtra(INDIVIDUAL_BREED, animals.getAnimalBreed());
+                                intent.putExtra(INDIVIDUAL_DOB, animals.getAnimalDOB());
+                                intent.putExtra(INDIVIDUAL_GENDER, animals.getAnimalGender());
+                                intent.putExtra(INDIVIDUAL_SOURCE, animals.getAnimalSource());
+                                intent.putExtra(INDIVIDUAL_TAG, animals.getAnimalTag());
+                                intent.putExtra(INDIVIDUAL_NOTES, animals.getNotes());
+                                intent.putExtra(INDIVIDUAL_GROUP_NUMBER, animals.getGroupNumber());
+                                //starting the activity with intent
+                                startActivity(intent);
+                            }
+                        });
+
+                        return true;
+                }
+                return false;
             }
-        });
+        };
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
         dl = (DrawerLayout)findViewById(R.id.activity_main);
@@ -205,6 +385,22 @@ public class GroupActivity extends AppCompatActivity {
 
         });
 
+        btnAdd.setText("Add Vaccination");
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), GroupVaccinationActivity.class);
+
+                //putting artist name and id to intent
+                intent.putExtra(GROUP_ID, groupIDText);
+                intent.putExtra(GROUP_NUMBER, groupNumberText);
+
+                //starting the activity with intent
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 
@@ -238,6 +434,8 @@ public class GroupActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     @Override

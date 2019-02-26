@@ -40,7 +40,7 @@ public class VaccinationInfoAdapter extends ArrayAdapter<Vaccination> {
         vaccinationDate.setText(vaccination.getVaccinationDate());
         vaccinationID.setText(vaccination.getVaccinationID());
         vaccinationAdmin.setText(vaccination.getVaccinationAdmin());
-        vaccinationAnimalTag.setText(vaccination.getVaccinationAnimalTag());
+        //vaccinationAnimalTag.setText(vaccination.getVaccinationAnimalTag());
 
         return listView;
 

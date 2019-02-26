@@ -78,6 +78,7 @@
     <string name="title_todo">To-Do List</string>
     <string name="title_vaccinations">Vaccinations</string>
     <string name="title_doses">Doses</string>
+    <string name="title_individual">Singles</string>
 
 
 </resources>

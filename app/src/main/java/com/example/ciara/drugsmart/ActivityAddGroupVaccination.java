@@ -76,8 +76,8 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
         vaccinationDosage = (EditText) findViewById(R.id.textViewDosage);
         vaccinationNotes = (EditText) findViewById(R.id.textViewNotes);
 
-        groupID = (TextView) findViewById(R.id.textViewVaccinationID);
-        groupNumber = (TextView) findViewById(R.id.TextViewGroupNumber);
+        groupID = (TextView) findViewById(R.id.textViewGroupID);
+        groupNumber = (TextView) findViewById(R.id.textViewGroupNumber);
 
         Intent vaccinationIntent = getIntent();
         Bundle vaccinationExtras = vaccinationIntent.getExtras();
@@ -140,7 +140,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
 
         //https://www.youtube.com/watch?v=hwe1abDO2Ag
         //Select administration of vaccination date
-        vaccinationDate = (TextView) findViewById(R.id.vaccinationDate);
+        vaccinationDate = (TextView) findViewById(R.id.doseDate);
         vaccinationDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -183,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
         String source = editTextSource.getText().toString().trim();
         String DOB = mDisplayDate.getText().toString().trim();
         String tag = editTextTagNumber.getText().toString().trim();
+        String notes = "test";
+        String group = "test";
 
         if(TextUtils.isEmpty(breed)){
             Toast.makeText(this, "You should enter a breed", Toast.LENGTH_LONG).show();
@@ -203,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             String id = databaseAnimal.push().getKey();
 
-            Animal animal = new Animal(id, breed, gender, source, DOB, tag);
+            Animal animal = new Animal(id, breed, gender, source, DOB, tag, group, notes);
 
             databaseAnimal.child(id).setValue(animal);
 

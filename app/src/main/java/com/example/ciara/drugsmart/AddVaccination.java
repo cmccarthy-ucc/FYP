@@ -135,7 +135,7 @@ public class AddVaccination extends AppCompatActivity {
 
         //https://www.youtube.com/watch?v=hwe1abDO2Ag
         //Select administration of vaccination date
-        vaccinationDate = (TextView)findViewById(R.id.vaccinationDate);
+        vaccinationDate = (TextView)findViewById(R.id.doseDate);
         vaccinationDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -227,12 +227,14 @@ public class AddVaccination extends AppCompatActivity {
         String date = vaccinationDate.getText().toString().trim();
         String admin = vaccinationAdmin.getText().toString().trim();
         String dosage = vaccinationDosage.getText().toString().trim();
+        String notes = "test";
+        String group = "test";
 
         if(!TextUtils.isEmpty(tag)){
 
             String id = databaseVaccination.push().getKey();
 
-            Vaccination vaccination = new Vaccination(idAnimal, tag, id, drug, admin, dosage, date);
+            Vaccination vaccination = new Vaccination(idAnimal, id, drug, admin, dosage, date);
 
             databaseVaccination.child(id).setValue(vaccination);
 

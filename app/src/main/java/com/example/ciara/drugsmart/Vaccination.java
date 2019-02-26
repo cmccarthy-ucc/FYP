@@ -3,7 +3,6 @@ package com.example.ciara.drugsmart;
 public class Vaccination {
 
     String vaccinationAnimalID;
-    String vaccinationAnimalTag;
     String vaccinationID;
     String vaccinationDrug;
     String vaccinationAdmin;
@@ -14,10 +13,9 @@ public class Vaccination {
 
     }
 
-    public Vaccination(String vaccinationAnimalID, String vaccinationAnimalTag, String vaccinationID, String vaccinationDrug,
+    public Vaccination(String vaccinationAnimalID, String vaccinationID, String vaccinationDrug,
                        String vaccinationAdmin, String vaccinationDosage, String vaccinationDate){
         this.vaccinationAnimalID = vaccinationAnimalID;
-        this.vaccinationAnimalTag = vaccinationAnimalTag;
         this.vaccinationID = vaccinationID;
         this.vaccinationDrug = vaccinationDrug;
         this.vaccinationAdmin = vaccinationAdmin;
@@ -29,9 +27,6 @@ public class Vaccination {
         return vaccinationAnimalID;
     }
 
-    public String getVaccinationAnimalTag() {
-        return vaccinationAnimalTag;
-    }
 
     public String getVaccinationID() {
         return vaccinationID;

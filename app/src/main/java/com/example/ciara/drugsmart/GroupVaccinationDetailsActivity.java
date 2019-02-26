@@ -11,9 +11,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_ID;
 import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_NUMBER;
-import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_ID;
 
 public class GroupVaccinationDetailsActivity extends AppCompatActivity {
 
@@ -41,7 +39,7 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
 
         vaccinationGroupNumber = findViewById(R.id.vaccinationGroupNumber);
         vaccinationID = findViewById(R.id.vaccinationID);
-        vaccinationDate = findViewById(R.id.vaccinationDate);
+        vaccinationDate = findViewById(R.id.doseDate);
         vaccinationAdmin = findViewById(R.id.vaccinationAdmin);
         vaccinationDosage = findViewById(R.id.vaccinationDosage);
         vaccinationDrug = findViewById(R.id.vaccinationDrug);

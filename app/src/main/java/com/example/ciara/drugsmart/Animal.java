@@ -8,19 +8,23 @@ public class Animal {
     String animalSource;
     String animalDOB;
     String animalTag;
+    String groupNumber;
+    String notes;
 
 
     public Animal(){
 
     }
 
-    public Animal(String animalID, String animalBreed, String animalGender, String animalSource, String animalDOB, String animalTag){
+    public Animal(String animalID, String animalBreed, String animalGender, String animalSource, String animalDOB, String animalTag, String groupNumber, String notes){
         this.animalID = animalID;
         this.animalBreed = animalBreed;
         this.animalGender = animalGender;
         this.animalSource = animalSource;
         this.animalDOB = animalDOB;
         this.animalTag = animalTag;
+        this.groupNumber = groupNumber;
+        this.notes = notes;
     }
 
     public String getAnimalID() {
@@ -40,5 +44,9 @@ public class Animal {
     public String getAnimalDOB() { return  animalDOB;}
 
     public String getAnimalTag() {return animalTag;}
+
+    public String getGroupNumber() {return groupNumber;}
+
+    public String getNotes() {return notes;}
 
 }

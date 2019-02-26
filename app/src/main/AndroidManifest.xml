@@ -84,8 +84,11 @@
         <activity android:name=".ActivityToDoDoseDetails" />
         <activity android:name=".GroupActivity" />
         <activity android:name=".GroupVaccinationActivity" />
-        <activity android:name=".GroupVaccinationDetailsActivity"
-            android:label="Group Vaccination Details"></activity>
+        <activity
+            android:name=".GroupVaccinationDetailsActivity"
+            android:label="Group Vaccination Details" />
+        <activity android:name=".GroupDoseActivity" />
+        <activity android:name=".AnimalActivity"></activity>
     </application>
 
 </manifest>

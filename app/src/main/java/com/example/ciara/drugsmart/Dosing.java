@@ -1,7 +1,7 @@
 package com.example.ciara.drugsmart;
 
 public class Dosing {
-    String doseGroupID;
+    //String doseGroupID;
     String doseGroupNumber;
     String doseID;
     String doseDrug;
@@ -18,10 +18,10 @@ public class Dosing {
 
     }
 
-    public Dosing(String doseGroupID, String doseGroupNumber, String doseID, String doseDrug,
+    public Dosing( String doseGroupNumber, String doseID, String doseDrug,
                   String doseAdmin, String doseDosage, String doseDate, String doseNotes, Boolean allDosed, String doseType){
         //Date doseDate
-        this.doseGroupID = doseGroupID;
+//        this.doseGroupID = doseGroupID;
         this.doseGroupNumber = doseGroupNumber;
         this.doseID = doseID;
         this.doseDrug = doseDrug;
@@ -33,7 +33,7 @@ public class Dosing {
         this.doseType = doseType;
     }
 
-    public String getDoseGroupID() {   return doseGroupID;    }
+    //public String getDoseGroupID() {   return doseGroupID;    }
 
     public String getDoseGroupNumber() {   return doseGroupNumber;    }
 
@@ -46,7 +46,6 @@ public class Dosing {
     public String getDoseDosage() {return doseDosage;}
 
     public String getDoseDate() {return  doseDate; }
-    //public Date getDoseDate() {return  doseDate; }
 
     public String getDoseNotes() {return doseNotes; }
 
