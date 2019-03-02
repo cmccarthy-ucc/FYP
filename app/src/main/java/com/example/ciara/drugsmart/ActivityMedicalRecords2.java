@@ -22,6 +22,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_NUMBER;
+import static com.example.ciara.drugsmart.GroupActivity.ALL_VACCINATED;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_ADMIN;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_DATE;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_DOSAGE;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_DRUG;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_GROUP_NOTES;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_GROUP_NUMBER;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_ID;
+
+import static com.example.ciara.drugsmart.GroupActivity.INDIVIDUAL_ID;
+
 public class ActivityMedicalRecords2 extends AppCompatActivity {
 
     private ListView listView;
@@ -29,10 +41,13 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
     List<Vaccination> vaccinationList;
 
     DatabaseReference databaseReferenceGV;
-    List<GroupVaccination> groupVaccinationList;
+    List<GroupVaccination> groupVaccinations;
 
     DatabaseReference databaseReferenceDose;
     List<Dosing> dosingList;
+
+    DatabaseReference databaseTreatments;
+    List<Treatments> individualTreatments;
 
     private TextView mTextMessage;
 
@@ -53,10 +68,13 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
         vaccinationList = new ArrayList<>();
 
         databaseReferenceGV = FirebaseDatabase.getInstance().getReference("groupVaccination");
-        groupVaccinationList = new ArrayList<>();
+        groupVaccinations = new ArrayList<>();
 
         databaseReferenceDose = FirebaseDatabase.getInstance().getReference("groupDose");
         dosingList = new ArrayList<>();
+
+        databaseTreatments = FirebaseDatabase.getInstance().getReference("treatments");
+        individualTreatments = new ArrayList<>();
 
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -67,16 +85,18 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         listView.setAdapter(null);
-                        vaccinationList.clear();
-                        databaseReference.addValueEventListener(new ValueEventListener() {
+                        individualTreatments.clear();
+                        databaseTreatments.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for(DataSnapshot vaccinationSnapshot : dataSnapshot.getChildren()){
-                                    Vaccination vaccination = vaccinationSnapshot.getValue(Vaccination.class);
-                                    vaccinationList.add(vaccination);
+                                for (DataSnapshot animalSnapshot : dataSnapshot.getChildren()) {
+                                    for (DataSnapshot vaccinationSnapshot : animalSnapshot.getChildren()) {
+                                        Treatments vaccination = vaccinationSnapshot.getValue(Treatments.class);
+                                        individualTreatments.add(vaccination);
+                                    }
+                                    TreatmentList vaccinationInfoAdapter = new TreatmentList(ActivityMedicalRecords2.this, individualTreatments);
+                                    listView.setAdapter(vaccinationInfoAdapter);
                                 }
-                                VaccinationInfoAdapter vaccinationInfoAdapter = new VaccinationInfoAdapter(ActivityMedicalRecords2.this, vaccinationList);
-                                listView.setAdapter(vaccinationInfoAdapter);
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -88,25 +108,27 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
 
                     case R.id.navigation_dashboard:
                         listView.setAdapter(null);
-                        groupVaccinationList.clear();
+                        groupVaccinations.clear();
                         databaseReferenceGV.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()){
-                                    GroupVaccination groupVaccination = groupVaccinationSnapshot.getValue(GroupVaccination.class);
-                                    groupVaccinationList.add(groupVaccination);
-                                }
-                                GroupVaccinationInfoAdapter groupVaccinationInfoAdapter = new GroupVaccinationInfoAdapter(ActivityMedicalRecords2.this, groupVaccinationList);
-                                listView.setAdapter(groupVaccinationInfoAdapter);
-                            }
+                                for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()) {
+                                    for (DataSnapshot vaccinationSnapshot : groupVaccinationSnapshot.getChildren()) {
+                                        GroupVaccination groupVaccination = vaccinationSnapshot.getValue(GroupVaccination.class);
+                                        groupVaccinations.add(groupVaccination);
+                                    }
+
+                                    AllGroupVaccinationList groupVaccinationInfoAdapter = new AllGroupVaccinationList(ActivityMedicalRecords2.this, groupVaccinations);
+                                    listView.setAdapter(groupVaccinationInfoAdapter);
+                                }}
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
                             }
                         });
                         mTextMessage.setText("All Group Vaccinations");
-
                         return true;
+
                     case R.id.navigation_notifications:
                         listView.setAdapter(null);
                         dosingList.clear();
@@ -190,21 +212,64 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
 
     protected void onStart(){
         super.onStart();
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseTreatments.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot vaccinationSnapshot : dataSnapshot.getChildren()){
-                    Vaccination vaccination = vaccinationSnapshot.getValue(Vaccination.class);
-                    vaccinationList.add(vaccination);
+                for (DataSnapshot animalSnapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot vaccinationSnapshot : animalSnapshot.getChildren()) {
+                        Treatments vaccination = vaccinationSnapshot.getValue(Treatments.class);
+                        individualTreatments.add(vaccination);
+                    }
+                    TreatmentList vaccinationInfoAdapter = new TreatmentList(ActivityMedicalRecords2.this, individualTreatments);
+                    listView.setAdapter(vaccinationInfoAdapter);
                 }
-                VaccinationInfoAdapter vaccinationInfoAdapter = new VaccinationInfoAdapter(ActivityMedicalRecords2.this, vaccinationList);
-                listView.setAdapter(vaccinationInfoAdapter);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
+        //NEW***
+//        groupVaccinations.clear();
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()) {
+//                    for (DataSnapshot vaccinationSnapshot : groupVaccinationSnapshot.getChildren()) {
+//                        GroupVaccination groupVaccination = vaccinationSnapshot.getValue(GroupVaccination.class);
+//                        groupVaccinations.add(groupVaccination);
+//                    }
+//                }
+//                AllGroupVaccinationList groupVaccinationInfoAdapter = new AllGroupVaccinationList(ActivityAllGroupVaccinations.this, groupVaccinations);
+//                listView.setAdapter(groupVaccinationInfoAdapter);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//Old**
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for(DataSnapshot vaccinationSnapshot : dataSnapshot.getChildren()){
+//                    Vaccination vaccination = vaccinationSnapshot.getValue(Vaccination.class);
+//                    vaccinationList.add(vaccination);
+//                }
+//                VaccinationInfoAdapter vaccinationInfoAdapter = new VaccinationInfoAdapter(ActivityMedicalRecords2.this, vaccinationList);
+//                listView.setAdapter(vaccinationInfoAdapter);
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
+
+//        datab
     }
 
 

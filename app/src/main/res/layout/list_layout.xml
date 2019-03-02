@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textViewID"
+        android:id="@+id/textViewGroupNumber"
         android:layout_width="274dp"
         android:layout_height="47dp"
         android:layout_alignParentStart="true"

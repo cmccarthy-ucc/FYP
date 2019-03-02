@@ -36,7 +36,7 @@ public class ViewVaccinationDetails extends AppCompatActivity {
                 = (TextView)findViewById(R.id.vaccinationGroupNumber);
         vaccinationID
                 = (TextView)findViewById(R.id.vaccinationID);
-        vaccinationDate = (TextView)findViewById(R.id.doseDate);
+        vaccinationDate = (TextView)findViewById(R.id.treatmentDate);
         vaccinationDrug = (TextView)findViewById(R.id.vaccinationDrug);
         vaccinationAdmin = (TextView)findViewById(R.id.vaccinationAdmin);
         vaccinationDosage = (TextView)findViewById(R.id.vaccinationDosage);

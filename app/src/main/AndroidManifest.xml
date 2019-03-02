@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ciara.drugsmart">
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SET_ALARM" />
 
@@ -13,14 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
         </activity>
         <activity android:name=".DataRetrieved" />
         <activity android:name=".TextRecognition" />
@@ -88,7 +79,12 @@
             android:name=".GroupVaccinationDetailsActivity"
             android:label="Group Vaccination Details" />
         <activity android:name=".GroupDoseActivity" />
-        <activity android:name=".AnimalActivity"></activity>
+        <activity android:name=".AnimalActivity" />
+        <activity android:name=".IndividualDetails" />
+        <activity android:name=".TreatmentDetails" />
+        <activity android:name=".TreatmentActivity" />
+        <activity android:name=".WelcomeActivity"
+            android:label="Home"></activity>
     </application>
 
 </manifest>

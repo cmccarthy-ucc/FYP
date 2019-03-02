@@ -39,7 +39,7 @@ public class ActivityToDoDoseDetails extends AppCompatActivity {
                 = (TextView)findViewById(R.id.doseGroupNumber);
         doseID
                 = (TextView)findViewById(R.id.doseID);
-        doseDate = (TextView)findViewById(R.id.doseDate);
+        doseDate = (TextView)findViewById(R.id.treatmentDate);
         doseDrug = (TextView)findViewById(R.id.doseDrug);
         doseAdmin = (TextView)findViewById(R.id.doseAdmin);
         doseDosage = (TextView)findViewById(R.id.doseDosage);

@@ -87,7 +87,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
         groupID.setText(groupIDText);
         groupNumber.setText(groupNumberText);
 
-        buttonAddVaccination = (Button) findViewById(R.id.buttonAddVaccination);
+        buttonAddVaccination = (Button) findViewById(R.id.buttonAddTreatment);
         buttonAddVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,7 +140,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
 
         //https://www.youtube.com/watch?v=hwe1abDO2Ag
         //Select administration of vaccination date
-        vaccinationDate = (TextView) findViewById(R.id.doseDate);
+        vaccinationDate = (TextView) findViewById(R.id.treatmentDate);
         vaccinationDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

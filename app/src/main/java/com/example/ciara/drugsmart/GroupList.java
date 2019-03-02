@@ -24,7 +24,7 @@ public class GroupList extends ArrayAdapter<Group> {
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.layout_group_list, null, true);
 
-        TextView textViewGroupNumber = (TextView) listViewItem.findViewById(R.id.textViewVaccinationDate);
+        TextView textViewGroupNumber = (TextView) listViewItem.findViewById(R.id.textViewGroupNumber);
         TextView textViewDOB = (TextView) listViewItem.findViewById(R.id.textViewVaccinationDrug);
 
         Group group = groups.get(position);

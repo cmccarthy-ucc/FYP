@@ -27,7 +27,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
-            android:id="@+id/textViewAnimalType"
+            android:id="@+id/textViewGender"
             android:layout_width="100dp"
             android:layout_height="19dp"
             android:layout_marginTop="8dp"
@@ -35,10 +35,10 @@
             android:layout_marginRight="56dp"
             android:text="Animal Type"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewVaccinationDate" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewGroupNumber" />
 
         <TextView
-            android:id="@+id/textViewGroupBreed"
+            android:id="@+id/textViewBreed"
             android:layout_width="100dp"
             android:layout_height="19dp"
             android:layout_marginTop="8dp"
@@ -46,10 +46,10 @@
             android:layout_marginRight="56dp"
             android:text="Group Breed"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAnimalType" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewGender" />
 
         <TextView
-            android:id="@+id/textViewGroupSource"
+            android:id="@+id/textViewSourceFarmer"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -57,10 +57,10 @@
             android:layout_marginRight="56dp"
             android:text="Group Source"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGroupBreed" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewBreed" />
 
         <TextView
-            android:id="@+id/textViewGroupDOB"
+            android:id="@+id/textViewDate"
             android:layout_width="100dp"
             android:layout_height="31dp"
             android:layout_marginTop="8dp"
@@ -68,7 +68,7 @@
             android:layout_marginRight="56dp"
             android:text="Group DOB"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGroupSource" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewSourceFarmer" />
 
         <TextView
             android:id="@+id/textView3"
@@ -91,7 +91,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewVaccinationDate"
+            android:id="@+id/textViewGroupNumber"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -160,7 +160,7 @@
             android:layout_marginRight="8dp"
             android:text="Group Date of Birth"
             android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toStartOf="@+id/textViewGroupDOB"
+            app:layout_constraintEnd_toStartOf="@+id/textViewDate"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -225,7 +225,21 @@
             android:text="Add"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGroupDOB" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
+
+        <Button
+            android:id="@+id/buttonUpdate"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:layout_marginRight="13dp"
+            android:text="Edit"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView

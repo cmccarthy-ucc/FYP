@@ -1,8 +1,9 @@
 package com.example.ciara.drugsmart;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Group {
+public class Group implements Serializable {
     String groupNo;
     String groupAnimalType;
     String groupBreed;
@@ -11,9 +12,11 @@ public class Group {
     String groupID;
     String groupNotes;
 //
+    public Group(){}
 
-    public Group(){
+    public Group(String vaccinationGroupNumber, String vaccinationID, String vaccinationDrug, String vaccinationAdmin, String vaccinationDosage, String vaccinationDate, String vaccinationNotes, Boolean allAnimalsVaccinated){
     }
+
 
     public Group(String groupNo, String groupAnimalType, String groupBreed, String groupSource, String groupDOB, String groupID, String groupNotes){
         this.groupNo = groupNo;

@@ -67,8 +67,8 @@ public class AddVaccination extends AppCompatActivity {
         vaccinationDosage = (EditText) findViewById(R.id.textViewDosage);
 
 
-        animalID = (TextView)findViewById(R.id.TextViewAnimalID);
-        animalTag = (TextView)findViewById(R.id.TextViewAnimalTag);
+        animalID = (TextView)findViewById(R.id.textViewAnimalID);
+        animalTag = (TextView)findViewById(R.id.textViewAnimalTag);
 
 
 
@@ -80,7 +80,7 @@ public class AddVaccination extends AppCompatActivity {
         animalID.setText(animalIDText);
         animalTag.setText(animalDOBText);
 
-        buttonAddVaccination = (Button) findViewById(R.id.buttonAddVaccination);
+        buttonAddVaccination = (Button) findViewById(R.id.buttonAddTreatment);
         buttonAddVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +135,7 @@ public class AddVaccination extends AppCompatActivity {
 
         //https://www.youtube.com/watch?v=hwe1abDO2Ag
         //Select administration of vaccination date
-        vaccinationDate = (TextView)findViewById(R.id.doseDate);
+        vaccinationDate = (TextView)findViewById(R.id.treatmentDate);
         vaccinationDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

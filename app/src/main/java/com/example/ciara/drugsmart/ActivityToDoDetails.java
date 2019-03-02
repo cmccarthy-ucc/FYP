@@ -42,7 +42,7 @@ public class ActivityToDoDetails extends AppCompatActivity {
         vaccinationGroupNumber
                 = (TextView)findViewById(R.id.vaccinationGroupNumber);
         vaccinationGroupID = (TextView) findViewById(R.id.vaccinationGroupID);
-        vaccinationDate = (TextView)findViewById(R.id.doseDate);
+        vaccinationDate = (TextView)findViewById(R.id.treatmentDate);
         vaccinationDrug = (TextView)findViewById(R.id.vaccinationDrug);
         vaccinationAdmin = (TextView)findViewById(R.id.vaccinationAdmin);
         vaccinationDosage = (TextView)findViewById(R.id.vaccinationDosage);
@@ -141,7 +141,7 @@ public class ActivityToDoDetails extends AppCompatActivity {
                 TextView vaccinationGroupNumber = (TextView) findViewById(R.id.vaccinationGroupNumber);
                 String vaccinationGroupNumberText = (String) vaccinationGroupNumber.getText();
 
-                TextView vaccinationDate = (TextView) findViewById(R.id.doseDate);
+                TextView vaccinationDate = (TextView) findViewById(R.id.treatmentDate);
                 String vaccinationDateText = (String) vaccinationDate.getText();
 
                 TextView vaccinationDosage = (TextView) findViewById(R.id.vaccinationDosage);

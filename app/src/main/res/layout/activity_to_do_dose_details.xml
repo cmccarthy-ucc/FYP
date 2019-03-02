@@ -40,7 +40,7 @@
             app:layout_constraintStart_toEndOf="@+id/doseGroupID" />
 
         <TextView
-            android:id="@+id/doseDate"
+            android:id="@+id/treatmentDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -63,7 +63,7 @@
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/divider2"
-            app:layout_constraintTop_toBottomOf="@+id/doseDate" />
+            app:layout_constraintTop_toBottomOf="@+id/treatmentDate" />
 
         <TextView
             android:id="@+id/doseDosage"

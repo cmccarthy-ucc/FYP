@@ -26,7 +26,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
-            android:id="@+id/textViewAnimalType"
+            android:id="@+id/textViewGender"
             android:layout_width="100dp"
             android:layout_height="19dp"
             android:layout_marginStart="8dp"
@@ -38,10 +38,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.951"
             app:layout_constraintStart_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textViewVaccinationDate" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewGroupNumber" />
 
         <TextView
-            android:id="@+id/textViewGroupBreed"
+            android:id="@+id/textViewBreed"
             android:layout_width="100dp"
             android:layout_height="19dp"
             android:layout_marginStart="96dp"
@@ -53,10 +53,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAnimalType" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewGender" />
 
         <TextView
-            android:id="@+id/textViewGroupSource"
+            android:id="@+id/textViewSourceFarmer"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="132dp"
@@ -68,10 +68,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGroupBreed" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewBreed" />
 
         <TextView
-            android:id="@+id/textViewGroupDOB"
+            android:id="@+id/textViewDate"
             android:layout_width="100dp"
             android:layout_height="31dp"
             android:layout_marginTop="8dp"
@@ -79,7 +79,7 @@
             android:layout_marginRight="56dp"
             android:text="Group DOB"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGroupSource" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewSourceFarmer" />
 
         <TextView
             android:id="@+id/textView3"
@@ -102,7 +102,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewVaccinationDate"
+            android:id="@+id/textViewGroupNumber"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -122,7 +122,7 @@
             android:layout_marginRight="8dp"
             android:text="Group Number"
             android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toStartOf="@+id/textViewVaccinationDate"
+            app:layout_constraintEnd_toStartOf="@+id/textViewGroupNumber"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewGroupID" />
@@ -176,7 +176,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
         <Button
-            android:id="@+id/buttonAddVaccination"
+            android:id="@+id/buttonAddTreatment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"

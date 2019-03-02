@@ -196,7 +196,7 @@ public class ActivityAddGroup extends AppCompatActivity {
                 intent.putExtra(GROUP_DOB, group.getGroupDOB());
                 intent.putExtra(GROUP_BREED, group.getGroupBreed());
                 intent.putExtra(GROUP_SOURCE, group.getGroupSource());
-                intent.putExtra(GROUP_NOTES, group.getGroupNo());
+                intent.putExtra(GROUP_NOTES, group.getGroupNotes());
                 intent.putExtra(ANIMAL_TYPE, group.getGroupAnimalType());
                 intent.putExtra(GROUP_NUMBER, group.getGroupNo());
 

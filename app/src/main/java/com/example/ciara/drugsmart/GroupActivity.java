@@ -1,5 +1,7 @@
 package com.example.ciara.drugsmart;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,11 +10,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,10 +45,16 @@ public class GroupActivity extends AppCompatActivity {
     TextView groupNumber;
     TextView mTextMessage;
     Button btnAdd;
+    Button btnUpdate;
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
+
+    //https://www.youtube.com/watch?v=hwe1abDO2Ag
+    private static final String TAG = "GroupActivity";
+    TextView mDisplayDate;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     ListView listViewVaccination;
     List<GroupVaccination> groupVaccinations;
@@ -73,6 +85,7 @@ public class GroupActivity extends AppCompatActivity {
     public static final String DOSE_GROUP_NUMBER = "com.example.ciara.drugsmart.doseGroupNumber";
     public static final String DOSE_NOTES = "com.example.ciara.drugsmart.doseGroupNotes";
     public static final String ALL_DOSED = "com.example.ciara.drugsmart.allDosed";
+    public static final String DOSE_TYPE = "com.example.ciara.drugsmart.doseType";
 
     public static final String GROUP_INDIVIDUAL_ID = "com.example.ciara.drugsmart.individualGroupID";
     public static final String INDIVIDUAL_ID = "com.example.ciara.drugsmart.individualID";
@@ -91,25 +104,26 @@ public class GroupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group);
         mTextMessage = findViewById(R.id.textViewTitle);
         btnAdd = findViewById(R.id.buttonAdd);
-
+        btnUpdate = findViewById(R.id.buttonUpdate);
 
         groupID
                 = (TextView)findViewById(R.id.textViewGroupID);
         groupAnimalType
-                = (TextView)findViewById(R.id.textViewAnimalType);
-        groupDOB = (TextView)findViewById(R.id.textViewGroupDOB);
-        groupSource = (TextView)findViewById(R.id.textViewGroupSource);
-        groupBreed = (TextView)findViewById(R.id.textViewGroupBreed);
-        groupNumber = (TextView)findViewById(R.id.textViewVaccinationDate);
+                = (TextView)findViewById(R.id.textViewGender);
+        groupDOB = (TextView)findViewById(R.id.textViewDate);
+        groupSource = (TextView)findViewById(R.id.textViewSourceFarmer);
+        groupBreed = (TextView)findViewById(R.id.textViewBreed);
+        groupNumber = (TextView)findViewById(R.id.textViewGroupNumber);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         final String groupIDText = extras.getString(GROUP_ID);
         final String groupNumberText = extras.getString(ActivityAddGroup.GROUP_NUMBER);
-        String groupAnimalTypeText = extras.getString(ActivityAddGroup.ANIMAL_TYPE);
-        String groupDOBText = extras.getString(ActivityAddGroup.GROUP_DOB);
-        String groupSourceText = extras.getString(ActivityAddGroup.GROUP_SOURCE);
-        String groupBreedText = extras.getString(ActivityAddGroup.GROUP_BREED);
+        final String groupAnimalTypeText = extras.getString(ActivityAddGroup.ANIMAL_TYPE);
+        final String groupDOBText = extras.getString(ActivityAddGroup.GROUP_DOB);
+        final String groupSourceText = extras.getString(ActivityAddGroup.GROUP_SOURCE);
+        final String groupBreedText = extras.getString(ActivityAddGroup.GROUP_BREED);
+        final String groupNotesText = extras.getString(ActivityAddGroup.GROUP_NOTES);
 
         groupID.setText(groupIDText);
         groupAnimalType.setText(groupAnimalTypeText);
@@ -126,6 +140,14 @@ public class GroupActivity extends AppCompatActivity {
 
         databaseIndividuals = FirebaseDatabase.getInstance().getReference("animal").child(intent.getStringExtra(ActivityAddGroup.GROUP_ID));
         groupIndividuals = new ArrayList<>();
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showUpdateDeleteDialog(groupNumberText, groupAnimalTypeText, groupBreedText, groupSourceText, groupDOBText, groupIDText, groupNotesText);
+            }
+
+        });
 
        listViewVaccination = findViewById(R.id.listViewVaccinations);
 //        listViewVaccination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -257,7 +279,7 @@ public class GroupActivity extends AppCompatActivity {
                                 //getting the selected artist
                                 Dosing doses = groupDoses.get(i);
                                 //creating an intent
-                                Intent intent = new Intent(getApplicationContext(), VaccinationInformation.class);
+                                Intent intent = new Intent(getApplicationContext(), ActivityViewDoseDetails.class);
                                 //putting artist name and id to intent
                                 intent.putExtra(GROUP_NUMBER, doses.getDoseGroupNumber());
                                 intent.putExtra(DOSE_ID, doses.getDoseID());
@@ -268,6 +290,7 @@ public class GroupActivity extends AppCompatActivity {
                                 intent.putExtra(DOSE_GROUP_NUMBER, doses.getDoseGroupNumber());
                                 intent.putExtra(DOSE_NOTES, doses.getDoseNotes());
                                 intent.putExtra(ALL_DOSED, doses.getAllDosed());
+                                intent.putExtra(DOSE_TYPE, doses.getDoseType());
                                 //starting the activity with intent
                                 startActivity(intent);
                             }
@@ -313,8 +336,9 @@ public class GroupActivity extends AppCompatActivity {
                                 //getting the selected artist
                                 Animal animals = groupIndividuals.get(i);
                                 //creating an intent
-                                Intent intent = new Intent(getApplicationContext(), ViewAnimalDetails.class);
+                                Intent intent = new Intent(getApplicationContext(), IndividualDetails.class);
                                 //putting artist name and id to intent
+                                intent.putExtra(INDIVIDUAL_GROUP_NUMBER, animals.getGroupNumber());
                                 intent.putExtra(INDIVIDUAL_ID, animals.getAnimalID());
                                 intent.putExtra(INDIVIDUAL_BREED, animals.getAnimalBreed());
                                 intent.putExtra(INDIVIDUAL_DOB, animals.getAnimalDOB());
@@ -322,7 +346,6 @@ public class GroupActivity extends AppCompatActivity {
                                 intent.putExtra(INDIVIDUAL_SOURCE, animals.getAnimalSource());
                                 intent.putExtra(INDIVIDUAL_TAG, animals.getAnimalTag());
                                 intent.putExtra(INDIVIDUAL_NOTES, animals.getNotes());
-                                intent.putExtra(INDIVIDUAL_GROUP_NUMBER, animals.getGroupNumber());
                                 //starting the activity with intent
                                 startActivity(intent);
                             }
@@ -407,34 +430,64 @@ public class GroupActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //attaching value event listener
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        final String groupIDText = extras.getString(GROUP_ID);
+        final String groupNumberText = extras.getString(ActivityAddGroup.GROUP_NUMBER);
+        listViewVaccination.setAdapter(null);
+        groupVaccinations.clear();
         databaseVaccinations.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                //clearing the previous artist list
-                groupVaccinations.clear();
-
-                //iterating through all the nodes
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
-                    GroupVaccination groupVaccination = postSnapshot.getValue(GroupVaccination.class);
-                    //adding artist to the list
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()){
+                    GroupVaccination groupVaccination = groupVaccinationSnapshot.getValue(GroupVaccination.class);
                     groupVaccinations.add(groupVaccination);
                 }
-
-                //creating adapter
-                GroupVaccinationList groupAdapter = new GroupVaccinationList(GroupActivity.this, groupVaccinations);
-                //attaching adapter to the listview
-                listViewVaccination.setAdapter(groupAdapter);
+                GroupVaccinationList groupVaccinationInfoAdapter = new GroupVaccinationList(GroupActivity.this, groupVaccinations);
+                listViewVaccination.setAdapter(groupVaccinationInfoAdapter);
             }
-
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+        mTextMessage.setText("Vaccinations");
+        btnAdd.setText("Add Vaccination");
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), GroupVaccinationActivity.class);
 
+                //putting artist name and id to intent
+                intent.putExtra(GROUP_ID, groupIDText);
+                intent.putExtra(GROUP_NUMBER, groupNumberText);
+
+                //starting the activity with intent
+                startActivity(intent);
+            }
+        });
+
+        listViewVaccination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //getting the selected artist
+                GroupVaccination groupVaccination = groupVaccinations.get(i);
+                //creating an intent
+                Intent intent = new Intent(getApplicationContext(), GroupVaccinationDetailsActivity.class);
+                //putting artist name and id to intent
+                intent.putExtra(GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
+                intent.putExtra(VACCINATION_ID, groupVaccination.getVaccinationID());
+                intent.putExtra(VACCINATION_DRUG, groupVaccination.getVaccinationDrug());
+                intent.putExtra(VACCINATION_DOSAGE, groupVaccination.getVaccinationDosage());
+                intent.putExtra(VACCINATION_ADMIN, groupVaccination.getVaccinationAdmin());
+                intent.putExtra(VACCINATION_DATE, groupVaccination.getVaccinationDate());
+                intent.putExtra(VACCINATION_GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
+                intent.putExtra(VACCINATION_GROUP_NOTES, groupVaccination.getVaccinationNotes());
+                intent.putExtra(ALL_VACCINATED, groupVaccination.getAllVaccinated());
+                //starting the activity with intent
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -446,5 +499,112 @@ public class GroupActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+    private void showUpdateDeleteDialog(String groupNo, String groupAnimalType, String groupBreed, String groupSource, String groupDOB, String groupID, String groupNotes) {
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        final String groupIDText = extras.getString(GROUP_ID);
+        final String groupNumberText = extras.getString(ActivityAddGroup.GROUP_NUMBER);
+        String groupAnimalTypeText = extras.getString(ActivityAddGroup.ANIMAL_TYPE);
+        String groupDOBText = extras.getString(ActivityAddGroup.GROUP_DOB);
+        String groupSourceText = extras.getString(ActivityAddGroup.GROUP_SOURCE);
+        String groupBreedText = extras.getString(ActivityAddGroup.GROUP_BREED);
+        String groupNotesText = extras.getString(ActivityAddGroup.GROUP_NOTES);
+
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.update_group, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText editTextSource = dialogView.findViewById(R.id.editTextSource);
+        editTextSource.setText(groupSourceText);
+        final EditText editTextBreed = dialogView.findViewById(R.id.editTextBreed);
+        editTextBreed.setText(groupBreedText);
+        final EditText editTextNotes = dialogView.findViewById(R.id.editTextNotes);
+        editTextNotes.setText(groupNotesText);
+        final TextView textViewDOB = dialogView.findViewById(R.id.textViewDate);
+        textViewDOB.setText(groupDOB);
+        final Spinner spinnerTypes = (Spinner) dialogView.findViewById(R.id.spinnerType);
+        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateArtist);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteArtist);
+
+        dialogBuilder.setTitle("GroupNumber:   " + groupNumberText);
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String groupNo = groupNumberText;
+                String groupID = groupIDText;
+                String source = editTextSource.getText().toString().trim();
+                String breed = editTextBreed.getText().toString().trim();
+                String dob = textViewDOB.getText().toString().trim();
+                String notes = editTextNotes.getText().toString().trim();
+                String type = spinnerTypes.getSelectedItem().toString();
+                if (!TextUtils.isEmpty(breed)) {
+                    updateGroup(groupNo, type, breed, source, dob, groupID, notes);
+                    b.dismiss();
+                }
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String groupNo = groupNumberText;
+                String groupID = groupIDText;
+                String source = editTextSource.getText().toString().trim();
+                String breed = editTextBreed.getText().toString().trim();
+                String dob = textViewDOB.getText().toString().trim();
+                String notes = editTextNotes.getText().toString().trim();
+                String type = spinnerTypes.getSelectedItem().toString();
+
+                deleteGroup(groupNo, type, breed, source, dob, groupID, notes);
+                b.dismiss();
+            }
+        });
+    }
+    private boolean updateGroup(String groupNo, String groupAnimalType, String groupBreed, String groupSource, String groupDOB, String groupID, String groupNotes) {
+        //getting the specified artist reference
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("groups").child(groupNo);
+
+        //updating artist
+        Group group = new Group(groupNo, groupAnimalType, groupBreed, groupSource, groupDOB, groupID, groupNotes);
+        dR.setValue(group);
+        Toast.makeText(getApplicationContext(), "Animal Updated", Toast.LENGTH_LONG).show();
+
+
+        return true;
+
+
+    }
+
+    private boolean deleteGroup(String groupNo, String groupAnimalType, String groupBreed, String groupSource, String groupDOB, String groupID, String groupNotes) {
+
+        //getting the specified artist reference
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("groups").child(groupNo);
+
+        //removing artist
+        dR.removeValue();
+
+        //getting the tracks reference for the specified artist
+        DatabaseReference drGroupVaccinations = FirebaseDatabase.getInstance().getReference("groupVaccinations").child(groupID);
+
+        //removing all tracks
+        drGroupVaccinations.removeValue();
+        Toast.makeText(getApplicationContext(), "Group Deleted", Toast.LENGTH_LONG).show();
+
+        return true;
+    }
+
 }
 

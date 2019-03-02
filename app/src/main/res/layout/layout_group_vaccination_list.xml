@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textViewVaccinationDate"
+        android:id="@+id/textViewGroupNumber"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -29,7 +29,7 @@
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewVaccinationDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewGroupNumber" />
 
     <TextView
         android:id="@+id/textView7"

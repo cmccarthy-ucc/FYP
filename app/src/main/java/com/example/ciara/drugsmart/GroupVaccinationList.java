@@ -24,7 +24,7 @@ public class GroupVaccinationList extends ArrayAdapter<GroupVaccination> {
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.layout_group_vaccination_list, null, true);
 
-        TextView textViewDate = (TextView) listViewItem.findViewById(R.id.textViewVaccinationDate);
+        TextView textViewDate = (TextView) listViewItem.findViewById(R.id.textViewGroupNumber);
         TextView textViewDrug = (TextView) listViewItem.findViewById(R.id.textViewVaccinationDrug);
 
         GroupVaccination groupVaccination = groupVaccinations.get(position);

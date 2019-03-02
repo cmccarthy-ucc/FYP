@@ -39,7 +39,7 @@ public class ActivityViewDoseDetails extends AppCompatActivity {
                 = (TextView)findViewById(R.id.doseGroupNumber);
         doseID
                 = (TextView)findViewById(R.id.doseID);
-        doseDate = (TextView)findViewById(R.id.doseDate);
+        doseDate = (TextView)findViewById(R.id.treatmentDate);
         doseDrug = (TextView)findViewById(R.id.doseDrug);
         doseAdmin = (TextView)findViewById(R.id.doseAdmin);
         doseDosage = (TextView)findViewById(R.id.doseDosage);
@@ -47,21 +47,37 @@ public class ActivityViewDoseDetails extends AppCompatActivity {
         allDosed = findViewById(R.id.allDosed);
         doseNotes = findViewById(R.id.doseNotes);
 
-        /*//value passed from one activity to another
+         /*//value passed from one activity to another
         String TempHolder = getIntent().getStringExtra("ListViewClickedValue");
         animalID.setText(TempHolder);
 */
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        String doseGroupNumberText = extras.getString("EXTRA_GROUP_NUMBER");
-        String doseIDText = extras.getString("EXTRA_ID");
-        String doseDateText = extras.getString("EXTRA_DATE");
-        String doseAdminText = extras.getString("EXTRA_ADMIN");
-        String doseDrugText = extras.getString("EXTRA_DRUG");
-        String doseDosageText = extras.getString("EXTRA_DOSAGE");
-        String doseTypeText = extras.getString("EXTRA_TYPE");
-        String allDosedText = extras.getString("EXTRA_ALL_DOSED");
-        String doseNotesText = extras.getString("EXTRA_NOTES");
+        String doseGroupNumberText = extras.getString(GroupActivity.DOSE_GROUP_NUMBER);
+        String doseIDText = extras.getString(GroupActivity.DOSE_ID);
+        String doseDateText = extras.getString(GroupActivity.DOSE_DATE);
+        String doseAdminText = extras.getString(GroupActivity.DOSE_ADMIN);
+        String doseDrugText = extras.getString(GroupActivity.DOSE_DRUG);
+        String doseDosageText = extras.getString(GroupActivity.DOSE_DOSAGE);
+        String doseTypeText = extras.getString(GroupActivity.DOSE_TYPE);
+        String allDosedText = extras.getString(GroupActivity.ALL_DOSED);
+        String doseNotesText = extras.getString(GroupActivity.DOSE_NOTES);
+
+//        /*//value passed from one activity to another
+//        String TempHolder = getIntent().getStringExtra("ListViewClickedValue");
+//        animalID.setText(TempHolder);
+//*/
+//        Intent intent = getIntent();
+//        Bundle extras = intent.getExtras();
+//        String doseGroupNumberText = extras.getString("EXTRA_GROUP_NUMBER");
+//        String doseIDText = extras.getString("EXTRA_ID");
+//        String doseDateText = extras.getString("EXTRA_DATE");
+//        String doseAdminText = extras.getString("EXTRA_ADMIN");
+//        String doseDrugText = extras.getString("EXTRA_DRUG");
+//        String doseDosageText = extras.getString("EXTRA_DOSAGE");
+//        String doseTypeText = extras.getString("EXTRA_TYPE");
+//        String allDosedText = extras.getString("EXTRA_ALL_DOSED");
+//        String doseNotesText = extras.getString("EXTRA_NOTES");
 
 
         doseGroupNumber.setText(doseGroupNumberText);

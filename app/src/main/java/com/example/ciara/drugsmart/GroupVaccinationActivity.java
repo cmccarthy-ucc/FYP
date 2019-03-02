@@ -90,7 +90,7 @@ public class GroupVaccinationActivity extends AppCompatActivity {
         databaseGroupVaccination = FirebaseDatabase.getInstance().getReference("groupVaccinations").child(intent.getStringExtra(ActivityAddGroup.GROUP_ID));
         groupVaccinations = new ArrayList<>();
 
-        buttonAddVaccination = (Button) findViewById(R.id.buttonAddVaccination);
+        buttonAddVaccination = (Button) findViewById(R.id.buttonAddTreatment);
         buttonAddVaccination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +104,7 @@ public class GroupVaccinationActivity extends AppCompatActivity {
         });
 
 
-        vaccinationDate = (TextView) findViewById(R.id.doseDate);
+        vaccinationDate = (TextView) findViewById(R.id.treatmentDate);
         vaccinationDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

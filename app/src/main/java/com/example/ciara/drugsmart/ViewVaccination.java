@@ -52,7 +52,7 @@ public class ViewVaccination extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
 
-        animalID = (TextView)findViewById(R.id.TextViewAnimalID);
+        animalID = (TextView)findViewById(R.id.textViewAnimalID);
         Intent intent = getIntent();
         animalIDText = intent.getExtras().getString("VIEW_VACCINATION_ANIMAL_ID");
 

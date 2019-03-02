@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DrugSmart</string>
+    <string name="app_name">VacciNote</string>
     <string name="search">Search</string>
 
     <array name="gender">

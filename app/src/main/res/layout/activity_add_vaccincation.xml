@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/TextViewAnimalID"
+            android:id="@+id/textViewAnimalID"
             android:layout_width="156dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -28,7 +28,7 @@
 
 
         <TextView
-            android:id="@+id/TextViewAnimalTag"
+            android:id="@+id/textViewAnimalTag"
             android:layout_width="147dp"
             android:layout_height="47dp"
             android:layout_marginTop="8dp"
@@ -39,7 +39,7 @@
             android:textColor="@android:color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextViewAnimalID" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewAnimalID" />
 
 
 
@@ -56,7 +56,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextViewAnimalTag" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewAnimalTag" />
 
         <EditText
             android:id="@+id/editAdmin"
@@ -78,7 +78,7 @@
         <!--android:text="Enter Breed"-->
 
         <TextView
-            android:id="@+id/doseDate"
+            android:id="@+id/treatmentDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -94,7 +94,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewDosage" />
 
         <Button
-            android:id="@+id/buttonAddVaccination"
+            android:id="@+id/buttonAddTreatment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -106,7 +106,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/doseDate" />
+            app:layout_constraintTop_toBottomOf="@+id/treatmentDate" />
 
         <Button
             android:id="@+id/buttonAddReminder"
@@ -120,7 +120,7 @@
             android:text="Add Reminder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAddVaccination" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonAddTreatment" />
 
         <EditText
             android:id="@+id/textViewDosage"

@@ -25,7 +25,7 @@
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/doseDate" />
+            app:layout_constraintTop_toBottomOf="@+id/treatmentDate" />
 
         <TextView
 
@@ -95,7 +95,7 @@
 
 
         <TextView
-            android:id="@+id/doseDate"
+            android:id="@+id/treatmentDate"
             android:layout_width="338dp"
             android:layout_height="35dp"
             android:layout_marginStart="24dp"
@@ -107,7 +107,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewDosage" />
 
         <Button
-            android:id="@+id/buttonAddVaccination"
+            android:id="@+id/buttonAddTreatment"
             android:layout_width="186dp"
             android:layout_height="53dp"
             android:layout_marginStart="8dp"
@@ -135,7 +135,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.68"
             app:layout_constraintStart_toEndOf="@+id/textViewNotes"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAddVaccination"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAddTreatment"
             app:layout_constraintVertical_bias="0.036" />
 
         <EditText
@@ -193,7 +193,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:text="Notes"
-            app:layout_constraintEnd_toStartOf="@+id/buttonAddVaccination"
+            app:layout_constraintEnd_toStartOf="@+id/buttonAddTreatment"
             app:layout_constraintHorizontal_bias="0.152"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroupAllVaccinated" />
