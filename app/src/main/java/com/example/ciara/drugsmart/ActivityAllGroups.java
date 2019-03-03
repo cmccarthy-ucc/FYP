@@ -3,7 +3,9 @@ package com.example.ciara.drugsmart;
 import android.app.ActivityGroup;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -128,6 +130,11 @@ public class ActivityAllGroups extends AppCompatActivity {
                         Intent intentToDo = new Intent(ActivityAllGroups.this, ActivityToDoList.class);
                         startActivity(intentToDo);
                         break;
+                    case R.id.drugs:
+                        Toast.makeText(ActivityAllGroups.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(ActivityAllGroups.this, AddDrug.class);
+                        startActivity(intentDrug);
+                        break;
                     default:
                         return true;
                 }
@@ -137,14 +144,23 @@ public class ActivityAllGroups extends AppCompatActivity {
 
         });
 
-        buttonAddGroup = findViewById(R.id.buttonAddGroup);
-        buttonAddGroup.setOnClickListener(new View.OnClickListener() {
+//        buttonAddGroup = findViewById(R.id.buttonAddGroup);
+//        buttonAddGroup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ActivityAllGroups.this, ActivityAddGroup.class);
+//                startActivity(intent);
+//            }
+//        });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(ActivityAllGroups.this, ActivityAddGroup.class);
                 startActivity(intent);
-            }
-        });
+
+            }});
 
 
            }

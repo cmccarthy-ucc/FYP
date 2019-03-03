@@ -11,7 +11,6 @@ public class Animal {
     String groupNumber;
     String notes;
 
-
     public Animal(){
 
     }

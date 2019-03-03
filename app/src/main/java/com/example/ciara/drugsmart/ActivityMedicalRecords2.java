@@ -67,10 +67,10 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("vaccination");
         vaccinationList = new ArrayList<>();
 
-        databaseReferenceGV = FirebaseDatabase.getInstance().getReference("groupVaccination");
+        databaseReferenceGV = FirebaseDatabase.getInstance().getReference("groupVaccinations");
         groupVaccinations = new ArrayList<>();
 
-        databaseReferenceDose = FirebaseDatabase.getInstance().getReference("groupDose");
+        databaseReferenceDose = FirebaseDatabase.getInstance().getReference("groupDoses");
         dosingList = new ArrayList<>();
 
         databaseTreatments = FirebaseDatabase.getInstance().getReference("treatments");
@@ -94,7 +94,7 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
                                         Treatments vaccination = vaccinationSnapshot.getValue(Treatments.class);
                                         individualTreatments.add(vaccination);
                                     }
-                                    TreatmentList vaccinationInfoAdapter = new TreatmentList(ActivityMedicalRecords2.this, individualTreatments);
+                                    AllSingleTreatmentList vaccinationInfoAdapter = new AllSingleTreatmentList(ActivityMedicalRecords2.this, individualTreatments);
                                     listView.setAdapter(vaccinationInfoAdapter);
                                 }
                             }
@@ -135,13 +135,14 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
                         databaseReferenceDose.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for(DataSnapshot dosingSnapshot : dataSnapshot.getChildren()){
+                                for(DataSnapshot dosingGroupSnapshot : dataSnapshot.getChildren()) {
+                                    for(DataSnapshot dosingSnapshot : dosingGroupSnapshot.getChildren()){
                                     Dosing dosing = dosingSnapshot.getValue(Dosing.class);
                                     dosingList.add(dosing);
                                 }
-                                DosingInfoAdapter dosingInfoAdapter = new DosingInfoAdapter(ActivityMedicalRecords2.this, dosingList);
+                                AllGroupDoseList dosingInfoAdapter = new AllGroupDoseList(ActivityMedicalRecords2.this, dosingList);
                                 listView.setAdapter(dosingInfoAdapter);
-                            }
+                            }}
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -187,7 +188,7 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityMedicalRecords2.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityMedicalRecords2.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(ActivityMedicalRecords2.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
@@ -220,7 +221,7 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
                         Treatments vaccination = vaccinationSnapshot.getValue(Treatments.class);
                         individualTreatments.add(vaccination);
                     }
-                    TreatmentList vaccinationInfoAdapter = new TreatmentList(ActivityMedicalRecords2.this, individualTreatments);
+                    AllSingleTreatmentList vaccinationInfoAdapter = new AllSingleTreatmentList(ActivityMedicalRecords2.this, individualTreatments);
                     listView.setAdapter(vaccinationInfoAdapter);
                 }
             }
@@ -229,47 +230,7 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
 
             }
         });
-
-        //NEW***
-//        groupVaccinations.clear();
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()) {
-//                    for (DataSnapshot vaccinationSnapshot : groupVaccinationSnapshot.getChildren()) {
-//                        GroupVaccination groupVaccination = vaccinationSnapshot.getValue(GroupVaccination.class);
-//                        groupVaccinations.add(groupVaccination);
-//                    }
-//                }
-//                AllGroupVaccinationList groupVaccinationInfoAdapter = new AllGroupVaccinationList(ActivityAllGroupVaccinations.this, groupVaccinations);
-//                listView.setAdapter(groupVaccinationInfoAdapter);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//Old**
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for(DataSnapshot vaccinationSnapshot : dataSnapshot.getChildren()){
-//                    Vaccination vaccination = vaccinationSnapshot.getValue(Vaccination.class);
-//                    vaccinationList.add(vaccination);
-//                }
-//                VaccinationInfoAdapter vaccinationInfoAdapter = new VaccinationInfoAdapter(ActivityMedicalRecords2.this, vaccinationList);
-//                listView.setAdapter(vaccinationInfoAdapter);
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
-
-//        datab
+        mTextMessage.setText("All Individual Treatments");
     }
 
 

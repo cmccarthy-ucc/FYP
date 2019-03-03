@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ciara.drugsmart">
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/appicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/appicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".DataRetrieved" />
         <activity android:name=".TextRecognition" />
         <activity android:name=".AddVaccination" />
@@ -83,8 +83,12 @@
         <activity android:name=".IndividualDetails" />
         <activity android:name=".TreatmentDetails" />
         <activity android:name=".TreatmentActivity" />
-        <activity android:name=".WelcomeActivity"
-            android:label="Home"></activity>
+        <activity
+            android:name=".WelcomeActivity"
+            android:label="Home" />
+        <activity android:name=".ActivityAllIndividuals" />
+        <activity android:name=".DrugActivity" />
+        <activity android:name=".AddDrug"></activity>
     </application>
 
 </manifest>

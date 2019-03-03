@@ -57,7 +57,7 @@ public class ActivityOptionsTwo extends AppCompatActivity {
         buttonToDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (ActivityOptionsTwo.this, ActivityToDoDoses.class);
+                Intent intent = new Intent (ActivityOptionsTwo.this, DrugActivity.class);
                 startActivity(intent);
             }
         });

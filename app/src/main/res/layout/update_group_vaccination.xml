@@ -81,27 +81,27 @@
         android:text="Are all animals vaccinated?"
         android:textColor="@color/colorPrimaryDark" />
 
-    <!--<RadioGroup-->
-        <!--android:id="@+id/radioGroupAll"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal">-->
+    <RadioGroup
+        android:id="@+id/radioGroupAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <!--<RadioButton-->
-            <!--android:id="@+id/radioButtonYes"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:checked="true"-->
-            <!--android:text="Yes" />-->
+        <RadioButton
+            android:id="@+id/radioButtonYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Yes" />
 
-        <!--<RadioButton-->
-            <!--android:id="@+id/radioButtonNo"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="No" />-->
-    <!--</RadioGroup>-->
+        <RadioButton
+            android:id="@+id/radioButtonNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="No" />
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"

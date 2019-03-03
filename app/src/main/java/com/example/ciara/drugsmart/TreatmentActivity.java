@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,13 +22,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_ID;
@@ -44,6 +49,9 @@ public class TreatmentActivity extends AppCompatActivity {
     Spinner treatmentDrug;
     Button addTreatment;
     TextView animalID;
+
+    List<Drug> drugList;
+    DatabaseReference fDatabaseRoot;
 
     DatabaseReference databaseTreatment;
 
@@ -124,6 +132,28 @@ public class TreatmentActivity extends AppCompatActivity {
                 treatmentDate.setText(date);
             }
         };
+        fDatabaseRoot = FirebaseDatabase.getInstance().getReference("drugs");
+        fDatabaseRoot.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                final List<String> drugs = new ArrayList<String>();
+
+                for (DataSnapshot drugSnapshot: dataSnapshot.getChildren()) {
+                    String drugName = drugSnapshot.child("name").getValue(String.class);
+                    drugs.add(drugName);
+                }
+                Spinner drugSpinner = (Spinner) findViewById(R.id.spinnerDrug);
+                ArrayAdapter<String> drugsAdapter = new ArrayAdapter<String>(TreatmentActivity.this, android.R.layout.simple_spinner_item, drugs);
+                drugsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                drugSpinner.setAdapter(drugsAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         dl = (DrawerLayout)findViewById(R.id.activity_main);
         t = new ActionBarDrawerToggle(this, dl,R.string.Open, R.string.Close);

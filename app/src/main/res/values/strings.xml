@@ -2,6 +2,9 @@
     <string name="app_name">VacciNote</string>
     <string name="search">Search</string>
 
+
+    <string name="action_settings">Settings</string>
+
     <array name="gender">
         <item>Male</item>
         <item>Female</item>

@@ -134,7 +134,7 @@ public class ActivityAllDoses extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityAllDoses.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityAllDoses.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(ActivityAllDoses.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
@@ -144,8 +144,13 @@ public class ActivityAllDoses extends AppCompatActivity {
                         break;
                     case R.id.todo:
                         Toast.makeText(ActivityAllDoses.this,"To-Do List", Toast.LENGTH_SHORT).show();
-                        Intent intentToDo = new Intent(ActivityAllDoses.this, ActivityToDoList.class);
+                        Intent intentToDo = new Intent(ActivityAllDoses.this, ActivityToDoDoses.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drugs:
+                        Toast.makeText(ActivityAllDoses.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(ActivityAllDoses.this, AddDrug.class);
+                        startActivity(intentDrug);
                         break;
                     default:
                         return true;

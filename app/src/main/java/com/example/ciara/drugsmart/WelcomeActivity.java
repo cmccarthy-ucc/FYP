@@ -36,7 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
         imageViewGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, ActivityGroupHome.class);
+                Intent intent = new Intent(WelcomeActivity.this, ActivityAllGroups.class);
                 startActivity(intent);
             }
         });
@@ -76,7 +76,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 switch (id) {
                     case R.id.animals:
                         Toast.makeText(WelcomeActivity.this, "Animals", Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(WelcomeActivity.this, ActivityIndividualHome.class);
+                        Intent intentAnimal = new Intent(WelcomeActivity.this, ActivityAllIndividuals.class);
                         startActivity(intentAnimal);
                         break;
                     case R.id.vaccinations:
@@ -98,6 +98,11 @@ public class WelcomeActivity extends AppCompatActivity {
                         Toast.makeText(WelcomeActivity.this, "To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(WelcomeActivity.this, ActivityToDoDoses.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drugs:
+                        Toast.makeText(WelcomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        Intent intentDrugs = new Intent(WelcomeActivity.this, AddDrug.class);
+                        startActivity(intentDrugs);
                         break;
                     default:
                         return true;

@@ -16,5 +16,8 @@
     <item android:id="@+id/todo"
         android:title="To-Do List"
         android:icon="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+    <item android:id="@+id/drugs"
+        android:icon="@drawable/ic_android_black_24dp"
+        android:title="Drugs Available"/>
 
 </menu>
