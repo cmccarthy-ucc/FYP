@@ -193,13 +193,18 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityMedicalRecords2.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityMedicalRecords2.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(ActivityMedicalRecords2.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
                         Toast.makeText(ActivityMedicalRecords2.this,"To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(ActivityMedicalRecords2.this, ActivityToDoList.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drugs:
+                        Toast.makeText(ActivityMedicalRecords2.this, "Drugs", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(ActivityMedicalRecords2.this, AddDrug.class);
+                        startActivity(intentDrug);
                         break;
                     default:
                         return true;

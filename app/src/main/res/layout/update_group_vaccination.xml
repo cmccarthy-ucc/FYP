@@ -73,35 +73,44 @@
         android:layout_below="@id/spinnerDrug"/>
 
 
+
     <TextView
         android:id="@+id/allDone"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_below="@id/editTextNotes"
-        android:text="Are all animals vaccinated?"
-        android:textColor="@color/colorPrimaryDark" />
+        android:text="Are all group memebers vaccinated"
+        android:textColor="@color/colorPrimaryDark"         />
 
-    <RadioGroup
-        android:id="@+id/radioGroupAll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radioButtonYes"
+        <CheckBox
+            android:id="@+id/checkBoxCompleted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="Yes" />
+            android:text="Mark as completed"
+            android:checked="true"/>
 
-        <RadioButton
-            android:id="@+id/radioButtonNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="No" />
-    </RadioGroup>
+
+    <!--<RadioGroup-->
+        <!--android:id="@+id/radioAllVaccinated1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<RadioButton-->
+            <!--android:id="@+id/radioButtonYes"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:checked="true"-->
+            <!--android:text="Yes" />-->
+
+        <!--<RadioButton-->
+            <!--android:id="@+id/radioButtonNo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="No" />-->
+    <!--</RadioGroup>-->
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -25,24 +25,7 @@
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/treatmentDate" />
-
-        <TextView
-
-            android:id="@+id/textViewGroupID"
-            android:layout_width="343dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:hint="GroupID"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
-            android:textSize="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewVaccinationDate" />
 
 
         <TextView
@@ -51,7 +34,7 @@
             android:layout_height="38dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="Group Number"
@@ -60,13 +43,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.558"
             app:layout_constraintStart_toEndOf="@+id/textView14"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGroupID" />
+            app:layout_constraintTop_toTopOf="parent" />
         <!--&lt;!&ndash; Select Drug&ndash;&gt;-->
 
         <!--&lt;!&ndash; Select Drug&ndash;&gt;-->
 
         <!--&lt;!&ndash; Enter Administrator's name &ndash;&gt;-->
-        <TextView
+        <EditText
             android:id="@+id/editAdmin"
             android:layout_width="338dp"
             android:layout_height="35dp"
@@ -85,7 +68,7 @@
 
 
         <TextView
-            android:id="@+id/treatmentDate"
+            android:id="@+id/textViewVaccinationDate"
             android:layout_width="338dp"
             android:layout_height="35dp"
             android:layout_marginStart="24dp"
@@ -97,7 +80,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewDosage" />
 
         <Button
-            android:id="@+id/buttonAddTreatment"
+            android:id="@+id/buttonUpdateVaccination"
             android:layout_width="186dp"
             android:layout_height="53dp"
             android:layout_marginStart="8dp"
@@ -111,7 +94,7 @@
             app:layout_constraintStart_toEndOf="@+id/textViewNotes"
             app:layout_constraintTop_toBottomOf="@+id/radioGroupAllVaccinated" />
 
-        <TextView
+        <EditText
             android:id="@+id/textViewDosage"
             android:layout_width="144dp"
             android:layout_height="35dp"
@@ -166,7 +149,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:text="Notes"
-            app:layout_constraintEnd_toStartOf="@+id/buttonAddTreatment"
+            app:layout_constraintEnd_toStartOf="@+id/buttonUpdateVaccination"
             app:layout_constraintHorizontal_bias="0.152"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroupAllVaccinated" />
@@ -192,12 +175,12 @@
             android:layout_height="25dp"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:text="Group Number:"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGroupID" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView19"
@@ -223,16 +206,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-        <TextView
-            android:id="@+id/textViewGroupID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAddTreatment" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView

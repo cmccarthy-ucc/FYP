@@ -104,18 +104,23 @@ public class ActivityIndividualHome extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityIndividualHome.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityIndividualHome.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(ActivityIndividualHome.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityIndividualHome.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityIndividualHome.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(ActivityIndividualHome.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
                         Toast.makeText(ActivityIndividualHome.this,"To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(ActivityIndividualHome.this, ActivityToDoList.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drugs:
+                        Toast.makeText(ActivityIndividualHome.this, "Drugs", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(ActivityIndividualHome.this, AddDrug.class);
+                        startActivity(intentDrug);
                         break;
                     default:
                         return true;

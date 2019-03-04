@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -50,7 +52,8 @@ public class ActivityAllGroups extends AppCompatActivity {
     DatabaseReference databaseGroups;
     ListView listViewGroups;
 
-    Button buttonAddGroup;
+    Button buttonSearch;
+    EditText editTextGroupNo;
 
 
 
@@ -65,6 +68,10 @@ public class ActivityAllGroups extends AppCompatActivity {
 
         //list to store artists
         groups = new ArrayList<>();
+
+        editTextGroupNo = findViewById(R.id.editTextSearchNo);
+        buttonSearch = findViewById(R.id.buttonSearchNo);
+
 
         listViewGroups = findViewById(R.id.listViewGroups);
         listViewGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -144,15 +151,6 @@ public class ActivityAllGroups extends AppCompatActivity {
 
         });
 
-//        buttonAddGroup = findViewById(R.id.buttonAddGroup);
-//        buttonAddGroup.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ActivityAllGroups.this, ActivityAddGroup.class);
-//                startActivity(intent);
-//            }
-//        });
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,6 +159,17 @@ public class ActivityAllGroups extends AppCompatActivity {
                 startActivity(intent);
 
             }});
+
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                groups.clear();//clear RecyclerView
+                //get text from search field
+                String vaccinationInfo = editTextGroupNo.getText().toString();
+                firebaseVaccinationSearch(vaccinationInfo);
+            }
+        });
 
 
            }
@@ -201,5 +210,53 @@ public class ActivityAllGroups extends AppCompatActivity {
             return true;
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void firebaseVaccinationSearch(final String vaccinationInfo) {
+      //query to search database based on text in textbox - made case insensitive
+        //code from https://stackoverflow.com/questions/54155576/android-firebase-search-query-not-working-properly
+        Query vaccinationSearchQuery = databaseGroups.orderByChild("groupNo").startAt(vaccinationInfo.toLowerCase()).endAt(vaccinationInfo.toLowerCase() + "\uf8ff");
+        vaccinationSearchQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot groupSnapshot : dataSnapshot.getChildren()) {
+                    Group group = groupSnapshot.getValue(Group.class);
+                    groups.add(group);
+                }
+                GroupList groupList = new GroupList(ActivityAllGroups.this, groups);
+                listViewGroups.setAdapter(groupList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+//
+//        databaseGroups.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                //iterating through all the nodes
+//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//                    //getting artist
+//                    Group group = postSnapshot.getValue(Group.class);
+//                    if (vaccinationInfo == group.getGroupNo()){
+//                        groups.add(group);
+//                    }
+//                    else {
+//                        Toast.makeText(ActivityAllGroups.this,"No Results", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                }
+//                GroupList groupList = new GroupList(ActivityAllGroups.this, groups);
+//                listViewGroups.setAdapter(groupList);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
     }
 }

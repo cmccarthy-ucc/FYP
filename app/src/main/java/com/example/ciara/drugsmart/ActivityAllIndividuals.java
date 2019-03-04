@@ -87,6 +87,11 @@ public class ActivityAllIndividuals extends AppCompatActivity {
                         Intent intentToDo = new Intent(ActivityAllIndividuals.this, ActivityToDoList.class);
                         startActivity(intentToDo);
                         break;
+                    case R.id.drugs:
+                        Toast.makeText(ActivityAllIndividuals.this, "Drugs", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(ActivityAllIndividuals.this, AddDrug.class);
+                        startActivity(intentDrug);
+                        break;
                     default:
                         return true;
                 }

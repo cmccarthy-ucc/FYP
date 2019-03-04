@@ -74,18 +74,23 @@ public class ActivityVaccinationHome extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityVaccinationHome.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityVaccinationHome.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(ActivityVaccinationHome.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityVaccinationHome.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityVaccinationHome.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(ActivityVaccinationHome.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
                         Toast.makeText(ActivityVaccinationHome.this,"To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(ActivityVaccinationHome.this, ActivityToDoList.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drugs:
+                        Toast.makeText(ActivityVaccinationHome.this, "Drugs", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(ActivityVaccinationHome.this, AddDrug.class);
+                        startActivity(intentDrug);
                         break;
                     default:
                         return true;

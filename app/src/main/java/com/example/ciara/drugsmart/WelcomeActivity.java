@@ -1,5 +1,6 @@
 package com.example.ciara.drugsmart;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -9,17 +10,30 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class WelcomeActivity extends AppCompatActivity {
 
     ImageView imageViewGroups;
     ImageView imageViewMedicalRecords;
     ImageView imageViewToDo;
+    Button login;
+
+    FirebaseAuth auth;
+    FirebaseUser user;
+    ProgressDialog PD;
+
+    String userID;
+
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -32,11 +46,33 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        userID = auth.getUid();
+
+        PD = new ProgressDialog(this);
+        PD.setMessage("Loading...");
+        PD.setCancelable(true);
+        PD.setCanceledOnTouchOutside(false);
+
+        TextView user = findViewById(R.id.textViewUser);
+        user.setText(userID);
+
         imageViewGroups = (ImageView) findViewById(R.id.imageViewGroups);
         imageViewGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, ActivityAllGroups.class);
+                startActivity(intent);
+            }
+        });
+
+        login = findViewById(R.id.button2);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (WelcomeActivity.this, TestMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -86,7 +122,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(WelcomeActivity.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(WelcomeActivity.this, ActivityAddGroup.class);
+                        Intent intentGroups = new Intent(WelcomeActivity.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
@@ -143,5 +179,13 @@ public class WelcomeActivity extends AppCompatActivity {
             Intent intentToDo = new Intent(WelcomeActivity.this, ActivityToDoDoses.class);
             startActivity(intentToDo);
         }
+    }
+    @Override
+    protected void onResume() {
+        if (auth.getCurrentUser() == null) {
+            startActivity(new Intent(WelcomeActivity.this, Login.class));
+            finish();
+        }
+        super.onResume();
     }
 }

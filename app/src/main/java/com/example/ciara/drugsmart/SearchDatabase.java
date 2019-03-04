@@ -92,18 +92,23 @@ public class SearchDatabase extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(SearchDatabase.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(SearchDatabase.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(SearchDatabase.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(SearchDatabase.this, "Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(SearchDatabase.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(SearchDatabase.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
                         Toast.makeText(SearchDatabase.this, "To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(SearchDatabase.this, ActivityToDoList.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drug:
+                        Toast.makeText(SearchDatabase.this, "Drugs Available", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(SearchDatabase.this, ActivityToDoList.class);
+                        startActivity(intentDrug);
                         break;
                     default:
                         return true;

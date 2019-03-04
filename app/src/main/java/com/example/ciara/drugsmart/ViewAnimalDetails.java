@@ -136,18 +136,23 @@ public class ViewAnimalDetails extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ViewAnimalDetails.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ViewAnimalDetails.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(ViewAnimalDetails.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(ViewAnimalDetails.this, "Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ViewAnimalDetails.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(ViewAnimalDetails.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
                         Toast.makeText(ViewAnimalDetails.this, "To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(ViewAnimalDetails.this, ActivityToDoList.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drug:
+                        Toast.makeText(ViewAnimalDetails.this, "Drugs Available", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(ViewAnimalDetails.this, ActivityToDoList.class);
+                        startActivity(intentDrug);
                         break;
                     default:
                         return true;

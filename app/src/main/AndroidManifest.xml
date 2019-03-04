@@ -29,7 +29,6 @@
         <receiver android:name=".NotificationService" />
 
         <activity android:name=".ViewVaccination" />
-        <activity android:name=".ActivityHome" />
         <activity android:name=".ActivityAllVaccinations" />
         <activity
             android:name=".Splashscreen"
@@ -88,7 +87,11 @@
             android:label="Home" />
         <activity android:name=".ActivityAllIndividuals" />
         <activity android:name=".DrugActivity" />
-        <activity android:name=".AddDrug"></activity>
+        <activity android:name=".AddDrug" />
+        <activity android:name=".Login" />
+        <activity android:name=".Register" />
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".TestMainActivity"></activity>
     </application>
 
 </manifest>

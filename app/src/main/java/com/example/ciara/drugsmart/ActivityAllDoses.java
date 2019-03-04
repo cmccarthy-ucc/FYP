@@ -139,7 +139,7 @@ public class ActivityAllDoses extends AppCompatActivity {
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityAllDoses.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityAllDoses.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(ActivityAllDoses.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
@@ -148,7 +148,7 @@ public class ActivityAllDoses extends AppCompatActivity {
                         startActivity(intentToDo);
                         break;
                     case R.id.drugs:
-                        Toast.makeText(ActivityAllDoses.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityAllDoses.this, "Drugs", Toast.LENGTH_SHORT).show();
                         Intent intentDrug = new Intent(ActivityAllDoses.this, AddDrug.class);
                         startActivity(intentDrug);
                         break;

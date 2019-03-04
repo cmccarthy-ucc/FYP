@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,6 +26,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_ID;
 import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_NUMBER;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_ADMIN;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_DATE;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_DOSAGE;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_DRUG;
+import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_GROUP_NOTES;
 
 public class GroupVaccinationDetailsActivity extends AppCompatActivity {
 
@@ -39,11 +45,13 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
     TextView vaccinationNotes;
     Button btnUpdate;
 
-    Boolean allAnimalsVaccinated = true;
+    CheckBox checkBoxComplete;
+    Boolean booleanCompleted = true;
 
     RadioButton radioButtonYes;
     RadioButton radioButtonNo;
-    RadioGroup allVaccinatedBoolean;
+    RadioGroup radioGroupAllVaccinated;
+    Boolean allVaccinatedRadio = true;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -70,13 +78,14 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
         final String vaccinationGroupIDText = extras.getString(GROUP_ID);
         final String vaccinationGroupNumberText = extras.getString(GROUP_NUMBER);
         final String vaccinationIDText = extras.getString(GroupActivity.VACCINATION_ID);
-        final String vaccinationDateText = extras.getString(GroupActivity.VACCINATION_DATE);
+        final String vaccinationDateText = extras.getString(VACCINATION_DATE);
         final String vaccinationAdminText = extras.getString(GroupActivity.VACCINATION_ADMIN);
         final String vaccinationDosageText = extras.getString(GroupActivity.VACCINATION_DOSAGE);
         final String vaccinationDrugText = extras.getString(GroupActivity.VACCINATION_DRUG);
         final String vaccinationNotesText = extras.getString(GroupActivity.VACCINATION_GROUP_NOTES);
-        String allVaccinatedText = extras.getString(GroupActivity.ALL_VACCINATED);
+        final String allVaccinatedText = extras.getString(GroupActivity.ALL_VACCINATED);
 
+        final Boolean boolean1 = Boolean.valueOf(allVaccinatedText);
 
 //        groupID.setText(vaccinationGroupIDText);
         vaccinationID.setText(vaccinationIDText);
@@ -120,13 +129,18 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
                         break;
                     case R.id.home:
                         Toast.makeText(GroupVaccinationDetailsActivity.this, "Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(GroupVaccinationDetailsActivity.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(GroupVaccinationDetailsActivity.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
                         Toast.makeText(GroupVaccinationDetailsActivity.this, "To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(GroupVaccinationDetailsActivity.this, ActivityToDoList.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drug:
+                        Toast.makeText(GroupVaccinationDetailsActivity.this, "Drugs Available", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(GroupVaccinationDetailsActivity.this, ActivityToDoList.class);
+                        startActivity(intentDrug);
                         break;
                     default:
                         return true;
@@ -138,14 +152,28 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
         });
 
         btnUpdate = findViewById(R.id.btnUpdate);
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showUpdateDeleteDialog(vaccinationGroupNumberText, vaccinationIDText, vaccinationDrugText, vaccinationAdminText, vaccinationDosageText,
-                        vaccinationDateText, vaccinationNotesText, allAnimalsVaccinated);
-
-            }
-        });
+        //btnUpdate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(getApplicationContext(), ActivityUpdateGroupVaccination.class);
+//
+//                //putting artist name and id to intent
+//                intent.putExtra(GROUP_ID, vaccinationGroupIDText);
+//                intent.putExtra(GROUP_NUMBER, vaccinationGroupNumberText);
+//                intent.putExtra(VACCINATION_DATE, vaccinationDateText);
+//                intent.putExtra(VACCINATION_ADMIN, vaccinationAdminText);
+//                intent.putExtra(VACCINATION_DOSAGE, vaccinationDosageText);
+//                intent.putExtra(VACCINATION_DRUG, vaccinationDrugText);
+//                intent.putExtra(VACCINATION_GROUP_NOTES, vaccinationNotesText);
+//
+//                //starting the activity with intent
+//                startActivity(intent);
+////                showUpdateDeleteDialog(vaccinationGroupNumberText, vaccinationIDText, vaccinationDrugText, vaccinationAdminText, vaccinationDosageText,
+////                        vaccinationDateText, vaccinationNotesText, boolean1);
+//
+//            }
+//        });
     }
 
     @Override
@@ -168,14 +196,45 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
         String vaccinationDrugText = extras.getString(GroupActivity.VACCINATION_DRUG);
         String vaccinationAdminText = extras.getString(GroupActivity.VACCINATION_ADMIN);
         String vaccinationDosageText = extras.getString(GroupActivity.VACCINATION_DOSAGE);
-        String vaccinationDateText = extras.getString(GroupActivity.VACCINATION_DATE);
+        String vaccinationDateText = extras.getString(VACCINATION_DATE);
         String vaccinationNotesText = extras.getString(GroupActivity.VACCINATION_GROUP_NOTES);
         final String allVaccinatedText = extras.getString(GroupActivity.ALL_VACCINATED);
+//        final Boolean boolean1 = Boolean.valueOf(allVaccinatedText);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.update_group_vaccination, null);
         dialogBuilder.setView(dialogView);
+
+        checkBoxComplete = findViewById(R.id.checkBoxCompleted);
+
+        if (checkBoxComplete.isChecked()){
+            booleanCompleted = true;
+        }
+        else {
+            booleanCompleted = false;
+        }
+
+//        radioButtonYes = (RadioButton) findViewById(R.id.radioButtonYes);
+//        radioButtonNo = (RadioButton) findViewById(R.id.radioButtonNo);
+
+        //https://stackoverflow.com/questions/8323778/how-to-set-onclicklistener-on-a-radiobutton-in-android
+        // **Origional source but updated code**
+//
+//
+//        radioGroupAllVaccinated = findViewById(R.id.radioAllVaccinated1);
+//        radioGroupAllVaccinated.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                if (radioButtonNo.isChecked()){
+//                    allVaccinatedRadio = false;
+//
+//                }
+//                else if (radioButtonYes.isChecked()){
+//                    allVaccinatedRadio = true;
+//                }
+//            }
+//        });
 
         final EditText editTextAdmin = dialogView.findViewById(R.id.editTextAdmin);
         editTextAdmin.setText(vaccinationAdminText);
@@ -189,6 +248,7 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateArtist);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteArtist);
 
+        final Boolean boolean3 = booleanCompleted;
         dialogBuilder.setTitle("GroupNumber:   " + groupNumberText);
         final AlertDialog b = dialogBuilder.create();
         b.show();
@@ -203,9 +263,9 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
                 String date = textViewDate.getText().toString().trim();
                 String notes = editTextNotes.getText().toString().trim();
                 String drug = spinnerDrug.getSelectedItem().toString();
-//                    Boolean allVaccinated = GroupActivity.ALL_VACCINATED;
+               Boolean allVaccinated = boolean3;
                 if (!TextUtils.isEmpty(dosage)) {
-                    updateGroupVaccination(groupNo, id, drug, admin, dosage, date, notes, allAnimalsVaccinated);
+                    updateGroupVaccination(groupNo, id, drug, admin, dosage, date, notes, allVaccinated);
                     b.dismiss();
                 }
                 finish();

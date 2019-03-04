@@ -126,12 +126,12 @@ public class ActivityGroupHome extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityGroupHome.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityGroupHome.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(ActivityGroupHome.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityGroupHome.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityGroupHome.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(ActivityGroupHome.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
@@ -139,6 +139,11 @@ public class ActivityGroupHome extends AppCompatActivity {
                     Intent intentToDo = new Intent(ActivityGroupHome.this, ActivityToDoList.class);
                     startActivity(intentToDo);
                     break;
+                    case R.id.drugs:
+                        Toast.makeText(ActivityGroupHome.this, "Drugs", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(ActivityGroupHome.this, AddDrug.class);
+                        startActivity(intentDrug);
+                        break;
                     default:
                         return true;
                 }

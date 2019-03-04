@@ -81,18 +81,23 @@ public class DrugActivity extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(DrugActivity.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(DrugActivity.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(DrugActivity.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(DrugActivity.this, "Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(DrugActivity.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(DrugActivity.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
                         Toast.makeText(DrugActivity.this, "To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(DrugActivity.this, ActivityToDoList.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drugs:
+                        Toast.makeText(DrugActivity.this, "Drugs", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(DrugActivity.this, AddDrug.class);
+                        startActivity(intentDrug);
                         break;
                     default:
                         return true;

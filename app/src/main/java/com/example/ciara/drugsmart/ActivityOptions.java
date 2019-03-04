@@ -29,15 +29,15 @@ public class ActivityOptions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
-
-        imageViewAnimal = (ImageView) findViewById(R.id.imageViewAnimal);
-        imageViewAnimal.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(ActivityOptions.this, ActivityHome.class);
-               startActivity(intent);
-           }
-    });
+//
+//        imageViewAnimal = (ImageView) findViewById(R.id.imageViewAnimal);
+//        imageViewAnimal.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View v) {
+//               Intent intent = new Intent(ActivityOptions.this, ActivityHome.class);
+//               startActivity(intent);
+//           }
+//    });
 
         imageViewVaccination = (ImageView) findViewById(R.id.imageViewVaccination);
         imageViewVaccination.setOnClickListener(new View.OnClickListener() {

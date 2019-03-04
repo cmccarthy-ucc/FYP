@@ -151,18 +151,23 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(MainActivity.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(MainActivity.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(MainActivity.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(MainActivity.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(MainActivity.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
                         Toast.makeText(MainActivity.this, "To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(MainActivity.this, ActivityToDoList.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drug:
+                        Toast.makeText(MainActivity.this, "Drugs Available", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(MainActivity.this, ActivityToDoList.class);
+                        startActivity(intentDrug);
                         break;
                     default:
                         return true;

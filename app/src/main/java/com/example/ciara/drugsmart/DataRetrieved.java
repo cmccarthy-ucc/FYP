@@ -121,18 +121,23 @@ public class DataRetrieved extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(DataRetrieved.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(DataRetrieved.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(DataRetrieved.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(DataRetrieved.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(DataRetrieved.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(DataRetrieved.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
                         Toast.makeText(DataRetrieved.this,"To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(DataRetrieved.this, ActivityToDoList.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drugs:
+                        Toast.makeText(DataRetrieved.this, "Drugs", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(DataRetrieved.this, AddDrug.class);
+                        startActivity(intentDrug);
                         break;
                     default:
                         return true;
