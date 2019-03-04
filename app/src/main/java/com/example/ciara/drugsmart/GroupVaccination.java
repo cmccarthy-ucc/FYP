@@ -12,13 +12,14 @@ public class GroupVaccination {
     String vaccinationDate;
     String vaccinationNotes;
     Boolean allVaccinated;
+    Long timeStamp;
 
     public GroupVaccination(){
 
     }
 
     public GroupVaccination( String vaccinationGroupNumber, String vaccinationID, String vaccinationDrug,
-                       String vaccinationAdmin, String vaccinationDosage, String vaccinationDate, String vaccinationNotes, Boolean allVaccinated){
+                       String vaccinationAdmin, String vaccinationDosage, String vaccinationDate, String vaccinationNotes, Boolean allVaccinated, Long timeStamp){
 //        this.vaccinationGroupID = vaccinationGroupID;
         this.vaccinationGroupNumber = vaccinationGroupNumber;
         this.vaccinationID = vaccinationID;
@@ -28,6 +29,7 @@ public class GroupVaccination {
         this.vaccinationDate = vaccinationDate;
         this.vaccinationNotes = vaccinationNotes;
         this.allVaccinated = allVaccinated;
+        this.timeStamp = timeStamp;
     }
 
 //    public String getVaccinationGroupID() {   return vaccinationGroupID;    }
@@ -47,6 +49,8 @@ public class GroupVaccination {
     public String getVaccinationNotes() {return vaccinationNotes; }
 
     public Boolean getAllVaccinated() {return allVaccinated; }
+
+    public Long getTimeStamp(){return timeStamp;}
 
 
 }

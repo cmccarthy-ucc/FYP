@@ -19,5 +19,8 @@
     <item android:id="@+id/drugs"
         android:icon="@drawable/ic_android_black_24dp"
         android:title="Drugs Available"/>
+    <item android:id="@+id/signOut"
+        android:title="Sign Out"
+        android:icon="@drawable/ic_spa_black_24dp"/>
 
 </menu>

@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class ViewAnimalDetails extends AppCompatActivity {
 
     //Declarations
@@ -24,6 +26,8 @@ public class ViewAnimalDetails extends AppCompatActivity {
     TextView animalBreed;
     TextView animalTag;
     TextView position;
+
+    FirebaseAuth auth;
 
     private Button btnAddVaccination;
     private Button btnViewVaccination;
@@ -153,6 +157,11 @@ public class ViewAnimalDetails extends AppCompatActivity {
                         Toast.makeText(ViewAnimalDetails.this, "Drugs Available", Toast.LENGTH_SHORT).show();
                         Intent intentDrug = new Intent(ViewAnimalDetails.this, ActivityToDoList.class);
                         startActivity(intentDrug);
+                        break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(ViewAnimalDetails.this, Login.class));
+                        finish();
                         break;
                     default:
                         return true;

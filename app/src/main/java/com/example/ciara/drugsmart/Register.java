@@ -17,6 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 public class Register extends AppCompatActivity {
     private EditText inputEmail, inputPassword;
@@ -58,14 +61,23 @@ public class Register extends AppCompatActivity {
                                 .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (!task.isSuccessful()) {
-                                            Toast.makeText(
-                                                    Register.this,
-                                                    "Authentication Failed",
-                                                    Toast.LENGTH_LONG).show();
-                                            Log.v("error", task.getResult().toString());
+                                        if(!task.isSuccessful()) {
+                                            try {
+                                                throw task.getException();
+                                            } catch(FirebaseAuthWeakPasswordException e) {
+                                                inputPassword.setError("Weak Password");
+                                                inputPassword.requestFocus();
+                                            } catch(FirebaseAuthInvalidCredentialsException e) {
+                                                inputEmail.setError("Invalid Email");
+                                                inputEmail.requestFocus();
+                                            } catch(FirebaseAuthUserCollisionException e) {
+                                                inputEmail.setError("User already exists");
+                                                inputEmail.requestFocus();
+                                            } catch(Exception e) {
+                                                Log.e("Sign Up Failed", e.getMessage());
+                                            }
                                         } else {
-                                            Intent intent = new Intent(Register.this, TestMainActivity.class);
+                                            Intent intent = new Intent(Register.this, WelcomeActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }

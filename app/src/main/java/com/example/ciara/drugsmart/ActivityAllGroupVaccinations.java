@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +44,8 @@ public class ActivityAllGroupVaccinations extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
+
+    FirebaseAuth auth;
 
 //    AllGroupVaccinationList groupVaccinationInfoAdapter = new AllGroupVaccinationList(ActivityAllGroupVaccinations.this, groupVaccinations);
 
@@ -177,6 +180,11 @@ public class ActivityAllGroupVaccinations extends AppCompatActivity {
                         Toast.makeText(ActivityAllGroupVaccinations.this, "Drugs", Toast.LENGTH_SHORT).show();
                         Intent intentDrug = new Intent(ActivityAllGroupVaccinations.this, AddDrug.class);
                         startActivity(intentDrug);
+                        break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(ActivityAllGroupVaccinations.this, Login.class));
+                        finish();
                         break;
                     default:
                         return true;

@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,6 +44,8 @@ public class AddVaccination extends AppCompatActivity {
     Spinner vaccinationDrug;
     EditText vaccinationAdmin;
     EditText vaccinationDosage;
+
+    FirebaseAuth auth;
 
     //https://www.youtube.com/watch?v=hwe1abDO2Ag
 
@@ -214,6 +217,11 @@ public class AddVaccination extends AppCompatActivity {
                         Toast.makeText(AddVaccination.this, "Drugs", Toast.LENGTH_SHORT).show();
                         Intent intentDrug = new Intent(AddVaccination.this, AddDrug.class);
                         startActivity(intentDrug);
+                        break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(AddVaccination.this, Login.class));
+                        finish();
                         break;
                     default:
                         return true;

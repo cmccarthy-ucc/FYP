@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +40,8 @@ public class ActivityAllVaccinations extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
+
+    FirebaseAuth auth;
 
 
     @Override
@@ -145,6 +148,11 @@ public class ActivityAllVaccinations extends AppCompatActivity {
                         Toast.makeText(ActivityAllVaccinations.this, "Drugs", Toast.LENGTH_SHORT).show();
                         Intent intentDrug = new Intent(ActivityAllVaccinations.this, AddDrug.class);
                         startActivity(intentDrug);
+                        break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(ActivityAllVaccinations.this, Login.class));
+                        finish();
                         break;
                     default:
                         return true;

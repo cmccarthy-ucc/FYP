@@ -56,8 +56,8 @@ public class WelcomeActivity extends AppCompatActivity {
         PD.setCancelable(true);
         PD.setCanceledOnTouchOutside(false);
 
-        TextView user = findViewById(R.id.textViewUser);
-        user.setText(userID);
+//        TextView user = findViewById(R.id.textViewUser);
+//        user.setText(userID);
 
         imageViewGroups = (ImageView) findViewById(R.id.imageViewGroups);
         imageViewGroups.setOnClickListener(new View.OnClickListener() {
@@ -68,14 +68,14 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-        login = findViewById(R.id.button2);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (WelcomeActivity.this, TestMainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        login = findViewById(R.id.button2);
+//        login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent (WelcomeActivity.this, TestMainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         imageViewMedicalRecords = (ImageView) findViewById(R.id.imageViewMedicaRecords);
         imageViewMedicalRecords.setOnClickListener(new View.OnClickListener() {
@@ -136,9 +136,14 @@ public class WelcomeActivity extends AppCompatActivity {
                         startActivity(intentToDo);
                         break;
                     case R.id.drugs:
-                        Toast.makeText(WelcomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WelcomeActivity.this, "Drugs Available", Toast.LENGTH_SHORT).show();
                         Intent intentDrugs = new Intent(WelcomeActivity.this, AddDrug.class);
                         startActivity(intentDrugs);
+                        break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(WelcomeActivity.this, Login.class));
+                        finish();
                         break;
                     default:
                         return true;

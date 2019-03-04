@@ -246,51 +246,51 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
 
     }
     private void addVaccination(){
-        String idGroup = groupID.getText().toString().trim();
-        String number = groupNumber.getText().toString().trim();
-        String drug = vaccinationDrug.getSelectedItem().toString();
-        //Date date = dateVaccination;
-        String date = vaccinationDate.getText().toString().trim();
-        String admin = vaccinationAdmin.getText().toString().trim();
-        String dosage = vaccinationDosage.getText().toString().trim();
-        String notes = vaccinationNotes.getText().toString().trim();
-
-
-//        if (TextUtils.isEmpty(date)) {
-//            Toast.makeText(this,"Please select a date", Toast.LENGTH_LONG).show();
-            if (TextUtils.isEmpty(number)) {
-                Toast.makeText(this,"Please select a date", Toast.LENGTH_LONG).show();
-
-            } else if (TextUtils.isEmpty(dosage)) {
-            Toast.makeText(this, "Please enter a dosage amount", Toast.LENGTH_LONG).show();
-        }
-        else if (radioButtonNo.isChecked() & (TextUtils.isEmpty(notes))){
-                Toast.makeText(this, "Please note which animals were not vaccinated", Toast.LENGTH_LONG).show();
-
-
-            }
-        else{
-        String id = databaseVaccination.push().getKey();
-
-        GroupVaccination groupVaccination = new GroupVaccination( number, id, drug, admin, dosage, date, notes,allVaccinated );
-
-        databaseVaccination.child(id).setValue(groupVaccination);
-
-        Toast.makeText(this, "Vaccination added", Toast.LENGTH_LONG).show(); }
-
-//        if(!TextUtils.isEmpty(number)){
+//        String idGroup = groupID.getText().toString().trim();
+//        String number = groupNumber.getText().toString().trim();
+//        String drug = vaccinationDrug.getSelectedItem().toString();
+//        //Date date = dateVaccination;
+//        String date = vaccinationDate.getText().toString().trim();
+//        String admin = vaccinationAdmin.getText().toString().trim();
+//        String dosage = vaccinationDosage.getText().toString().trim();
+//        String notes = vaccinationNotes.getText().toString().trim();
 //
-//            String id = databaseVaccination.push().getKey();
 //
-//            GroupVaccination groupVaccination = new GroupVaccination(idGroup, number, id, drug, admin, dosage, date, notes,allAnimals);
+////        if (TextUtils.isEmpty(date)) {
+////            Toast.makeText(this,"Please select a date", Toast.LENGTH_LONG).show();
+//            if (TextUtils.isEmpty(number)) {
+//                Toast.makeText(this,"Please select a date", Toast.LENGTH_LONG).show();
 //
-//            databaseVaccination.child(id).setValue(groupVaccination);
-//
-//            Toast.makeText(this, "Vaccination added", Toast.LENGTH_LONG).show();
-//
-//        } else{
-//            Toast.makeText(this, "Please select admin", Toast.LENGTH_LONG).show();
+//            } else if (TextUtils.isEmpty(dosage)) {
+//            Toast.makeText(this, "Please enter a dosage amount", Toast.LENGTH_LONG).show();
 //        }
+//        else if (radioButtonNo.isChecked() & (TextUtils.isEmpty(notes))){
+//                Toast.makeText(this, "Please note which animals were not vaccinated", Toast.LENGTH_LONG).show();
+//
+//
+//            }
+//        else{
+//        String id = databaseVaccination.push().getKey();
+//
+//        GroupVaccination groupVaccination = new GroupVaccination( number, id, drug, admin, dosage, date, notes,allVaccinated, );
+//
+//        databaseVaccination.child(id).setValue(groupVaccination);
+//
+//        Toast.makeText(this, "Vaccination added", Toast.LENGTH_LONG).show(); }
+//
+////        if(!TextUtils.isEmpty(number)){
+////
+////            String id = databaseVaccination.push().getKey();
+////
+////            GroupVaccination groupVaccination = new GroupVaccination(idGroup, number, id, drug, admin, dosage, date, notes,allAnimals);
+////
+////            databaseVaccination.child(id).setValue(groupVaccination);
+////
+////            Toast.makeText(this, "Vaccination added", Toast.LENGTH_LONG).show();
+////
+////        } else{
+////            Toast.makeText(this, "Please select admin", Toast.LENGTH_LONG).show();
+////        }
 
 
     }

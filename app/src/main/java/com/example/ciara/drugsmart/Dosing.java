@@ -12,6 +12,7 @@ public class Dosing {
     String doseNotes;
     Boolean allDosed;
     String doseType;
+    Long timeStamp;
 
 
     public Dosing(){
@@ -19,7 +20,7 @@ public class Dosing {
     }
 
     public Dosing( String doseGroupNumber, String doseID, String doseDrug,
-                  String doseAdmin, String doseDosage, String doseDate, String doseNotes, Boolean allDosed, String doseType){
+                  String doseAdmin, String doseDosage, String doseDate, String doseNotes, Boolean allDosed, String doseType, Long timeStamp){
         //Date doseDate
 //        this.doseGroupID = doseGroupID;
         this.doseGroupNumber = doseGroupNumber;
@@ -31,6 +32,7 @@ public class Dosing {
         this.doseNotes = doseNotes;
         this.allDosed = allDosed;
         this.doseType = doseType;
+        this.timeStamp = timeStamp;
     }
 
     //public String getDoseGroupID() {   return doseGroupID;    }
@@ -52,6 +54,8 @@ public class Dosing {
     public Boolean getAllDosed() {return allDosed; }
 
     public String getDoseType() { return doseType; }
+
+    public Long getTimeStamp()  {return timeStamp;}
 
 
 }

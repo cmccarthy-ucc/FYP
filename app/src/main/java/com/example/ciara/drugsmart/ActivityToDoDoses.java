@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +56,8 @@ public class ActivityToDoDoses extends AppCompatActivity {
     List<Dosing> dosingList;
 
     private TextView mTextMessage;
+
+    FirebaseAuth auth;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -243,6 +246,16 @@ public class ActivityToDoDoses extends AppCompatActivity {
                         Toast.makeText(ActivityToDoDoses.this,"To-Do List", Toast.LENGTH_SHORT).show();
                         Intent intentToDo = new Intent(ActivityToDoDoses.this, ActivityToDoList.class);
                         startActivity(intentToDo);
+                        break;
+                    case R.id.drugs:
+                        Toast.makeText(ActivityToDoDoses.this, "Drugs", Toast.LENGTH_SHORT).show();
+                        Intent intentDrug = new Intent(ActivityToDoDoses.this, AddDrug.class);
+                        startActivity(intentDrug);
+                        break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(ActivityToDoDoses.this, Login.class));
+                        finish();
                         break;
                     default:
                         return true;

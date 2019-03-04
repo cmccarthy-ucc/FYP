@@ -2,6 +2,7 @@ package com.example.ciara.drugsmart;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -22,13 +23,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_ID;
@@ -51,6 +56,13 @@ public class GroupActivity extends AppCompatActivity {
     private ActionBarDrawerToggle t;
     private NavigationView nv;
 
+    Long time;
+
+    FirebaseAuth auth;
+    FirebaseUser user;
+    ProgressDialog PD;
+
+    String userID;
     //https://www.youtube.com/watch?v=hwe1abDO2Ag
     private static final String TAG = "GroupActivity";
     TextView mDisplayDate;
@@ -75,6 +87,7 @@ public class GroupActivity extends AppCompatActivity {
     public static final String VACCINATION_GROUP_NUMBER = "com.example.ciara.drugsmart.vaccinationGroupNumber";
     public static final String VACCINATION_GROUP_NOTES = "com.example.ciara.drugsmart.vaccinationGroupNotes";
     public static final String ALL_VACCINATED = "com.example.ciara.drugsmart.allVaccinated";
+
 
     public static final String GROUP_DOSE_ID = "com.example.ciara.drugsmart.doseGroupID";
     public static final String DOSE_ID = "com.example.ciara.drugsmart.doseID";
@@ -106,6 +119,12 @@ public class GroupActivity extends AppCompatActivity {
         btnAdd = findViewById(R.id.buttonAdd);
         btnUpdate = findViewById(R.id.buttonUpdate);
 
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        userID = auth.getUid();
+
+        time = System.currentTimeMillis()/1000;
+
         groupID
                 = (TextView)findViewById(R.id.textViewGroupID);
         groupAnimalType
@@ -124,6 +143,7 @@ public class GroupActivity extends AppCompatActivity {
         final String groupSourceText = extras.getString(ActivityAddGroup.GROUP_SOURCE);
         final String groupBreedText = extras.getString(ActivityAddGroup.GROUP_BREED);
         final String groupNotesText = extras.getString(ActivityAddGroup.GROUP_NOTES);
+        final String userIDText = userID;
 
         groupID.setText(groupIDText);
         groupAnimalType.setText(groupAnimalTypeText);
@@ -144,7 +164,7 @@ public class GroupActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showUpdateDeleteDialog(groupNumberText, groupAnimalTypeText, groupBreedText, groupSourceText, groupDOBText, groupIDText, groupNotesText);
+                showUpdateDeleteDialog(groupNumberText, groupAnimalTypeText, groupBreedText, groupSourceText, groupDOBText, groupIDText, groupNotesText, userIDText);
             }
 
         });
@@ -186,13 +206,15 @@ public class GroupActivity extends AppCompatActivity {
                     case R.id.group_navigation_vaccination:
                     listViewVaccination.setAdapter(null);
                        groupVaccinations.clear();
-                        databaseVaccinations.addValueEventListener(new ValueEventListener() {
+                        Query dateQuery = databaseVaccinations.orderByChild("timeStamp").startAt(time);
+                        dateQuery.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()){
                                     GroupVaccination groupVaccination = groupVaccinationSnapshot.getValue(GroupVaccination.class);
                                     groupVaccinations.add(groupVaccination);
                                 }
+                                Collections.reverse(groupVaccinations);
                                 GroupVaccinationList groupVaccinationInfoAdapter = new GroupVaccinationList(GroupActivity.this, groupVaccinations);
                                 listViewVaccination.setAdapter(groupVaccinationInfoAdapter);
                             }
@@ -243,13 +265,15 @@ public class GroupActivity extends AppCompatActivity {
                     case R.id.group_navigation_doses:
                         listViewVaccination.setAdapter(null);
                         groupDoses.clear();
-                        databaseDoses.addValueEventListener(new ValueEventListener() {
+                        Query doseQuery = databaseDoses.orderByChild("timeStamp").startAt(time);
+                        doseQuery.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for(DataSnapshot dosingSnapshot : dataSnapshot.getChildren()){
                                     Dosing groupDose = dosingSnapshot.getValue(Dosing.class);
                                     groupDoses.add(groupDose);
                                 }
+                                Collections.reverse(groupDoses);
                                 GroupDoseList groupDoseInfoAdapter = new GroupDoseList(GroupActivity.this, groupDoses);
                                 listViewVaccination.setAdapter(groupDoseInfoAdapter);
                             }
@@ -404,6 +428,11 @@ public class GroupActivity extends AppCompatActivity {
                         Intent intentDrug = new Intent(GroupActivity.this, AddDrug.class);
                         startActivity(intentDrug);
                         break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(GroupActivity.this, Login.class));
+                        finish();
+                        break;
                     default:
                         return true;
                 }
@@ -441,13 +470,15 @@ public class GroupActivity extends AppCompatActivity {
         final String groupNumberText = extras.getString(ActivityAddGroup.GROUP_NUMBER);
         listViewVaccination.setAdapter(null);
         groupVaccinations.clear();
-        databaseVaccinations.addValueEventListener(new ValueEventListener() {
+        Query dateQuery = databaseVaccinations.orderByChild("timeStamp").startAt(time);
+        dateQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()){
                     GroupVaccination groupVaccination = groupVaccinationSnapshot.getValue(GroupVaccination.class);
                     groupVaccinations.add(groupVaccination);
                 }
+                Collections.reverse(groupVaccinations);
                 GroupVaccinationList groupVaccinationInfoAdapter = new GroupVaccinationList(GroupActivity.this, groupVaccinations);
                 listViewVaccination.setAdapter(groupVaccinationInfoAdapter);
             }
@@ -507,7 +538,7 @@ public class GroupActivity extends AppCompatActivity {
 
 
 
-    private void showUpdateDeleteDialog(String groupNo, String groupAnimalType, String groupBreed, String groupSource, String groupDOB, String groupID, String groupNotes) {
+    private void showUpdateDeleteDialog(String groupNo, String groupAnimalType, String groupBreed, String groupSource, String groupDOB, String groupID, String groupNotes, String userID) {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -518,6 +549,7 @@ public class GroupActivity extends AppCompatActivity {
         String groupSourceText = extras.getString(ActivityAddGroup.GROUP_SOURCE);
         String groupBreedText = extras.getString(ActivityAddGroup.GROUP_BREED);
         String groupNotesText = extras.getString(ActivityAddGroup.GROUP_NOTES);
+        final String userIDText = userID;
 
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -552,8 +584,9 @@ public class GroupActivity extends AppCompatActivity {
                 String dob = textViewDOB.getText().toString().trim();
                 String notes = editTextNotes.getText().toString().trim();
                 String type = spinnerTypes.getSelectedItem().toString();
+                String userID = userIDText;
                 if (!TextUtils.isEmpty(breed)) {
-                    updateGroup(groupNo, type, breed, source, dob, groupID, notes);
+                    updateGroup(groupNo, type, breed, source, dob, groupID, notes, userID);
                     b.dismiss();
                 }
                 finish();
@@ -578,12 +611,14 @@ public class GroupActivity extends AppCompatActivity {
             }
         });
     }
-    private boolean updateGroup(String groupNo, String groupAnimalType, String groupBreed, String groupSource, String groupDOB, String groupID, String groupNotes) {
+    private boolean updateGroup(String groupNo, String groupAnimalType, String groupBreed,
+                                String groupSource, String groupDOB,
+                                String groupID, String groupNotes, String userID) {
         //getting the specified artist reference
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("groups").child(groupNo);
 
         //updating artist
-        Group group = new Group(groupNo, groupAnimalType, groupBreed, groupSource, groupDOB, groupID, groupNotes);
+        Group group = new Group(groupNo, groupAnimalType, groupBreed, groupSource, groupDOB, groupID, groupNotes,userID );
         dR.setValue(group);
         Toast.makeText(getApplicationContext(), "Animal Updated", Toast.LENGTH_LONG).show();
 
@@ -610,6 +645,7 @@ public class GroupActivity extends AppCompatActivity {
 
         return true;
     }
+//https://stackoverflow.com/questions/41744219/how-to-highlight-the-item-when-pressed-using-bottomnavigationview-between-activi
 
 }
 

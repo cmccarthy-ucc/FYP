@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,6 +50,12 @@ public class TreatmentActivity extends AppCompatActivity {
     Spinner treatmentDrug;
     Button addTreatment;
     TextView animalID;
+    Spinner drugSpinner;
+
+    FirebaseAuth auth;
+
+    Long timeStamp;
+    Calendar cal = Calendar.getInstance();
 
     List<Drug> drugList;
     DatabaseReference fDatabaseRoot;
@@ -103,7 +110,7 @@ public class TreatmentActivity extends AppCompatActivity {
         treatmentDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
+
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -130,6 +137,8 @@ public class TreatmentActivity extends AppCompatActivity {
 //                vaccinationDate.setText(dateFormat.format(date));
                 String date = dayOfMonth + "/" + month + "/" + year;
                 treatmentDate.setText(date);
+                cal.set(year, month, dayOfMonth);
+                timeStamp = cal.getTimeInMillis();
             }
         };
         fDatabaseRoot = FirebaseDatabase.getInstance().getReference("drugs");
@@ -143,7 +152,7 @@ public class TreatmentActivity extends AppCompatActivity {
                     String drugName = drugSnapshot.child("name").getValue(String.class);
                     drugs.add(drugName);
                 }
-                Spinner drugSpinner = (Spinner) findViewById(R.id.spinnerDrug);
+                 drugSpinner = (Spinner) findViewById(R.id.spinnerDrug);
                 ArrayAdapter<String> drugsAdapter = new ArrayAdapter<String>(TreatmentActivity.this, android.R.layout.simple_spinner_item, drugs);
                 drugsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 drugSpinner.setAdapter(drugsAdapter);
@@ -199,6 +208,11 @@ public class TreatmentActivity extends AppCompatActivity {
                         Intent intentDrug = new Intent(TreatmentActivity.this, ActivityToDoList.class);
                         startActivity(intentDrug);
                         break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(TreatmentActivity.this, Login.class));
+                        finish();
+                        break;
                     default:
                         return true;
                 }
@@ -209,12 +223,13 @@ public class TreatmentActivity extends AppCompatActivity {
 
     private void addTreatment(){
         String tag = animalTag.getText().toString().trim();
-        String drug = treatmentDrug.getSelectedItem().toString();
+        String drug = drugSpinner.getSelectedItem().toString();
         String date = treatmentDate.getText().toString().trim();
         String admin = treatmentAdmin.getText().toString().trim();
         String dosage = treatmentDosage.getText().toString().trim();
         String notes = treatmentNotes.getText().toString().trim();
         //String individualID = animalID.getText().toString().trim();
+        Long timeStamp1 = timeStamp;
 
         if (TextUtils.isEmpty(date)) {
             Toast.makeText(this,"Please select a date", Toast.LENGTH_LONG).show();
@@ -230,7 +245,7 @@ public class TreatmentActivity extends AppCompatActivity {
         else{
             String id = databaseTreatment.push().getKey();
 
-            Treatments treatment = new Treatments(tag, id, drug, admin, dosage, date, notes );
+            Treatments treatment = new Treatments(tag, id, drug, admin, dosage, date, notes, timeStamp1 );
 
             databaseTreatment.child(id).setValue(treatment);
 

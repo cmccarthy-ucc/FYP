@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class ActivityToDoDoseDetails extends AppCompatActivity {
 
@@ -23,6 +25,8 @@ public class ActivityToDoDoseDetails extends AppCompatActivity {
     TextView doseType;
     TextView allDosed;
     TextView doseNotes;
+
+    FirebaseAuth auth;
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
     private DrawerLayout dl;
@@ -117,6 +121,11 @@ public class ActivityToDoDoseDetails extends AppCompatActivity {
                         Toast.makeText(ActivityToDoDoseDetails.this, "Drugs", Toast.LENGTH_SHORT).show();
                         Intent intentDrug = new Intent(ActivityToDoDoseDetails.this, AddDrug.class);
                         startActivity(intentDrug);
+                        break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(ActivityToDoDoseDetails.this, Login.class));
+                        finish();
                         break;
                     default:
                         return true;

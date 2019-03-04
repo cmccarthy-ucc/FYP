@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -44,6 +45,9 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
     TextView vaccinationDrug;
     TextView vaccinationNotes;
     Button btnUpdate;
+    Long timeStamp = 2147483649L;
+
+    FirebaseAuth auth;
 
     CheckBox checkBoxComplete;
     Boolean booleanCompleted = true;
@@ -142,6 +146,11 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
                         Intent intentDrug = new Intent(GroupVaccinationDetailsActivity.this, ActivityToDoList.class);
                         startActivity(intentDrug);
                         break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(GroupVaccinationDetailsActivity.this, Login.class));
+                        finish();
+                        break;
                     default:
                         return true;
                 }
@@ -186,7 +195,7 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
     }
 
     private void showUpdateDeleteDialog(String vaccinationGroupNumber, String vaccinationID, String vaccinationDrug,
-                                        String vaccinationAdmin, String vaccinationDosage, String vaccinationDate, String vaccinationNotes, Boolean allVaccinated) {
+                                        String vaccinationAdmin, String vaccinationDosage, String vaccinationDate, String vaccinationNotes, Boolean allVaccinated, Long timeStamp1) {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -200,6 +209,7 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
         String vaccinationNotesText = extras.getString(GroupActivity.VACCINATION_GROUP_NOTES);
         final String allVaccinatedText = extras.getString(GroupActivity.ALL_VACCINATED);
 //        final Boolean boolean1 = Boolean.valueOf(allVaccinatedText);
+        final Long timeStamp2 = timeStamp;
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -265,7 +275,7 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
                 String drug = spinnerDrug.getSelectedItem().toString();
                Boolean allVaccinated = boolean3;
                 if (!TextUtils.isEmpty(dosage)) {
-                    updateGroupVaccination(groupNo, id, drug, admin, dosage, date, notes, allVaccinated);
+                    updateGroupVaccination(groupNo, id, drug, admin, dosage, date, notes, allVaccinated, timeStamp2);
                     b.dismiss();
                 }
                 finish();
@@ -275,7 +285,7 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
     }
 
     private boolean updateGroupVaccination(String vaccinationGroupNumber, String vaccinationID, String vaccinationDrug,
-                                           String vaccinationAdmin, String vaccinationDosage, String vaccinationDate, String vaccinationNotes, Boolean allVaccinated) {
+                                           String vaccinationAdmin, String vaccinationDosage, String vaccinationDate, String vaccinationNotes, Boolean allVaccinated, Long timeStamp) {
         String groupID = ActivityAddGroup.GROUP_ID;
         //getting the specified vaccination reference
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("groupVaccinations");
@@ -285,7 +295,7 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
 
         //updating vaccination
         GroupVaccination group = new GroupVaccination(vaccinationGroupNumber, vaccinationID, vaccinationDrug, vaccinationAdmin, vaccinationDosage,
-                                vaccinationDate, vaccinationNotes, allVaccinated);
+                                vaccinationDate, vaccinationNotes, allVaccinated,timeStamp);
         drVaccination.setValue(group);
         Toast.makeText(getApplicationContext(), "Vaccination Updated", Toast.LENGTH_LONG).show();
 

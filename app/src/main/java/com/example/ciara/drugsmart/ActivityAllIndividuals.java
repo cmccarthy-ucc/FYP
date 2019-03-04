@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +26,8 @@ public class ActivityAllIndividuals extends AppCompatActivity {
     private ListView listView;
     DatabaseReference databaseReference;
     List<Animal> animalList;
+
+    FirebaseAuth auth;
 
 
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
@@ -91,6 +94,11 @@ public class ActivityAllIndividuals extends AppCompatActivity {
                         Toast.makeText(ActivityAllIndividuals.this, "Drugs", Toast.LENGTH_SHORT).show();
                         Intent intentDrug = new Intent(ActivityAllIndividuals.this, AddDrug.class);
                         startActivity(intentDrug);
+                        break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(ActivityAllIndividuals.this, Login.class));
+                        finish();
                         break;
                     default:
                         return true;

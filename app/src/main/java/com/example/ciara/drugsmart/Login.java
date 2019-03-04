@@ -15,6 +15,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 
 public class Login extends AppCompatActivity {
@@ -54,13 +57,42 @@ public class Login extends AppCompatActivity {
                                 .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
+
                                         if (!task.isSuccessful()) {
-                                            Toast.makeText(
-                                                    Login.this,
-                                                    "Authentication Failed",
-                                                    Toast.LENGTH_LONG).show();
-                                            Log.v("error", task.getResult().toString());
-                                        } else {
+                                        String temp = "auth failed";
+                                        try {
+                                            temp =  task.getException().getMessage();
+                                        } catch (Exception e) {
+
+                                        }
+                                        Toast.makeText(Login.this, temp,
+                                                Toast.LENGTH_SHORT).show();
+
+
+                                    }
+
+//                                        if (!task.isSuccessful()) {
+//                                            try {
+//                                                throw task.getException();
+//                                            } catch(FirebaseAuthWeakPasswordException e) {
+//                                                inputPassword.setError("Weak Password");
+//                                                inputPassword.requestFocus();
+//                                            } catch(FirebaseAuthInvalidCredentialsException e) {
+//                                                inputEmail.setError("Invalid Email");
+//                                                inputEmail.requestFocus();
+//                                            } catch(FirebaseAuthUserCollisionException e) {
+//                                                inputEmail.setError("User already exists");
+//                                                inputEmail.requestFocus();
+//                                            } catch(Exception e) {
+//                                                Log.e("Sign Up Failed", e.getMessage());
+//                                            }
+
+//                                            Toast.makeText(
+//                                                    Login.this,
+//                                                    "Authentication Failed",
+//                                                    Toast.LENGTH_LONG).show();
+//                                            Log.v("error", task.getResult().toString());
+                                         else {
                                             Intent intent = new Intent(Login.this, WelcomeActivity.class);
                                             startActivity(intent);
                                             finish();

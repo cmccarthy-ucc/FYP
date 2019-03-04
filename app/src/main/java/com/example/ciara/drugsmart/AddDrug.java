@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +36,8 @@ public class AddDrug extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
 
     DatabaseReference databaseReference;
+
+    FirebaseAuth auth;
 
     ListView listView;
     List<Drug> drugList;
@@ -129,6 +132,11 @@ public class AddDrug extends AppCompatActivity {
                         Toast.makeText(AddDrug.this, "Drugs", Toast.LENGTH_SHORT).show();
                         Intent intentDrug = new Intent(AddDrug.this, AddDrug.class);
                         startActivity(intentDrug);
+                        break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(AddDrug.this, Login.class));
+                        finish();
                         break;
                     default:
                         return true;

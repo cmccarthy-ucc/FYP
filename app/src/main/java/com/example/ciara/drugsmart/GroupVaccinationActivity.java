@@ -25,6 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,7 +54,11 @@ public class GroupVaccinationActivity extends AppCompatActivity {
     RadioButton radioButtonYes;
     RadioButton radioButtonNo;
     Boolean allVaccinated = true;
+    Calendar cal = Calendar.getInstance();
+    Long timeStamp;
+    Spinner drugSpinner;
 
+    FirebaseAuth auth;
 
 
     DatabaseReference databaseGroupVaccination;
@@ -119,7 +124,7 @@ public class GroupVaccinationActivity extends AppCompatActivity {
         vaccinationDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
+
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -146,6 +151,9 @@ public class GroupVaccinationActivity extends AppCompatActivity {
 //                vaccinationDate.setText(dateFormat.format(date));
                 String date = dayOfMonth + "/" + month + "/" + year;
                 vaccinationDate.setText(date);
+                cal.set(year, month, dayOfMonth);
+                timeStamp = cal.getTimeInMillis();
+
 
 
 
@@ -184,7 +192,7 @@ public class GroupVaccinationActivity extends AppCompatActivity {
                     String drugName = drugSnapshot.child("name").getValue(String.class);
                     drugs.add(drugName);
                 }
-                Spinner drugSpinner = (Spinner) findViewById(R.id.spinnerDrug);
+                drugSpinner = findViewById(R.id.spinnerDrug);
                 ArrayAdapter<String> drugsAdapter = new ArrayAdapter<String>(GroupVaccinationActivity.this, android.R.layout.simple_spinner_item, drugs);
                 drugsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 drugSpinner.setAdapter(drugsAdapter);
@@ -240,6 +248,12 @@ public class GroupVaccinationActivity extends AppCompatActivity {
                         Intent intentDrug = new Intent(GroupVaccinationActivity.this, AddDrug.class);
                         startActivity(intentDrug);
                         break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(GroupVaccinationActivity.this, Login.class));
+                        finish();
+                        break;
+
                     default:
                         return true;
                 }
@@ -250,11 +264,12 @@ public class GroupVaccinationActivity extends AppCompatActivity {
     }
     private void addVaccination(){
         String number = groupNumber.getText().toString().trim();
-        String drug = vaccinationDrug.getSelectedItem().toString();
+        String drug = drugSpinner.getSelectedItem().toString();
         String date = vaccinationDate.getText().toString().trim();
         String admin = vaccinationAdmin.getText().toString().trim();
         String dosage = vaccinationDosage.getText().toString().trim();
         String notes = vaccinationNotes.getText().toString().trim();
+        Long timeStamp1 = timeStamp/1000;
 
 //        if (TextUtils.isEmpty(date)) {
 //            Toast.makeText(this,"Please select a date", Toast.LENGTH_LONG).show();
@@ -272,7 +287,7 @@ public class GroupVaccinationActivity extends AppCompatActivity {
         else{
             String id = databaseGroupVaccination.push().getKey();
 
-            GroupVaccination groupVaccination = new GroupVaccination(number, id, drug, admin, dosage, date, notes,allVaccinated );
+            GroupVaccination groupVaccination = new GroupVaccination(number, id, drug, admin, dosage, date, notes,allVaccinated,timeStamp1 );
 
             databaseGroupVaccination.child(id).setValue(groupVaccination);
 

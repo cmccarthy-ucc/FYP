@@ -1,6 +1,7 @@
 package com.example.ciara.drugsmart;
 
 import android.app.ActivityGroup;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +20,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +39,7 @@ import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_ID;
 import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_NOTES;
 import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_NUMBER;
 import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_SOURCE;
+import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
 
 public class ActivityAllGroups extends AppCompatActivity {
 
@@ -47,6 +51,12 @@ public class ActivityAllGroups extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
+
+    FirebaseAuth auth;
+    FirebaseUser user;
+    ProgressDialog PD;
+
+    String userID;
 
     List<Group> groups;
     DatabaseReference databaseGroups;
@@ -61,6 +71,10 @@ public class ActivityAllGroups extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_groups);
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        userID = auth.getUid();
 
 //        listView = (ListView)findViewById(R.id.listViewGroups);
 
@@ -142,6 +156,11 @@ public class ActivityAllGroups extends AppCompatActivity {
                         Intent intentDrug = new Intent(ActivityAllGroups.this, AddDrug.class);
                         startActivity(intentDrug);
                         break;
+                    case R.id.signOut:
+                        auth.signOut();
+                        startActivity(new Intent(ActivityAllGroups.this, Login.class));
+                        finish();
+                        break;
                     default:
                         return true;
                 }
@@ -163,11 +182,14 @@ public class ActivityAllGroups extends AppCompatActivity {
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                groups.clear();//clear RecyclerView
+                if (editTextGroupNo.getText().toString().trim().length() > 0){
+                    groups.clear();//clear RecyclerView
                 //get text from search field
                 String vaccinationInfo = editTextGroupNo.getText().toString();
-                firebaseVaccinationSearch(vaccinationInfo);
+                firebaseVaccinationSearch(vaccinationInfo);}
+                else {
+                    onStart();
+                }
             }
         });
 
@@ -175,7 +197,8 @@ public class ActivityAllGroups extends AppCompatActivity {
            }
     protected void onStart(){
         super.onStart();
-        databaseGroups.addValueEventListener(new ValueEventListener() {
+        Query orderQuery = databaseGroups.orderByChild("userID").equalTo(user.getUid());
+        orderQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -184,16 +207,21 @@ public class ActivityAllGroups extends AppCompatActivity {
 
                 //iterating through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
                     //getting artist
                     Group group = postSnapshot.getValue(Group.class);
+
                     //adding artist to the list
                     groups.add(group);
+
                 }
 
-                //creating adapter
                 GroupList groupAdapter = new GroupList(ActivityAllGroups.this, groups);
                 //attaching adapter to the listview
                 listViewGroups.setAdapter(groupAdapter);
+
+                //creating adapter
+
             }
 
             @Override
@@ -213,18 +241,29 @@ public class ActivityAllGroups extends AppCompatActivity {
     }
 
     private void firebaseVaccinationSearch(final String vaccinationInfo) {
+        final String groupNo = editTextGroupNo.getText().toString().trim();
       //query to search database based on text in textbox - made case insensitive
         //code from https://stackoverflow.com/questions/54155576/android-firebase-search-query-not-working-properly
-        Query vaccinationSearchQuery = databaseGroups.orderByChild("groupNo").startAt(vaccinationInfo.toLowerCase()).endAt(vaccinationInfo.toLowerCase() + "\uf8ff");
-        vaccinationSearchQuery.addValueEventListener(new ValueEventListener() {
+        //Query vaccinationSearchQuery = databaseGroups.orderByChild("groupNo").startAt(vaccinationInfo.toLowerCase()).endAt(vaccinationInfo.toLowerCase() + "\uf8ff");
+
+        Query orderQuery = databaseGroups.orderByChild("userID").equalTo(user.getUid());
+
+        orderQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot groupSnapshot : dataSnapshot.getChildren()) {
                     Group group = groupSnapshot.getValue(Group.class);
-                    groups.add(group);
+
+                    if(group.getGroupNo().equals(groupNo)) {
+                        groups.add(group);
+
+                    }
+                   //groups.add(group);
+                    GroupList groupList = new GroupList(ActivityAllGroups.this, groups);
+                    listViewGroups.setAdapter(groupList);
                 }
-                GroupList groupList = new GroupList(ActivityAllGroups.this, groups);
-                listViewGroups.setAdapter(groupList);
+//                GroupList groupList = new GroupList(ActivityAllGroups.this, groups);
+//                listViewGroups.setAdapter(groupList);
             }
 
             @Override
@@ -232,7 +271,8 @@ public class ActivityAllGroups extends AppCompatActivity {
 
             }
         });
-//
+
+
 //        databaseGroups.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

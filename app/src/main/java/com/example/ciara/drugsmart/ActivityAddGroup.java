@@ -1,6 +1,7 @@
 package com.example.ciara.drugsmart;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -23,10 +24,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -42,6 +46,7 @@ public class ActivityAddGroup extends AppCompatActivity {
     Button btnAddGroup;
     Spinner spinnerAnimalType;
     EditText editTextNotes;
+    String userID;
 //    RadioButton radioButtonYes;
 //    RadioButton radioButtonNo;
     Boolean allVaccinated = false;
@@ -69,15 +74,23 @@ public class ActivityAddGroup extends AppCompatActivity {
     public static final String GROUP_NOTES = "com.example.ciara.drugsmart.groupnotes";
     public static final String ANIMAL_TYPE = "com.example.ciara.drugsmart.animaltype";
     public static final String GROUP_NUMBER = "com.example.ciara.drugsmart.groupnumber";
+    public static final String USER_ID = "com.example.ciara.drugsmart.userid";
 
     List<Group> groups;
     DatabaseReference databaseGroups;
 
-
+    FirebaseAuth auth;
+    FirebaseUser user;
+    ProgressDialog PD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        userID = auth.getUid();
+
+
 
         databaseGroups = FirebaseDatabase.getInstance().getReference("groups");
         setContentView(R.layout.activity_add_group);
@@ -172,9 +185,14 @@ public class ActivityAddGroup extends AppCompatActivity {
                         startActivity(intentToDo);
                         break;
                     case R.id.drugs:
-                        Toast.makeText(ActivityAddGroup.this, "To-Do List", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityAddGroup.this, "Drugs Available", Toast.LENGTH_SHORT).show();
                         Intent intentDrug = new Intent(ActivityAddGroup.this, AddDrug.class);
                         startActivity(intentDrug);
+                        break;
+                    case R.id.signOut:
+                       auth.signOut();
+                        startActivity(new Intent(ActivityAddGroup.this, Login.class));
+                        finish();
                         break;
                     default:
                         return true;
@@ -224,7 +242,9 @@ public class ActivityAddGroup extends AppCompatActivity {
         protected void onStart() {
             super.onStart();
             //attaching value event listener
-            databaseGroups.addValueEventListener(new ValueEventListener() {
+            Query orderQuery = databaseGroups.orderByChild("userID").equalTo(user.getUid());
+
+            orderQuery.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -318,6 +338,7 @@ public class ActivityAddGroup extends AppCompatActivity {
         String source = editTextSource.getText().toString().trim();
         String DOB = mDisplayDate.getText().toString().trim();
         String notes = editTextNotes.getText().toString().trim();
+        String userID1 = userID;
        // Boolean vaccinated = allVaccinated;
 
 //
@@ -343,7 +364,7 @@ public class ActivityAddGroup extends AppCompatActivity {
         else {
             String id = databaseAnimal.push().getKey();
 
-            Group group = new Group(groupNo, animalType, breed, source, DOB, id, notes);
+            Group group = new Group(groupNo, animalType, breed, source, DOB, id, notes, userID1);
 
             databaseAnimal.child(groupNo).setValue(group);
 
