@@ -26,7 +26,7 @@ public class WelcomeActivity extends AppCompatActivity {
     ImageView imageViewGroups;
     ImageView imageViewMedicalRecords;
     ImageView imageViewToDo;
-    Button login;
+    Button signOut;
 
     FirebaseAuth auth;
     FirebaseUser user;
@@ -68,14 +68,15 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-//        login = findViewById(R.id.button2);
-//        login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent (WelcomeActivity.this, TestMainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        signOut = findViewById(R.id.buttonSignOut);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                startActivity(new Intent(WelcomeActivity.this, Login.class));
+                finish();
+            }
+        });
 
         imageViewMedicalRecords = (ImageView) findViewById(R.id.imageViewMedicaRecords);
         imageViewMedicalRecords.setOnClickListener(new View.OnClickListener() {

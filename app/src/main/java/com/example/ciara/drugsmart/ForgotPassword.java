@@ -29,6 +29,7 @@ public class ForgotPassword extends AppCompatActivity {
     private FirebaseAuth auth;
     private ProgressDialog PD;
     private TextInputLayout labelMode;
+    Button btnLogin;
 
 
     @Override
@@ -47,10 +48,16 @@ public class ForgotPassword extends AppCompatActivity {
         txtMode = (TextView) findViewById(R.id.title);
         submit = (Button) findViewById(R.id.submit_button);
         labelMode = (TextInputLayout) findViewById(R.id.label);
+        btnLogin = findViewById(R.id.sign_in_button);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override            public void onClick(View view) {
+                finish();
+            }
+        });
 
         final int mode = getIntent().getIntExtra("Mode", 0);
         if (mode == 0) {
-            txtMode.setText("Forget Password");
+            txtMode.setText("Forgot Password");
             edtMode.setHint("Enter Registered Email");
             labelMode.setHint("Enter Registered Email");
         } else if (mode == 1) {

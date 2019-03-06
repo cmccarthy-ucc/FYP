@@ -1,6 +1,7 @@
 package com.example.ciara.drugsmart;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -22,11 +23,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_ID;
 import static com.example.ciara.drugsmart.ActivityAddGroup.GROUP_NUMBER;
+import static com.example.ciara.drugsmart.GroupActivity.GROUP_VACCINATION_ID;
 import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_ADMIN;
 import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_DATE;
 import static com.example.ciara.drugsmart.GroupActivity.VACCINATION_DOSAGE;
@@ -46,8 +53,12 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
     TextView vaccinationNotes;
     Button btnUpdate;
     Long timeStamp = 2147483649L;
+    Boolean boolean1;
 
     FirebaseAuth auth;
+    FirebaseUser user;
+    ProgressDialog PD;
+    String userID;
 
     CheckBox checkBoxComplete;
     Boolean booleanCompleted = true;
@@ -68,6 +79,8 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_vaccination_details);
 
 
+        timeStamp = System.currentTimeMillis()/1000;
+
         vaccinationGroupNumber = findViewById(R.id.vaccinationGroupNumber);
         vaccinationID = findViewById(R.id.vaccinationID);
         vaccinationDate = findViewById(R.id.treatmentDate);
@@ -77,9 +90,14 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
         vaccinationNotes = findViewById(R.id.vaccinationNotes);
         allVaccination = findViewById(R.id.allVaccinated);
 
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        userID = auth.getUid();
+
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        final String vaccinationGroupIDText = extras.getString(GROUP_ID);
+        final String vaccinationGroupIDText = extras.getString("GROUP_ID");
         final String vaccinationGroupNumberText = extras.getString(GROUP_NUMBER);
         final String vaccinationIDText = extras.getString(GroupActivity.VACCINATION_ID);
         final String vaccinationDateText = extras.getString(VACCINATION_DATE);
@@ -89,7 +107,8 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
         final String vaccinationNotesText = extras.getString(GroupActivity.VACCINATION_GROUP_NOTES);
         final String allVaccinatedText = extras.getString(GroupActivity.ALL_VACCINATED);
 
-        final Boolean boolean1 = Boolean.valueOf(allVaccinatedText);
+
+        boolean1 = Boolean.valueOf(allVaccinatedText);
 
 //        groupID.setText(vaccinationGroupIDText);
         vaccinationID.setText(vaccinationIDText);
@@ -159,30 +178,26 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
             }
 
         });
-
         btnUpdate = findViewById(R.id.btnUpdate);
-        //btnUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(getApplicationContext(), ActivityUpdateGroupVaccination.class);
-//
-//                //putting artist name and id to intent
-//                intent.putExtra(GROUP_ID, vaccinationGroupIDText);
-//                intent.putExtra(GROUP_NUMBER, vaccinationGroupNumberText);
-//                intent.putExtra(VACCINATION_DATE, vaccinationDateText);
-//                intent.putExtra(VACCINATION_ADMIN, vaccinationAdminText);
-//                intent.putExtra(VACCINATION_DOSAGE, vaccinationDosageText);
-//                intent.putExtra(VACCINATION_DRUG, vaccinationDrugText);
-//                intent.putExtra(VACCINATION_GROUP_NOTES, vaccinationNotesText);
-//
-//                //starting the activity with intent
-//                startActivity(intent);
-////                showUpdateDeleteDialog(vaccinationGroupNumberText, vaccinationIDText, vaccinationDrugText, vaccinationAdminText, vaccinationDosageText,
-////                        vaccinationDateText, vaccinationNotesText, boolean1);
-//
-//            }
-//        });
+        if (boolean1.equals(true)){
+            btnUpdate.setVisibility(View.INVISIBLE);
+        }
+        else if (boolean1.equals(false)){
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean1 = true;
+//                    DatabaseReference dR = FirebaseDatabase.getInstance().getReference("groupVaccinations");
+//                    DatabaseReference drGroup = dR.child("groupID");
+//                    DatabaseReference drVaccination = drGroup.child("vaccinationID");
+
+                    updateGroupVaccination();
+                    //drVaccination.child("allVaccinated").setValue(boolean1);
+                }
+
+            });
+        }
+
     }
 
     @Override
@@ -193,115 +208,65 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+//    String vaccinationGroupNumber, String vaccinationID, String vaccinationDrug,
+//    String vaccinationAdmin, String vaccinationDosage, String vaccinationDate,
+//    String vaccinationNotes,      Long timeStamp
+//
 
-    private void showUpdateDeleteDialog(String vaccinationGroupNumber, String vaccinationID, String vaccinationDrug,
-                                        String vaccinationAdmin, String vaccinationDosage, String vaccinationDate, String vaccinationNotes, Boolean allVaccinated, Long timeStamp1) {
+    private boolean updateGroupVaccination( ) {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        final String groupIDText = extras.getString(GROUP_ID);
-        final String groupNumberText = extras.getString(ActivityAddGroup.GROUP_NUMBER);
-        String vaccinationIDText = extras.getString(GroupActivity.VACCINATION_ID);
-        String vaccinationDrugText = extras.getString(GroupActivity.VACCINATION_DRUG);
-        String vaccinationAdminText = extras.getString(GroupActivity.VACCINATION_ADMIN);
-        String vaccinationDosageText = extras.getString(GroupActivity.VACCINATION_DOSAGE);
-        String vaccinationDateText = extras.getString(VACCINATION_DATE);
-        String vaccinationNotesText = extras.getString(GroupActivity.VACCINATION_GROUP_NOTES);
+        final String vaccinationGroupIDText = extras.getString("GROUP_ID");
+        final String vaccinationGroupNumberText = extras.getString(GROUP_NUMBER);
+        final String vaccinationIDText = extras.getString(GroupActivity.VACCINATION_ID);
+        final String vaccinationDateText = extras.getString(VACCINATION_DATE);
+        final String vaccinationAdminText = extras.getString(GroupActivity.VACCINATION_ADMIN);
+        final String vaccinationDosageText = extras.getString(GroupActivity.VACCINATION_DOSAGE);
+        final String vaccinationDrugText = extras.getString(GroupActivity.VACCINATION_DRUG);
+        final String vaccinationNotesText = extras.getString(GroupActivity.VACCINATION_GROUP_NOTES);
         final String allVaccinatedText = extras.getString(GroupActivity.ALL_VACCINATED);
-//        final Boolean boolean1 = Boolean.valueOf(allVaccinatedText);
-        final Long timeStamp2 = timeStamp;
+        String userID1 = userID;
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.update_group_vaccination, null);
-        dialogBuilder.setView(dialogView);
 
-        checkBoxComplete = findViewById(R.id.checkBoxCompleted);
 
-        if (checkBoxComplete.isChecked()){
-            booleanCompleted = true;
-        }
-        else {
-            booleanCompleted = false;
-        }
+        String vaccinationID = GroupActivity.VACCINATION_ID;
+        String vaccinationDrug = GroupActivity.VACCINATION_DRUG;
+        String vaccinationAdmin = GroupActivity.VACCINATION_ADMIN;
+        String vaccinationDate = GroupActivity.VACCINATION_DATE;
+        String vaccinationDosage = GroupActivity.VACCINATION_DOSAGE;
+        String vaccinationNote = GroupActivity.VACCINATION_GROUP_NOTES;
+        String vaccinationGroupNumber = GroupActivity.VACCINATION_GROUP_NUMBER;
 
-//        radioButtonYes = (RadioButton) findViewById(R.id.radioButtonYes);
-//        radioButtonNo = (RadioButton) findViewById(R.id.radioButtonNo);
+        Long time = timeStamp;
+        Boolean allDone = true;
 
-        //https://stackoverflow.com/questions/8323778/how-to-set-onclicklistener-on-a-radiobutton-in-android
-        // **Origional source but updated code**
-//
-//
-//        radioGroupAllVaccinated = findViewById(R.id.radioAllVaccinated1);
-//        radioGroupAllVaccinated.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                if (radioButtonNo.isChecked()){
-//                    allVaccinatedRadio = false;
-//
-//                }
-//                else if (radioButtonYes.isChecked()){
-//                    allVaccinatedRadio = true;
-//                }
-//            }
-//        });
 
-        final EditText editTextAdmin = dialogView.findViewById(R.id.editTextAdmin);
-        editTextAdmin.setText(vaccinationAdminText);
-        final EditText editTextDosage = dialogView.findViewById(R.id.editTextDosage);
-        editTextDosage.setText(vaccinationDosageText);
-        final EditText editTextNotes = dialogView.findViewById(R.id.editTextNotes);
-        editTextNotes.setText(vaccinationNotesText);
-        final TextView textViewDate = dialogView.findViewById(R.id.textViewDate);
-        textViewDate.setText(vaccinationDateText);
-        final Spinner spinnerDrug = (Spinner) dialogView.findViewById(R.id.spinnerDrug);
-        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateArtist);
-        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteArtist);
 
-        final Boolean boolean3 = booleanCompleted;
-        dialogBuilder.setTitle("GroupNumber:   " + groupNumberText);
-        final AlertDialog b = dialogBuilder.create();
-        b.show();
+        Date todayDate = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String todayString = formatter.format(todayDate);
 
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String groupNo = groupNumberText;
-                String id = groupIDText;
-                String admin = editTextAdmin.getText().toString().trim();
-                String dosage = editTextDosage.getText().toString().trim();
-                String date = textViewDate.getText().toString().trim();
-                String notes = editTextNotes.getText().toString().trim();
-                String drug = spinnerDrug.getSelectedItem().toString();
-               Boolean allVaccinated = boolean3;
-                if (!TextUtils.isEmpty(dosage)) {
-                    updateGroupVaccination(groupNo, id, drug, admin, dosage, date, notes, allVaccinated, timeStamp2);
-                    b.dismiss();
-                }
-                finish();
-                startActivity(getIntent());
-            }
-        });
-    }
+        String updateNote = "Marked as completed on " + todayString + ",  Previous Note: " + vaccinationNotesText;
 
-    private boolean updateGroupVaccination(String vaccinationGroupNumber, String vaccinationID, String vaccinationDrug,
-                                           String vaccinationAdmin, String vaccinationDosage, String vaccinationDate, String vaccinationNotes, Boolean allVaccinated, Long timeStamp) {
-        String groupID = ActivityAddGroup.GROUP_ID;
         //getting the specified vaccination reference
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("groupVaccinations");
-        DatabaseReference drGroup = dR.child(groupID);
-        DatabaseReference drVaccination = drGroup.child(vaccinationID);
+        DatabaseReference drGroup = dR.child(vaccinationGroupIDText);
+        DatabaseReference drVaccination = drGroup.child(vaccinationIDText);
 
-
+        //drVaccination.child("allVaccinated").setValue(allVaccinated);
         //updating vaccination
-        GroupVaccination group = new GroupVaccination(vaccinationGroupNumber, vaccinationID, vaccinationDrug, vaccinationAdmin, vaccinationDosage,
-                                vaccinationDate, vaccinationNotes, allVaccinated,timeStamp);
+        GroupVaccination group = new GroupVaccination(vaccinationGroupNumberText, vaccinationIDText, vaccinationDrugText, vaccinationAdminText, vaccinationDosageText,
+                                vaccinationDateText, updateNote, allDone,time, userID1);
         drVaccination.setValue(group);
         Toast.makeText(getApplicationContext(), "Vaccination Updated", Toast.LENGTH_LONG).show();
 
 
         return true;
         //updating artist
+
+
+        //drVaccination.child("allVaccinated").setValue(true);
     }
 
 }

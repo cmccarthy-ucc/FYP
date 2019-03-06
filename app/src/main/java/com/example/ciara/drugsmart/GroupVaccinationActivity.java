@@ -1,6 +1,7 @@
 package com.example.ciara.drugsmart;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -59,8 +61,10 @@ public class GroupVaccinationActivity extends AppCompatActivity {
     Spinner drugSpinner;
 
     FirebaseAuth auth;
+    FirebaseUser user;
+    ProgressDialog PD;
 
-
+String userID;
     DatabaseReference databaseGroupVaccination;
     DatabaseReference databaseReference;
     List<Drug> drugList;
@@ -78,6 +82,8 @@ public class GroupVaccinationActivity extends AppCompatActivity {
     private ActionBarDrawerToggle t;
     private NavigationView nv;
 
+    String groupIDText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +91,10 @@ public class GroupVaccinationActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("drugs");
         drugList = new ArrayList<>();
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        userID = auth.getUid();
 
 
         //vaccinationDrug = (Spinner) findViewById(R.id.spinnerDrug);
@@ -94,7 +104,7 @@ public class GroupVaccinationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        final String groupIDText = extras.getString(GROUP_ID);
+        groupIDText = extras.getString(GROUP_ID);
         final String groupNumberText = extras.getString(ActivityAddGroup.GROUP_NUMBER);
 
         groupID = (TextView) findViewById(R.id.textViewGroupID);
@@ -270,6 +280,8 @@ public class GroupVaccinationActivity extends AppCompatActivity {
         String dosage = vaccinationDosage.getText().toString().trim();
         String notes = vaccinationNotes.getText().toString().trim();
         Long timeStamp1 = timeStamp/1000;
+        String groupID = groupIDText;
+        String userID1 = userID;
 
 //        if (TextUtils.isEmpty(date)) {
 //            Toast.makeText(this,"Please select a date", Toast.LENGTH_LONG).show();
@@ -287,7 +299,7 @@ public class GroupVaccinationActivity extends AppCompatActivity {
         else{
             String id = databaseGroupVaccination.push().getKey();
 
-            GroupVaccination groupVaccination = new GroupVaccination(number, id, drug, admin, dosage, date, notes,allVaccinated,timeStamp1 );
+            GroupVaccination groupVaccination = new GroupVaccination(number, id, drug, admin, dosage, date, notes,allVaccinated,timeStamp1, userID1 );
 
             databaseGroupVaccination.child(id).setValue(groupVaccination);
 

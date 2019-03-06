@@ -49,6 +49,7 @@ public class GroupActivity extends AppCompatActivity {
     TextView groupBreed;
     TextView groupNumber;
     TextView mTextMessage;
+
     Button btnAdd;
     Button btnUpdate;
     //https://medium.com/quick-code/android-navigation-drawer-e80f7fc2594f
@@ -133,6 +134,7 @@ public class GroupActivity extends AppCompatActivity {
         groupSource = (TextView)findViewById(R.id.textViewSourceFarmer);
         groupBreed = (TextView)findViewById(R.id.textViewBreed);
         groupNumber = (TextView)findViewById(R.id.textViewGroupNumber);
+        groupID = findViewById(R.id.textView55);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -151,6 +153,7 @@ public class GroupActivity extends AppCompatActivity {
         groupSource.setText(groupSourceText);
         groupBreed.setText(groupBreedText);
         groupNumber.setText(groupNumberText);
+        groupID.setText(groupIDText);
 
         databaseDoses = FirebaseDatabase.getInstance().getReference("groupDoses").child(intent.getStringExtra(ActivityAddGroup.GROUP_ID));
         groupDoses = new ArrayList<>();
@@ -206,8 +209,8 @@ public class GroupActivity extends AppCompatActivity {
                     case R.id.group_navigation_vaccination:
                     listViewVaccination.setAdapter(null);
                        groupVaccinations.clear();
-                        Query dateQuery = databaseVaccinations.orderByChild("timeStamp").startAt(time);
-                        dateQuery.addValueEventListener(new ValueEventListener() {
+                        //Query dateQuery = databaseVaccinations.orderByChild("timeStamp").startAt(time);
+                        databaseVaccinations.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()){
@@ -255,7 +258,10 @@ public class GroupActivity extends AppCompatActivity {
                                 intent.putExtra(VACCINATION_DATE, groupVaccination.getVaccinationDate());
                                 intent.putExtra(VACCINATION_GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
                                 intent.putExtra(VACCINATION_GROUP_NOTES, groupVaccination.getVaccinationNotes());
-                                intent.putExtra(ALL_VACCINATED, groupVaccination.getAllVaccinated());
+                                intent.putExtra(ALL_VACCINATED, groupVaccination.getAllVaccinated().toString());
+                                //intent.putExtra(GROUP_VACCINATION_ID, groupVaccination.getVaccinationGroupID());
+                                intent.putExtra("GROUP_ID", groupIDText);
+
                                         //starting the activity with intent
                                         startActivity(intent);
                                     }
@@ -265,8 +271,8 @@ public class GroupActivity extends AppCompatActivity {
                     case R.id.group_navigation_doses:
                         listViewVaccination.setAdapter(null);
                         groupDoses.clear();
-                        Query doseQuery = databaseDoses.orderByChild("timeStamp").startAt(time);
-                        doseQuery.addValueEventListener(new ValueEventListener() {
+                        //Query doseQuery = databaseDoses.orderByChild("timeStamp").startAt(time);
+                        databaseDoses.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for(DataSnapshot dosingSnapshot : dataSnapshot.getChildren()){
@@ -313,8 +319,9 @@ public class GroupActivity extends AppCompatActivity {
                                 intent.putExtra(DOSE_DATE, doses.getDoseDate());
                                 intent.putExtra(DOSE_GROUP_NUMBER, doses.getDoseGroupNumber());
                                 intent.putExtra(DOSE_NOTES, doses.getDoseNotes());
-                                intent.putExtra(ALL_DOSED, doses.getAllDosed());
                                 intent.putExtra(DOSE_TYPE, doses.getDoseType());
+                                intent.putExtra(ALL_DOSED, doses.getAllDosed().toString());
+                                intent.putExtra("GROUP_ID", groupIDText);
                                 //starting the activity with intent
                                 startActivity(intent);
                             }
@@ -420,7 +427,7 @@ public class GroupActivity extends AppCompatActivity {
                         break;
                     case R.id.todo:
                         Toast.makeText(GroupActivity.this,"To-Do List", Toast.LENGTH_SHORT).show();
-                        Intent intentToDo = new Intent(GroupActivity.this, ActivityToDoList.class);
+                        Intent intentToDo = new Intent(GroupActivity.this, ActivityToDoDoses.class);
                         startActivity(intentToDo);
                         break;
                     case R.id.drugs:
@@ -470,8 +477,9 @@ public class GroupActivity extends AppCompatActivity {
         final String groupNumberText = extras.getString(ActivityAddGroup.GROUP_NUMBER);
         listViewVaccination.setAdapter(null);
         groupVaccinations.clear();
-        Query dateQuery = databaseVaccinations.orderByChild("timeStamp").startAt(time);
-        dateQuery.addValueEventListener(new ValueEventListener() {
+//        Query dateQuery = databaseVaccinations.orderByChild("timeStamp").startAt(time);
+//        dateQuery.addValueEventListener(new ValueEventListener() {
+            databaseVaccinations.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot groupVaccinationSnapshot : dataSnapshot.getChildren()){
@@ -507,10 +515,12 @@ public class GroupActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //getting the selected artist
+
                 GroupVaccination groupVaccination = groupVaccinations.get(i);
                 //creating an intent
                 Intent intent = new Intent(getApplicationContext(), GroupVaccinationDetailsActivity.class);
                 //putting artist name and id to intent
+                intent.putExtra("GROUP_ID", groupIDText);
                 intent.putExtra(GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
                 intent.putExtra(VACCINATION_ID, groupVaccination.getVaccinationID());
                 intent.putExtra(VACCINATION_DRUG, groupVaccination.getVaccinationDrug());
@@ -519,7 +529,7 @@ public class GroupActivity extends AppCompatActivity {
                 intent.putExtra(VACCINATION_DATE, groupVaccination.getVaccinationDate());
                 intent.putExtra(VACCINATION_GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
                 intent.putExtra(VACCINATION_GROUP_NOTES, groupVaccination.getVaccinationNotes());
-                intent.putExtra(ALL_VACCINATED, groupVaccination.getAllVaccinated());
+                intent.putExtra(ALL_VACCINATED, groupVaccination.getAllVaccinated().toString());
                 //starting the activity with intent
                 startActivity(intent);
             }

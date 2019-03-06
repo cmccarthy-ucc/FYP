@@ -20,7 +20,8 @@ public class Dosing {
     }
 
     public Dosing( String doseGroupNumber, String doseID, String doseDrug,
-                  String doseAdmin, String doseDosage, String doseDate, String doseNotes, Boolean allDosed, String doseType, Long timeStamp){
+                  String doseAdmin, String doseDosage, String doseDate,
+                   String doseNotes, Boolean allDosed, String doseType, Long timeStamp){
         //Date doseDate
 //        this.doseGroupID = doseGroupID;
         this.doseGroupNumber = doseGroupNumber;

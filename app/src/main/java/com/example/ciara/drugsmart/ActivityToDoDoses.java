@@ -120,7 +120,7 @@ public class ActivityToDoDoses extends AppCompatActivity {
                                         //getting the selected artist
                                         GroupVaccination groupVaccination = groupVaccinationList.get(i);
                                         //creating an intent
-                                        Intent intent = new Intent(getApplicationContext(), GroupVaccinationDetailsActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), ToDoVaccination.class);
                                         //putting artist name and id to intent
                                         intent.putExtra(GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
                                         intent.putExtra(VACCINATION_ID, groupVaccination.getVaccinationID());
@@ -130,7 +130,7 @@ public class ActivityToDoDoses extends AppCompatActivity {
                                         intent.putExtra(VACCINATION_DATE, groupVaccination.getVaccinationDate());
                                         intent.putExtra(VACCINATION_GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
                                         intent.putExtra(VACCINATION_GROUP_NOTES, groupVaccination.getVaccinationNotes());
-                                        intent.putExtra(ALL_VACCINATED, groupVaccination.getAllVaccinated());
+                                        intent.putExtra(ALL_VACCINATED, groupVaccination.getAllVaccinated().toString());
                                         //starting the activity with intent
                                         startActivity(intent);
                                     }
@@ -178,7 +178,7 @@ public class ActivityToDoDoses extends AppCompatActivity {
                                 //getting the selected artist
                                 Dosing doses = dosingList.get(i);
                                 //creating an intent
-                                Intent intent = new Intent(getApplicationContext(), ActivityViewDoseDetails.class);
+                                Intent intent = new Intent(getApplicationContext(), TodoDoses.class);
                                 //putting artist name and id to intent
                                 intent.putExtra(GROUP_NUMBER, doses.getDoseGroupNumber());
                                 intent.putExtra(DOSE_ID, doses.getDoseID());
@@ -188,7 +188,7 @@ public class ActivityToDoDoses extends AppCompatActivity {
                                 intent.putExtra(DOSE_DATE, doses.getDoseDate());
                                 intent.putExtra(DOSE_GROUP_NUMBER, doses.getDoseGroupNumber());
                                 intent.putExtra(DOSE_NOTES, doses.getDoseNotes());
-                                intent.putExtra(ALL_DOSED, doses.getAllDosed());
+                                intent.putExtra(ALL_DOSED, doses.getAllDosed().toString());
                                 intent.putExtra(DOSE_TYPE, doses.getDoseType());
                                 //starting the activity with intent
                                 startActivity(intent);
@@ -299,7 +299,7 @@ public class ActivityToDoDoses extends AppCompatActivity {
                 //getting the selected artist
                 GroupVaccination groupVaccination = groupVaccinationList.get(i);
                 //creating an intent
-                Intent intent = new Intent(getApplicationContext(), GroupVaccinationDetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ToDoVaccination.class);
                 //putting artist name and id to intent
                 intent.putExtra(GROUP_NUMBER, groupVaccination.getVaccinationGroupNumber());
                 intent.putExtra(VACCINATION_ID, groupVaccination.getVaccinationID());

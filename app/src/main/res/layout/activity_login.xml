@@ -25,7 +25,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/colorAccent">
 
         <EditText
             android:id="@+id/email"
@@ -36,13 +37,14 @@
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@android:color/black" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/colorAccent">
 
         <EditText
             android:id="@+id/password"
@@ -55,7 +57,7 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@android:color/black" />
 
     </android.support.design.widget.TextInputLayout>
 

@@ -7,9 +7,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/appicon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/appicon"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
@@ -88,10 +88,18 @@
         <activity android:name=".ActivityAllIndividuals" />
         <activity android:name=".DrugActivity" />
         <activity android:name=".AddDrug" />
-        <activity android:name=".Login" />
-        <activity android:name=".Register" />
-        <activity android:name=".ForgotPassword" />
-        <activity android:name=".TestMainActivity"></activity>
+        <activity
+            android:name=".Login"
+            android:label="Welcome to VacciNote" />
+        <activity
+            android:name=".Register"
+            android:label="Welcome to VacciNote" />
+        <activity
+            android:name=".ForgotPassword"
+            android:label="Forgot Password" />
+        <activity android:name=".TestMainActivity" />
+        <activity android:name=".ToDoVaccination" />
+        <activity android:name=".TodoDoses"></activity>
     </application>
 
 </manifest>

@@ -201,27 +201,19 @@ public class ActivityAllGroups extends AppCompatActivity {
         orderQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                //clearing the previous artist list
+                //clearing the previous group list
                 groups.clear();
-
                 //iterating through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    //getting artist
+                    //getting group
                     Group group = postSnapshot.getValue(Group.class);
-
-                    //adding artist to the list
+                    //adding group to the list
                     groups.add(group);
-
                 }
-
                 GroupList groupAdapter = new GroupList(ActivityAllGroups.this, groups);
                 //attaching adapter to the listview
                 listViewGroups.setAdapter(groupAdapter);
-
                 //creating adapter
-
             }
 
             @Override
@@ -253,10 +245,8 @@ public class ActivityAllGroups extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot groupSnapshot : dataSnapshot.getChildren()) {
                     Group group = groupSnapshot.getValue(Group.class);
-
                     if(group.getGroupNo().equals(groupNo)) {
                         groups.add(group);
-
                     }
                    //groups.add(group);
                     GroupList groupList = new GroupList(ActivityAllGroups.this, groups);
