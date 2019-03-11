@@ -188,11 +188,11 @@ public class AddVaccination extends AppCompatActivity {
                 int id = item.getItemId();
 
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(AddVaccination.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(AddVaccination.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(AddVaccination.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(AddVaccination.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(AddVaccination.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(AddVaccination.this, ActivityMedicalRecords2.class);
@@ -210,7 +210,7 @@ public class AddVaccination extends AppCompatActivity {
                         break;
                     case R.id.todo:
                         Toast.makeText(AddVaccination.this,"To-DO List", Toast.LENGTH_SHORT).show();
-                        Intent intentToDo = new Intent(AddVaccination.this, ActivityToDoList.class);
+                        Intent intentToDo = new Intent(AddVaccination.this, ActivityToDoDoses.class);
                         startActivity(intentToDo);
                         break;
                     case R.id.drugs:

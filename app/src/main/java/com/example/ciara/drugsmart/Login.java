@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
+//https://www.androidhive.info/2016/06/android-getting-started-firebase-simple-login-registration-auth/
+
 
 public class Login extends AppCompatActivity {
 
@@ -31,7 +33,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         PD = new ProgressDialog(this);
         PD.setMessage("Loading...");

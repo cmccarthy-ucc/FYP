@@ -62,11 +62,11 @@ public class ActivityVaccinationHome extends AppCompatActivity {
                 int id = item.getItemId();
 
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(ActivityVaccinationHome.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityVaccinationHome.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(ActivityVaccinationHome.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(ActivityVaccinationHome.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityVaccinationHome.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ActivityVaccinationHome.this, ActivityMedicalRecords2.class);

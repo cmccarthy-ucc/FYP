@@ -285,11 +285,11 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
                 int id = item.getItemId();
 
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(ActivityMedicalRecords2.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityMedicalRecords2.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(ActivityMedicalRecords2.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(ActivityMedicalRecords2.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityMedicalRecords2.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ActivityMedicalRecords2.this, ActivityMedicalRecords2.class);
@@ -332,6 +332,8 @@ public class ActivityMedicalRecords2 extends AppCompatActivity {
 
     protected void onStart(){
         super.onStart();
+        listView.setAdapter(null);
+        individualTreatments.clear();
         databaseTreatments.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -398,18 +399,19 @@ public class GroupActivity extends AppCompatActivity {
         t.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+//https://stackoverflow.com/questions/1109022/close-hide-the-android-soft-keyboard
         nv = (NavigationView)findViewById(R.id.nv);
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(GroupActivity.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(GroupActivity.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(GroupActivity.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(GroupActivity.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(GroupActivity.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(GroupActivity.this, ActivityMedicalRecords2.class);

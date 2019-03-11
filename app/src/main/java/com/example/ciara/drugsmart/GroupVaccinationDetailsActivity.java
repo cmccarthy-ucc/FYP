@@ -135,11 +135,11 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(GroupVaccinationDetailsActivity.this, "Animals", Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(GroupVaccinationDetailsActivity.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(GroupVaccinationDetailsActivity.this, "Animals", Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(GroupVaccinationDetailsActivity.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(GroupVaccinationDetailsActivity.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(GroupVaccinationDetailsActivity.this, ActivityMedicalRecords2.class);
@@ -157,12 +157,12 @@ public class GroupVaccinationDetailsActivity extends AppCompatActivity {
                         break;
                     case R.id.todo:
                         Toast.makeText(GroupVaccinationDetailsActivity.this, "To-Do List", Toast.LENGTH_SHORT).show();
-                        Intent intentToDo = new Intent(GroupVaccinationDetailsActivity.this, ActivityToDoList.class);
+                        Intent intentToDo = new Intent(GroupVaccinationDetailsActivity.this, ActivityToDoDoses.class);
                         startActivity(intentToDo);
                         break;
                     case R.id.drug:
                         Toast.makeText(GroupVaccinationDetailsActivity.this, "Drugs Available", Toast.LENGTH_SHORT).show();
-                        Intent intentDrug = new Intent(GroupVaccinationDetailsActivity.this, ActivityToDoList.class);
+                        Intent intentDrug = new Intent(GroupVaccinationDetailsActivity.this, DrugActivity.class);
                         startActivity(intentDrug);
                         break;
                     case R.id.signOut:

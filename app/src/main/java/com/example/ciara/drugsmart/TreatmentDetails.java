@@ -72,11 +72,11 @@ public class TreatmentDetails extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(TreatmentDetails.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(TreatmentDetails.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(TreatmentDetails.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(TreatmentDetails.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(TreatmentDetails.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(TreatmentDetails.this, ActivityMedicalRecords2.class);
@@ -94,12 +94,12 @@ public class TreatmentDetails extends AppCompatActivity {
                         break;
                     case R.id.todo:
                         Toast.makeText(TreatmentDetails.this,"To-Do List", Toast.LENGTH_SHORT).show();
-                        Intent intentToDo = new Intent(TreatmentDetails.this, ActivityToDoList.class);
+                        Intent intentToDo = new Intent(TreatmentDetails.this, ActivityToDoDoses.class);
                         startActivity(intentToDo);
                         break;
                     case R.id.drug:
                         Toast.makeText(TreatmentDetails.this, "Drugs Available", Toast.LENGTH_SHORT).show();
-                        Intent intentDrug = new Intent(TreatmentDetails.this, ActivityToDoList.class);
+                        Intent intentDrug = new Intent(TreatmentDetails.this, DrugActivity.class);
                         startActivity(intentDrug);
                         break;
                     case R.id.signOut:

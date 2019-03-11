@@ -113,11 +113,11 @@ public class DataRetrieved extends AppCompatActivity {
                 int id = item.getItemId();
 
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(DataRetrieved.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(DataRetrieved.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(DataRetrieved.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(DataRetrieved.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(DataRetrieved.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(DataRetrieved.this, ActivityMedicalRecords2.class);

@@ -48,7 +48,7 @@ public class ActivityOptionsTwo extends AppCompatActivity {
         imageViewAnimalGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityOptionsTwo.this, ActivityGroupHome.class);
+                Intent intent = new Intent(ActivityOptionsTwo.this, ActivityAllGroups.class);
                 startActivity(intent);
             }
         });
@@ -78,11 +78,11 @@ public class ActivityOptionsTwo extends AppCompatActivity {
                 int id = item.getItemId();
 
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(ActivityOptionsTwo.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityOptionsTwo.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(ActivityOptionsTwo.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(ActivityOptionsTwo.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityOptionsTwo.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ActivityOptionsTwo.this, ActivityMedicalRecords2.class);

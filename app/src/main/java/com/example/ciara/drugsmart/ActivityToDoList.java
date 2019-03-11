@@ -62,11 +62,11 @@ public class ActivityToDoList extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(ActivityToDoList.this, "Animals", Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityToDoList.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(ActivityToDoList.this, "Animals", Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(ActivityToDoList.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityToDoList.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ActivityToDoList.this, ActivityMedicalRecords2.class);
@@ -74,7 +74,7 @@ public class ActivityToDoList extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityToDoList.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityToDoList.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(ActivityToDoList.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
@@ -132,7 +132,7 @@ public class ActivityToDoList extends AppCompatActivity {
 
 
                 //Multiple Values
-                Intent intent = new Intent(ActivityToDoList.this, ActivityToDoDetails.class);
+                Intent intent = new Intent(ActivityToDoList.this, ActivityToDoDoseDetails.class);
                 Bundle extras = new Bundle();
                 extras.putString("EXTRA_GROUP_NUMBER", vaccinationGroupNumberText);
                 extras.putString("EXTRA_GROUP_ID", groupVaccinationIDText);

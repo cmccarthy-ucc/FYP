@@ -159,11 +159,11 @@ public class ActivityAddGroup extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(ActivityAddGroup.this, "Animals", Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityAddGroup.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(ActivityAddGroup.this, "Animals", Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(ActivityAddGroup.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityAddGroup.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ActivityAddGroup.this, ActivityMedicalRecords2.class);

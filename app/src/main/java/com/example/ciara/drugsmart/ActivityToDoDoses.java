@@ -222,11 +222,11 @@ public class ActivityToDoDoses extends AppCompatActivity {
                 int id = item.getItemId();
 
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(ActivityToDoDoses.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityToDoDoses.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(ActivityToDoDoses.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(ActivityToDoDoses.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityToDoDoses.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ActivityToDoDoses.this, ActivityMedicalRecords2.class);
@@ -234,12 +234,12 @@ public class ActivityToDoDoses extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityToDoDoses.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityToDoDoses.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(ActivityToDoDoses.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityToDoDoses.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityToDoDoses.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(ActivityToDoDoses.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:

@@ -212,11 +212,11 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(ActivityAddGroupVaccination.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityAddGroupVaccination.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(ActivityAddGroupVaccination.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(ActivityAddGroupVaccination.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityAddGroupVaccination.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ActivityAddGroupVaccination.this, ActivityMedicalRecords2.class);
@@ -224,7 +224,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityAddGroupVaccination.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityAddGroupVaccination.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(ActivityAddGroupVaccination.this, WelcomeActivity.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
@@ -234,7 +234,7 @@ public class ActivityAddGroupVaccination extends AppCompatActivity {
                         break;
                     case R.id.todo:
                         Toast.makeText(ActivityAddGroupVaccination.this, "To-Do List", Toast.LENGTH_SHORT).show();
-                        Intent intentToDo = new Intent(ActivityAddGroupVaccination.this, ActivityToDoList.class);
+                        Intent intentToDo = new Intent(ActivityAddGroupVaccination.this, ActivityToDoDoses.class);
                         startActivity(intentToDo);
                         break;
                     default:

@@ -126,11 +126,11 @@ public class ActivityAllGroups extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(ActivityAllGroups.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityAllGroups.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(ActivityAllGroups.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(ActivityAllGroups.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityAllGroups.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ActivityAllGroups.this, ActivityMedicalRecords2.class);
@@ -138,17 +138,17 @@ public class ActivityAllGroups extends AppCompatActivity {
                         break;
                     case R.id.groups:
                         Toast.makeText(ActivityAllGroups.this, "Groups", Toast.LENGTH_SHORT).show();
-                        Intent intentGroups = new Intent(ActivityAllGroups.this, ActivityGroupHome.class);
+                        Intent intentGroups = new Intent(ActivityAllGroups.this, ActivityAllGroups.class);
                         startActivity(intentGroups);
                         break;
                     case R.id.home:
                         Toast.makeText(ActivityAllGroups.this,"Home", Toast.LENGTH_SHORT).show();
-                        Intent intentHome = new Intent(ActivityAllGroups.this, ActivityOptionsTwo.class);
+                        Intent intentHome = new Intent(ActivityAllGroups.this, WelcomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.todo:
                         Toast.makeText(ActivityAllGroups.this,"To-Do List", Toast.LENGTH_SHORT).show();
-                        Intent intentToDo = new Intent(ActivityAllGroups.this, ActivityToDoList.class);
+                        Intent intentToDo = new Intent(ActivityAllGroups.this, ActivityToDoDoses.class);
                         startActivity(intentToDo);
                         break;
                     case R.id.drugs:

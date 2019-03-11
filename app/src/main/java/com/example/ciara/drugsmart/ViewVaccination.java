@@ -87,11 +87,6 @@ public class ViewVaccination extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(ViewVaccination.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ViewVaccination.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
                     case R.id.vaccinations:
                         Toast.makeText(ViewVaccination.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ViewVaccination.this, ActivityMedicalRecords2.class);
@@ -109,7 +104,7 @@ public class ViewVaccination extends AppCompatActivity {
                         break;
                     case R.id.todo:
                         Toast.makeText(ViewVaccination.this, "To-Do List", Toast.LENGTH_SHORT).show();
-                        Intent intentToDO = new Intent(ViewVaccination.this, ActivityToDoList.class);
+                        Intent intentToDO = new Intent(ViewVaccination.this, ActivityToDoDoses.class);
                         startActivity(intentToDO);
                         break;
                     case R.id.drug:

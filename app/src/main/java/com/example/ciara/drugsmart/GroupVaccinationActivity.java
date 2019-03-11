@@ -228,11 +228,11 @@ String userID;
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(GroupVaccinationActivity.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(GroupVaccinationActivity.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(GroupVaccinationActivity.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(GroupVaccinationActivity.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(GroupVaccinationActivity.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(GroupVaccinationActivity.this, ActivityMedicalRecords2.class);
@@ -250,7 +250,7 @@ String userID;
                         break;
                     case R.id.todo:
                         Toast.makeText(GroupVaccinationActivity.this, "To-Do List", Toast.LENGTH_SHORT).show();
-                        Intent intentToDo = new Intent(GroupVaccinationActivity.this, ActivityToDoList.class);
+                        Intent intentToDo = new Intent(GroupVaccinationActivity.this, ActivityToDoDoses.class);
                         startActivity(intentToDo);
                         break;
                     case R.id.drugs:
@@ -293,22 +293,23 @@ String userID;
         }
         else if (radioButtonNo.isChecked() & (TextUtils.isEmpty(notes))){
             Toast.makeText(this, "Please note which animals were not vaccinated", Toast.LENGTH_LONG).show();
-
-
         }
-        else{
+        else if (TextUtils.isEmpty(admin)){
+            Toast.makeText(this, "Please enter an administrator", Toast.LENGTH_LONG).show();
+        }
+        else {
             String id = databaseGroupVaccination.push().getKey();
 
-            GroupVaccination groupVaccination = new GroupVaccination(number, id, drug, admin, dosage, date, notes,allVaccinated,timeStamp1, userID1 );
+            GroupVaccination groupVaccination = new GroupVaccination(number, id, drug, admin, dosage, date, notes, allVaccinated, timeStamp1, userID1);
 
             databaseGroupVaccination.child(id).setValue(groupVaccination);
 
-            Toast.makeText(this, "Vaccination added", Toast.LENGTH_LONG).show(); }
+            Toast.makeText(this, "Vaccination added", Toast.LENGTH_LONG).show();
 
-        finish();
-        startActivity(getIntent());
+            finish();
+            startActivity(getIntent());
 
-
+        }
 
     }
 

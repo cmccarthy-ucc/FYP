@@ -92,11 +92,11 @@ public class ActivityToDoDoseDetails extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(ActivityToDoDoseDetails.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(ActivityToDoDoseDetails.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(ActivityToDoDoseDetails.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(ActivityToDoDoseDetails.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(ActivityToDoDoseDetails.this, "Medical Records", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(ActivityToDoDoseDetails.this, ActivityMedicalRecords2.class);
@@ -114,7 +114,7 @@ public class ActivityToDoDoseDetails extends AppCompatActivity {
                         break;
                     case R.id.todo:
                         Toast.makeText(ActivityToDoDoseDetails.this, "To-Do List", Toast.LENGTH_SHORT).show();
-                        Intent intentToDo = new Intent(ActivityToDoDoseDetails.this, ActivityToDoList.class);
+                        Intent intentToDo = new Intent(ActivityToDoDoseDetails.this, ActivityToDoDoses.class);
                         startActivity(intentToDo);
                         break;
                     case R.id.drugs:

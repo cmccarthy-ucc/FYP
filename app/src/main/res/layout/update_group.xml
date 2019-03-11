@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="  Date of Birth"
-            android:textSize="16sp"  />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewDate"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="DOB"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <EditText
@@ -64,14 +64,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Update" />
+            android:text="Update"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/buttonDeleteArtist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Delete" />
+            android:text="Delete"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

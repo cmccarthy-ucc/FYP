@@ -139,11 +139,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.animals:
-                        Toast.makeText(MainActivity.this, "Animals",Toast.LENGTH_SHORT).show();
-                        Intent intentAnimal = new Intent(MainActivity.this, ActivityIndividualHome.class);
-                        startActivity(intentAnimal);
-                        break;
+//                    case R.id.animals:
+//                        Toast.makeText(MainActivity.this, "Animals",Toast.LENGTH_SHORT).show();
+//                        Intent intentAnimal = new Intent(MainActivity.this, ActivityIndividualHome.class);
+//                        startActivity(intentAnimal);
+//                        break;
                     case R.id.vaccinations:
                         Toast.makeText(MainActivity.this, "Vaccinations", Toast.LENGTH_SHORT).show();
                         Intent intentVaccination = new Intent(MainActivity.this, ActivityMedicalRecords2.class);
