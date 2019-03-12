@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ciara.drugsmart">
+    package="com.fyp.ciara.drugsmart">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SET_ALARM" />
@@ -12,10 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".DataRetrieved" />
-        <activity android:name=".TextRecognition" />
-        <activity android:name=".AddVaccination" />
+        <activity android:name="com.fyp.ciara.drugsmart.MainActivity" />
+        <activity android:name="com.fyp.ciara.drugsmart.DataRetrieved" />
+        <activity android:name="com.fyp.ciara.drugsmart.TextRecognition" />
+        <activity android:name="com.fyp.ciara.drugsmart.AddVaccination" />
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
@@ -24,14 +24,14 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".ViewAnimalDetails" />
+        <activity android:name="com.fyp.ciara.drugsmart.ViewAnimalDetails" />
 
-        <receiver android:name=".NotificationService" />
+        <receiver android:name="com.fyp.ciara.drugsmart.NotificationService" />
 
-        <activity android:name=".ViewVaccination" />
-        <activity android:name=".ActivityAllVaccinations" />
+        <activity android:name="com.fyp.ciara.drugsmart.ViewVaccination" />
+        <activity android:name="com.fyp.ciara.drugsmart.ActivityAllVaccinations" />
         <activity
-            android:name=".Splashscreen"
+            android:name="com.fyp.ciara.drugsmart.Splashscreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,65 +41,65 @@
         </activity>
         <activity android:name=".ActivityOptions" />
         <activity
-            android:name=".ActivityOptionsTwo"
+            android:name="com.fyp.ciara.drugsmart.ActivityOptionsTwo"
             android:label="Home" />
-        <activity android:name=".ActivityAddGroup" />
-        <activity android:name=".ActivityVaccinationHome" />
-        <activity android:name=".SearchDatabase" />
+        <activity android:name="com.fyp.ciara.drugsmart.ActivityAddGroup" />
+        <activity android:name="com.fyp.ciara.drugsmart.ActivityVaccinationHome" />
+        <activity android:name="com.fyp.ciara.drugsmart.SearchDatabase" />
         <activity
-            android:name=".ActivityAllGroups"
+            android:name="com.fyp.ciara.drugsmart.ActivityAllGroups"
             android:label="All Animal Groups" />
-        <activity android:name=".ActivityAddGroupVaccination" />
+        <activity android:name="com.fyp.ciara.drugsmart.ActivityAddGroupVaccination" />
         <activity android:name=".ViewGroupDetails" />
-        <activity android:name=".ViewVaccinationDetails" />
+        <activity android:name="com.fyp.ciara.drugsmart.ViewVaccinationDetails" />
         <activity android:name=".ActivityGroupHome" />
-        <activity android:name=".ActivityIndividualHome" />
+        <activity android:name="com.fyp.ciara.drugsmart.ActivityIndividualHome" />
         <activity android:name=".ActivityAllGroupVaccinations" />
         <activity android:name=".ActivityAllDoses" />
         <activity
-            android:name=".ActivityViewDoseDetails"
+            android:name="com.fyp.ciara.drugsmart.ActivityViewDoseDetails"
             android:label="Group Dose Details" />
         <activity android:name=".ActivityAddGroupDose" />
         <activity
-            android:name=".ActivityMedicalRecords2"
+            android:name="com.fyp.ciara.drugsmart.ActivityMedicalRecords2"
             android:label="@string/title_activity_medical_records2" />
         <activity
-            android:name=".ActivityToDoList"
+            android:name="com.fyp.ciara.drugsmart.ActivityToDoList"
             android:label="To-Do List" />
         <activity android:name=".ActivityToDoDetails" />
         <activity android:name=".ActivityUpdateGroupVaccination" />
         <activity
-            android:name=".ActivityToDoDoses"
+            android:name="com.fyp.ciara.drugsmart.ActivityToDoDoses"
             android:label="To-Do List" />
-        <activity android:name=".ActivityToDoDoseDetails" />
-        <activity android:name=".GroupActivity" />
-        <activity android:name=".GroupVaccinationActivity" />
+        <activity android:name="com.fyp.ciara.drugsmart.ActivityToDoDoseDetails" />
+        <activity android:name="com.fyp.ciara.drugsmart.GroupActivity" />
+        <activity android:name="com.fyp.ciara.drugsmart.GroupVaccinationActivity" />
         <activity
-            android:name=".GroupVaccinationDetailsActivity"
+            android:name="com.fyp.ciara.drugsmart.GroupVaccinationDetailsActivity"
             android:label="Group Vaccination Details" />
-        <activity android:name=".GroupDoseActivity" />
-        <activity android:name=".AnimalActivity" />
-        <activity android:name=".IndividualDetails" />
-        <activity android:name=".TreatmentDetails" />
-        <activity android:name=".TreatmentActivity" />
+        <activity android:name="com.fyp.ciara.drugsmart.GroupDoseActivity" />
+        <activity android:name="com.fyp.ciara.drugsmart.AnimalActivity" />
+        <activity android:name="com.fyp.ciara.drugsmart.IndividualDetails" />
+        <activity android:name="com.fyp.ciara.drugsmart.TreatmentDetails" />
+        <activity android:name="com.fyp.ciara.drugsmart.TreatmentActivity" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name="com.fyp.ciara.drugsmart.WelcomeActivity"
             android:label="Home" />
         <activity android:name=".ActivityAllIndividuals" />
-        <activity android:name=".DrugActivity" />
-        <activity android:name=".AddDrug" />
+        <activity android:name="com.fyp.ciara.drugsmart.DrugActivity" />
+        <activity android:name="com.fyp.ciara.drugsmart.AddDrug" />
         <activity
-            android:name=".Login"
+            android:name="com.fyp.ciara.drugsmart.Login"
             android:label="Welcome to VacciNote" />
         <activity
-            android:name=".Register"
+            android:name="com.fyp.ciara.drugsmart.Register"
             android:label="Welcome to VacciNote" />
         <activity
-            android:name=".ForgotPassword"
+            android:name="com.fyp.ciara.drugsmart.ForgotPassword"
             android:label="Forgot Password" />
-        <activity android:name=".TestMainActivity" />
-        <activity android:name=".ToDoVaccination" />
-        <activity android:name=".TodoDoses"></activity>
+        <activity android:name="com.fyp.ciara.drugsmart.TestMainActivity" />
+        <activity android:name="com.fyp.ciara.drugsmart.ToDoVaccination" />
+        <activity android:name="com.fyp.ciara.drugsmart.TodoDoses"></activity>
     </application>
 
 </manifest>

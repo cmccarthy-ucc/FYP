@@ -3,6 +3,10 @@
     <string name="search">Search</string>
 
 
+    <string name="privacyPolicy">
+        <a href="https://termsfeed.com/privacy-policy/ddff151b1909354970091ab54c08112e">See more</a>
+    </string>
+
     <string name="action_settings">Settings</string>
 
     <array name="gender">

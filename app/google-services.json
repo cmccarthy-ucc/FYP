@@ -49,6 +49,37 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460178962720:android:5539b1923e155ef3",
+        "android_client_info": {
+          "package_name": "com.fyp.ciara.drugsmart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460178962720-el1d8ul0ju5g53gfdkrq9l7k98o20n94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4bPcRs98BbWL1jlG0HBL004tsKuo6Lrk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"
